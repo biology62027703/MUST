@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+	xmlns:tx="http://www.springframework.org/schema/tx"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	 
+	<!-- jdbc 設定(不會印sql)
+	<bean id="dataSource"
+	class="org.springframework.jndi.JndiObjectFactoryBean" >
+		<property name="jndiName" value="java:comp/env/jdbc/ORCL"></property>
+	</bean>
+	--> 
+	 <!-- 官網的設定 -->
+    <bean id="dataSource_MUST_WEB" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
+		<property name="url" value="jdbc:log4jdbc:sqlserver://192.168.1.72:1433;databaseName=MUST_NEW" />
+		<property name="username" value="sa" />
+		<property name="password" value="19330608" />
+		<property name="maxActive" value="1000" />
+		<property name="maxIdle" value="30" />
+		<property name="maxWait" value="5000" />
+	</bean>
+	
+	<bean id="dataSource_51" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
+		<property name="url" value="jdbc:log4jdbc:sqlserver://192.168.1.51:1433;databaseName=DIVA" />
+		<property name="username" value="sa" />
+		<property name="password" value="19330608" />
+		<property name="maxActive" value="1000" />
+		<property name="maxIdle" value="30" />
+		<property name="maxWait" value="5000" />
+	</bean>
+	
+	<bean id="dataSource_LICENSE" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
+		<property name="url" value="jdbc:log4jdbc:sqlserver://192.168.1.74:1433;databaseName=LICENSE" />
+		<property name="username" value="sa" />
+		<property name="password" value="Miist19330608" />
+		<property name="maxActive" value="1000" />
+		<property name="maxIdle" value="30" />
+		<property name="maxWait" value="5000" />
+	</bean>
+	
+	<bean id="dataSource_ERP" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
+		<property name="url" value="jdbc:log4jdbc:sqlserver://192.168.1.23:1433;databaseName=must" />
+		<property name="username" value="sa" />
+		<property name="password" value="19330608" />
+		<property name="maxActive" value="1000" />
+		<property name="maxIdle" value="30" />
+		<property name="maxWait" value="5000" />
+	</bean>
+
+	<!-- <bean id="dataSource_MUST_WEB" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
+		<property name="url" value="jdbc:log4jdbc:mysql://192.168.1.203:3306/test" />
+		<property name="username" value="root" />
+		<property name="password" value="it0759" />
+		<property name="maxActive" value="1000" />
+		<property name="maxIdle" value="30" />
+		<property name="maxWait" value="5000" />
+	</bean> -->
+	
+	 <!-- DIVA的設定 -->
+  	<bean id="dataSource_diva" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
+        <property name="url" value="jdbc:log4jdbc:oracle:thin:@192.168.1.66:1521/diva161.must.org.tw" />
+		<property name="username" value="system" />
+		<property name="password" value="diva161sys12" />
+		<property name="maxActive" value="10" />
+	</bean>
+	
+</beans>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="BACKSTAGE">
+	
+	<update id="CHECKIN" parameterClass="java.util.HashMap">
+		update CHECKIN set situation='Y'
+		<isNotEqual compareValue="" prepend="," property="agent">
+			agent = #agent#
+		</isNotEqual>
+		where member_no = #member_no#
+	</update>
+	
+	
+	<select id="CHECK_MEMBER_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct member_no,chinese_name,ticket,situation from CHECKIN
+		<dynamic prepend="where">
+			<isNotEqual prepend="or" compareValue="" property="agent">
+				chinese_name = #agent#
+			</isNotEqual>
+			<isNotEqual prepend="or" compareValue="" property="agent">
+				member_no = #agent#
+			</isNotEqual>
+		</dynamic>	
+	</select>
+	
+	<select id="QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		SELECT type,href,seq,show FROM DIVA..backstage
+	</select>
+	
+	
+</sqlMap>

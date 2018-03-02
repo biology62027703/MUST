@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="STATEMENTS">
+	
+	<select id="QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select a.dist_id,a.dist_no,a.ip_base_no,a.email_key,a.Payment_No,a.Payment_Date,a.Net_Payment,b.cust_name,b.cust_type,b.private_email 
+		from statement_palist a
+			join member b on b.ip_base_no=a.ip_base_no
+		<dynamic prepend="where">
+			<isNotEqual prepend="and" compareValue="" property="IP_BASE_NO">
+				a.IP_BASE_NO = #IP_BASE_NO#
+			</isNotEqual>
+			<isNotEqual prepend="and" compareValue="" property="DIST">
+				a.DIST_NO = #DIST_NO#
+			</isNotEqual>
+		</dynamic>
+	</select>
+	
+	<select id="QUERY_EXTRAEMAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		SELECT email FROM extra_email where email_kind like '%3%'		
+			<isNotEqual prepend="and" compareValue="" property="IP_BASE_NO">
+				a.IP_BASE_NO = #IP_BASE_NO#
+			</isNotEqual>
+	</select>
+	
+	<select id="CHECK_MEMBER_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct member_no,chinese_name,ticket,situation from CHECKIN
+		<dynamic prepend="where">
+			<isNotEqual prepend="or" compareValue="" property="agent">
+				chinese_name = #agent#
+			</isNotEqual>
+			<isNotEqual prepend="or" compareValue="" property="agent">
+				member_no = #agent#
+			</isNotEqual>
+		</dynamic>	
+	</select>
+	
+	<update id="UPDATE_STATEMENT_ROY" parameterClass="java.util.HashMap">
+		update statement_palist set 
+		<isNotEqual compareValue="" prepend="," property="agent">
+			agent = #agent#
+		</isNotEqual>
+		<isNotEqual compareValue="" prepend="," property="agent_memberno">
+			agent_memberno = #agent_memberno#
+		</isNotEqual>
+		<dynamic prepend="where">
+			<isNotEqual prepend="and" compareValue="" property="member_no">
+				member_no = #member_no#
+			</isNotEqual>
+			<isNotEqual prepend="and" compareValue="" property="chinese_name">
+				chinese_name = #chinese_name#
+			</isNotEqual>
+		</dynamic>
+	</update>
+	
+	
+</sqlMap>

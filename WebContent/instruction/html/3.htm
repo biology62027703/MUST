@@ -1,0 +1,129 @@
+<html>
+<head>
+<title>使用者系統</title>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<script src="script/jquery-1.6.4.min.js" language="javascript"></script>
+<script src="script/jquery.corner.js" language="javascript"></script>
+<script language="JavaScript">
+<!--
+$(".title_item").corner();
+
+$(function(){
+	$(".item_right").click(function(){
+		url = $(this).attr("url");
+		openwin(url,"aaa",1024,768)
+	});
+})
+
+function openwin(URL,arguments,width,height)
+{  //功能:開一個非獨佔的視窗
+   //參數1.URL :連結的網頁
+   //參數2.arguments :傳入網頁的參數
+   var str = URL+"?"+arguments;
+   newWindow=window.open("","","maximize=no;toolbar=no,directories=no,status=yes,scrollbars=yes,hscrollbars=no,resize=no,menubar=no");
+   if ((width!=null)&&(height!=null))
+      newWindow.resizeTo(width,height);
+   else     
+   newWindow.resizeTo(screen.width,screen.availHeight);
+   newWindow.moveTo((screen.width-width)/2,(screen.availHeight-height)/2);
+   newWindow.location=str;
+}
+//-->
+</script>
+<style type="text/css">
+<!--
+body
+{
+	font-family: "微軟正黑體";
+}
+.title{
+	font-family: "微軟正黑體";
+	font-weight: bold;
+	font-size:36px;
+	color: #113333;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #363;
+}
+
+.title_item{
+	font-weight: bold;
+	font-size:30px;
+	text-align: center;
+	line-height: 45px;
+	background: #55331C;
+	color:#FFF;
+	border: 3px solid #BF8660;
+	margin-right: 4px;
+	margin-left: 4px;
+}
+.content_item_left
+{
+	font-weight: bold;
+	font-size:30px;
+	line-height: 50px;
+	margin-right: 4px;
+	margin-left: 4px;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+}
+
+.content_item_right
+{
+	height:50px;
+	text-align: center;
+	line-height: 50px;
+	vertical-align:middle;
+	margin-right: 4px;
+	margin-left: 4px;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+}
+
+.item_left{
+	float: left;
+	width:66%;
+}
+
+.item_right{
+	cursor:pointer;
+	float: left;
+	width:30%;
+}
+
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="50" topmargin="30">
+<form name="form">
+<br>
+<div style="width:80%">
+	<div class="title">續予、延長收容事件後台管理功能</div>
+    <br>
+    <div>
+    	<div class="title_item item_left">課　　程　　內　　容</div>
+		<div class="title_item item_right">影片檔</div>
+    </div>
+    <div>
+   	  <div class="content_item_left item_left">1．使用者簽入</div>
+        <div class="content_item_right item_right" url=".\\K\\K.htm"><img src="..\img\listen.png" border="0" align="absmiddle"></div>
+    </div>
+    <div>
+   	  <div class="content_item_left item_left">2．使用者帳號管理</div>
+        <div class="content_item_right item_right" url=".\\H\\H.htm"><img src="..\img\listen.png" border="0"></div>
+    </div>
+    <div>
+   	  <div class="content_item_left item_left">3．群組管理</div>    
+       <div class="content_item_right item_right" url=".\\I\\I.htm"><img src="..\img\listen.png" border="0"></div>    
+    </div>
+    <div>
+   	  <div class="content_item_left item_left">4．常用機關維護</div>    
+      <div class="content_item_right item_right" url=".\\J\\J.htm"><img src="..\img\listen.png" border="0"></div>    
+    </div>    
+</div>
+</form>
+</body>
+</html>

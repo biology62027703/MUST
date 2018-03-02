@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="BIG5"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="UTIL">
+	<statement id="execute" remapResults="true" parameterClass="java.lang.String" resultClass="int">  
+		<![CDATA[   $sql$   ]]>
+	</statement>
+	
+	<statement id="executeSelectSql" remapResults="true" parameterClass="java.lang.String" resultClass="java.util.HashMap">  
+		<![CDATA[   $sql$   ]]>
+	</statement>
+	
+	<statement id="executeSelectSql2" remapResults="true" parameterClass="java.lang.String" resultClass="java.util.LinkedHashMap">  
+		<![CDATA[   $sql$   ]]>
+	</statement>
+	
+	<statement id="executeSelectCnt" remapResults="true" parameterClass="java.lang.String" resultClass="java.util.HashMap">  
+		<![CDATA[   select count(1) as cnt from ($sql$)   ]]>
+	</statement>
+	
+	<select id="QueryAllTables" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select owner, table_name
+		from all_tables
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="owner">
+				owner = #owner#
+			</isNotNull>
+			<isNotNull prepend="and" property="table_name">
+				table_name = #table_name#
+			</isNotNull>
+		</dynamic>
+		order by owner, table_name
+	</select>
+	
+</sqlMap>

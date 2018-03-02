@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="BIG5"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="TSO">
+	
+	<select id="XMLDATA_Query" resultClass="com.sertek.table.rcvxmldata"  parameterClass="java.util.HashMap">
+		select rowid, xmlid, prgid, sysdt, systm, xmldata, okflag, insdt, instm
+		from so..rcvxmldata with (nolock)
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="xmlid">
+				xmlid = #xmlid#
+			</isNotNull>
+			<isNotNull prepend="and" property="prgid">
+				prgid = #prgid#
+			</isNotNull>
+			<isNotNull prepend="and" property="okflag">
+				okflag = #okflag#
+			</isNotNull>
+		</dynamic>
+		<isNotNull prepend="" property="orderByKey">
+			order by $orderByKey$
+		</isNotNull>
+	</select>
+	
+	<update id="updateRcvxmldata" parameterClass="java.util.HashMap">
+		update so..rcvxmldata
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="okflag">
+				okflag = #okflag#
+			</isNotNull>
+			<isNotNull prepend="," property="insdt">
+				"insdt" = #insdt#
+			</isNotNull>
+			<isNotNull prepend="," property="instm">
+				instm = #instm#
+			</isNotNull>
+		</dynamic>
+		where xmlid = #xmlid#
+	</update>
+	
+	<select id="S03_query" resultClass="com.sertek.table.S03"  parameterClass="java.util.HashMap">
+		select usrid, usrnm, email
+		from so..s03
+		where usrid=#usrid#
+		union
+		select usrid, usrnm, email
+		from bos..s03
+		where usrid=#usrid#
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="BIG5"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"   
+"http://www.ibatis.com/dtd/sql-map-2.dtd">  
+
+<sqlMap namespace="TABLE">  
+    
+    <resultMap id="tableresult" class="java.util.HashMap">  
+    	<result column="TABLE_NAME" property="table" javaType="string" jdbcType="VARCHAR" />
+    	<result column="COLUMN_NAME" property="field" javaType="string" jdbcType="VARCHAR" />
+    </resultMap> 
+    
+	<select id="OwnerTable" resultClass="java.util.HashMap"  parameterClass="java.lang.String">  
+        <![CDATA[   
+            select a.table_name, b.column_name, c.column_position as pk_position, d.column_position as idx_position
+            from dba_tables a
+            join all_tab_columns b on a.owner=b.owner and a.table_name=b.table_name
+            left join all_ind_columns c on c.table_owner=a.owner and c.table_name=a.table_name and c.column_name=b.column_name and c.index_name like 'PK%'
+            left join all_ind_columns d on d.table_owner=a.owner and d.table_name=a.table_name and d.column_name=b.column_name and d.index_name like 'IDX%'
+            where a.owner=#value#
+            order by a.table_name, column_id
+        ]]>  
+    </select>    
+
+</sqlMap>

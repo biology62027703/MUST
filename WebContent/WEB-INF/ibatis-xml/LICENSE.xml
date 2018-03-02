@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="LICENSE">
+	
+	<update id="INSERT_LICENSE" parameterClass="java.util.HashMap">
+		insert into license_main 
+		<dynamic prepend="(" >
+			<isNotNull  prepend="," property="doc_no">
+				doc_no
+			</isNotNull>
+			<isNotNull  prepend="," property="status">
+				status
+			</isNotNull>
+			<isNotNull  prepend="," property="user_copman">
+				user_copman
+			</isNotNull>
+			<isNotNull  prepend="," property="idno">
+				idno
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_tel1">
+				cnt2_tel1
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_fax">
+				cnt2_fax
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_sphone">
+				cnt2_sphone
+			</isNotNull>
+			<isNotNull  prepend="," property="user_title">
+				user_title
+			</isNotNull>
+			<isNotNull  prepend="," property="user_cname">
+				user_cname
+			</isNotNull>
+			<isNotNull  prepend="," property="user_copno">
+				user_copno
+			</isNotNull>
+			<isNotNull  prepend="," property="user_tel">
+				user_tel
+			</isNotNull>
+			<isNotNull  prepend="," property="user_fax">
+				user_fax
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_bdate">
+				cont_bdate
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_edate">
+				cont_edate
+			</isNotNull>
+			<isNotNull  prepend="," property="user_post">
+				user_post
+			</isNotNull>
+			<isNotNull  prepend="," property="user_addr">
+				user_addr
+			</isNotNull>
+			<isNotNull  prepend="," property="user_cpost">
+				user_cpost
+			</isNotNull>
+			<isNotNull  prepend="," property="user_caddr">
+				user_caddr
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_name">
+				cnt1_name
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_sphone">
+				cnt1_sphone
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_email">
+				cnt1_email
+			</isNotNull>
+			<isNotNull  prepend="," property="user_class">
+				user_class
+			</isNotNull>
+			<isNotNull  prepend="," property="kind">
+				kind
+			</isNotNull>
+		)
+		</dynamic>
+		values
+		<dynamic prepend="(" >
+			<isNotNull  prepend="," property="doc_no">
+				#doc_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="status">
+				#status#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_copman">
+				#user_copman#
+			</isNotNull>
+			<isNotNull  prepend="," property="idno">
+				#idno#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_tel1">
+				#cnt2_tel1#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_fax">
+				#cnt2_fax#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_sphone">
+				#cnt2_sphone#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_title">
+				#user_title#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_cname">
+				#user_cname#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_copno">
+				#user_copno#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_tel">
+				#user_tel#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_fax">
+				#user_fax#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_bdate">
+				#cont_bdate#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_edate">
+				#cont_edate#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_post">
+				#user_post#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_addr">
+				#user_addr#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_cpost">
+				#user_cpost#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_caddr">
+				#user_caddr#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_name">
+				#cnt1_name#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_sphone">
+				#cnt1_sphone#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_email">
+				#cnt1_email#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_class">
+				#user_class#
+			</isNotNull>
+			<isNotNull  prepend="," property="kind">
+				#kind#
+			</isNotNull>
+		)
+		</dynamic>
+	</update>
+	
+	<update id="INSERT_MACHINE" parameterClass="java.util.HashMap">
+		insert into license_machine 
+		<dynamic prepend="(" >
+			<isNotNull  prepend="," property="doc_no">
+				doc_no
+			</isNotNull>
+			<isNotNull  prepend="," property="factory">
+				factory
+			</isNotNull>
+			<isNotNull  prepend="," property="machine">
+				machine
+			</isNotNull>			
+		)
+		</dynamic>
+		values
+		<dynamic prepend="(" >
+			<isNotNull  prepend="," property="doc_no">
+				#doc_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="factory">
+				#factory#
+			</isNotNull>
+			<isNotNull  prepend="," property="machine">
+				#machine#
+			</isNotNull>			
+		)
+		</dynamic>
+	</update>
+	
+	<update id="DELETE_MACHINE" parameterClass="java.util.HashMap">
+		delete from license_machine
+			where doc_no=#doc_no#
+	</update>
+	
+	<update id="UPDATE_LICENSE" parameterClass="java.util.HashMap">
+		update license_main 
+			set status='1'
+			<isNotNull  prepend="," property="user_copman">
+				user_copman=#user_copman#
+			</isNotNull>
+			<isNotNull  prepend="," property="idno">
+				idno=#idno#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_tel1">
+				cnt2_tel1=#cnt2_tel1#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_fax">
+				cnt2_fax=#cnt2_fax#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_sphone">
+				cnt2_sphone=#cnt2_sphone#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_title">
+				user_title=#user_title#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_cname">
+				user_cname=#user_cname#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_copno">
+				user_copno=#user_copno#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_tel">
+				user_tel=#user_tel#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_fax">
+				user_fax=#user_fax#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_bdate">
+				cont_bdate=#cont_bdate#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_edate">
+				cont_edate=#cont_edate#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_post">
+				user_post=#user_post#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_addr">
+				user_addr=#user_addr#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_cpost">
+				user_cpost=#user_cpost#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_caddr">
+				user_caddr=#user_caddr#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_name">
+				cnt1_name=#cnt1_name#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_sphone">
+				cnt1_sphone=#cnt1_sphone#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_email">
+				cnt1_email=#cnt1_email#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_class">
+				user_class=#user_class#
+			</isNotNull>
+			<isNotNull  prepend="," property="kind">
+				kind=#kind#
+			</isNotNull>
+			where doc_no=#doc_no#
+	</update>
+	
+	<update id="UPDATE_LICENSE_BACK" parameterClass="java.util.HashMap">
+		update license_main 
+			set status=#status#,
+				msg=#msg#
+			where doc_no=#doc_no#
+	</update>
+	
+	<update id="UPDATE_LICENSE_APPLY" parameterClass="java.util.HashMap">
+		update license_main 
+			set status=#status#,
+				msg=''
+			where doc_no=#doc_no#
+	</update>
+	
+	<select id="QUERY_LICENSE_MAIN" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select doc_no,user_cname,user_copman,user_tel,user_copno from license_main 
+			where status='1' order by doc_no 
+	</select>
+	
+	<select id="QUERY_LICENSE_MAIN_DETAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		SELECT license_seq
+		      ,doc_no
+		      ,user_copman
+		      ,idno
+		      ,cnt2_tel1
+		      ,cnt2_fax
+		      ,cnt2_sphone
+		      ,user_title
+		      ,user_copno
+		      ,user_cname
+		      ,user_tel
+		      ,user_fax
+		      ,cont_bdate
+		      ,cont_edate
+		      ,user_post
+		      ,user_addr
+		      ,user_cpost
+		      ,user_caddr
+		      ,cnt1_name
+		      ,cnt1_sphone
+		      ,cnt1_email
+		      ,status
+		      ,user_class
+		      ,kind
+		  FROM LICENSE.dbo.LICENSE_MAIN
+			where DOC_NO=#doc_no#
+			
+	</select>
+	
+	<select id="QUERY_LICENSE_MAIN_MACHINE" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		SELECT doc_no
+		      ,factory
+		      ,machine
+		  FROM LICENSE.dbo.LICENSE_MACHINE
+			where DOC_NO=#doc_no#
+	</select>
+	
+	
+</sqlMap>

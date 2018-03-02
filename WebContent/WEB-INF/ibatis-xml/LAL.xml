@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="LAL">
+	
+	<update id="INSERT_USER" parameterClass="java.util.HashMap">
+		insert into LAL.dbo.[USER] 
+		<dynamic prepend="(" >			
+			<isNotNull  prepend="," property="user_cstatus">
+				user_cstatus
+			</isNotNull>
+			<isNotNull  prepend="," property="user_copman">
+				user_copman
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_tel1">
+				cnt2_tel1
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_fax">
+				cnt2_fax
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_sphone">
+				cnt2_sphone
+			</isNotNull>
+			<isNotNull  prepend="," property="user_title">
+				user_title
+			</isNotNull>
+			<isNotNull  prepend="," property="user_cname">
+				user_cname
+			</isNotNull>
+			<isNotNull  prepend="," property="user_copno">
+				user_copno
+			</isNotNull>
+			<isNotNull  prepend="," property="user_tel">
+				user_tel
+			</isNotNull>
+			<isNotNull  prepend="," property="user_fax">
+				user_fax
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_bdate">
+				cont_bdate
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_edate">
+				cont_edate
+			</isNotNull>
+			<isNotNull  prepend="," property="user_post">
+				user_post
+			</isNotNull>
+			<isNotNull  prepend="," property="user_addr">
+				user_addr
+			</isNotNull>
+			<isNotNull  prepend="," property="user_cpost">
+				user_cpost
+			</isNotNull>
+			<isNotNull  prepend="," property="user_caddr">
+				user_caddr
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_name">
+				cnt1_name
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_sphone">
+				cnt1_sphone
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_email">
+				cnt1_email
+			</isNotNull>
+			<isNotNull  prepend="," property="user_class">
+				user_class
+			</isNotNull>			
+			<isNotNull  prepend="," property="user_kname">
+				user_kname
+			</isNotNull>
+			<isNotNull  prepend="," property="user_kdate">
+				user_kdate
+			</isNotNull>
+			<isNotNull  prepend="," property="user_no">
+				user_no
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_name">
+				cnt2_name
+			</isNotNull>			
+		)
+		</dynamic>
+		values
+		<dynamic prepend="(" >			
+			<isNotNull  prepend="," property="user_cstatus">
+				#user_cstatus#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_copman">
+				#user_copman#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_tel1">
+				#cnt2_tel1#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_fax">
+				#cnt2_fax#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_sphone">
+				#cnt2_sphone#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_title">
+				#user_title#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_cname">
+				#user_cname#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_copno">
+				#user_copno#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_tel">
+				#user_tel#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_fax">
+				#user_fax#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_bdate">
+				#cont_bdate#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_edate">
+				#cont_edate#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_post">
+				#user_post#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_addr">
+				#user_addr#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_cpost">
+				#user_cpost#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_caddr">
+				#user_caddr#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_name">
+				#cnt1_name#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_sphone">
+				#cnt1_sphone#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt1_email">
+				#cnt1_email#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_class">
+				#user_class#
+			</isNotNull>			
+			<isNotNull  prepend="," property="user_kname">
+				#user_kname#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_kdate">
+				#user_kdate#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_no">
+				#user_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="cnt2_name">
+				#cnt2_name#
+			</isNotNull>
+		)
+		</dynamic>
+	</update>
+	
+	<update id="POST_INSERT" parameterClass="java.util.HashMap">
+		insert into LAL.dbo.[POST]  
+		<dynamic prepend="(" >
+			<isNotNull  prepend="," property="POST_AUTO_NO">
+				POST_AUTO_NO
+			</isNotNull>
+			<isNotNull  prepend="," property="CASE_NO">
+				CASE_NO
+			</isNotNull>
+			<isNotNull  prepend="," property="USER_NO">
+				USER_NO
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_SEQNO">
+				POST_SEQNO
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_TYPE">
+				POST_TYPE
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_DATE">
+				POST_DATE
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_NAME">
+				POST_NAME
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_TEXTNO">
+				POST_TEXTNO
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_PTRFLAG">
+				POST_PTRFLAG
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_KDATE">
+				POST_KDATE
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_NOTE">
+				POST_NOTE
+			</isNotNull>
+		)
+		</dynamic>
+		values
+		<dynamic prepend="(" >
+			<isNotNull  prepend="," property="POST_AUTO_NO">
+				#POST_AUTO_NO#
+			</isNotNull>
+			<isNotNull  prepend="," property="CASE_NO">
+				#CASE_NO#
+			</isNotNull>
+			<isNotNull  prepend="," property="USER_NO">
+				#USER_NO#
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_SEQNO">
+				#POST_SEQNO#
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_TYPE">
+				#POST_TYPE#
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_DATE">
+				#POST_DATE#
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_NAME">
+				#POST_NAME#
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_TEXTNO">
+				#POST_TEXTNO#
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_PTRFLAG">
+				#POST_PTRFLAG#
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_KDATE">
+				#POST_KDATE#
+			</isNotNull>
+			<isNotNull  prepend="," property="POST_NOTE">
+				#POST_NOTE#
+			</isNotNull>
+		)
+		</dynamic>
+	</update>
+	
+	
+	<select id="POST_EXCEL_FILE_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select CASE_NO
+		      ,POST_TYPE
+		      ,POST_DATE
+		      ,POST_NAME
+		      ,POST_TEXTNO
+		      ,POST_NOTE
+		      ,POST_PTRFLAG
+		      from LAL.dbo.POST_EXCEL_FILE		
+	</select>
+	
+	<select id="POST_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">		
+		select a.case_no,a.user_no,case when b.POST_SEQNO is null then 0 else b.POST_SEQNO end as POST_SEQNO from LAL.dbo.[CASE] a 
+		 LEFT join (SELECT top 1 USER_NO,POST_SEQNO,CASE_NO FROM LAL.dbo.POST where case_no=#CASE_NO# order by post_SEQNO DESC) b on a.case_no=b.case_no 
+		 	where a.case_no=#CASE_NO#
+	</select>
+	
+	<select id="MAX_POST_AUTO_NO" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">		
+		SELECT MAX(POST_AUTO_NO) as POST_AUTO_NO FROM LAL.dbo.POST
+	</select>
+	
+	<select id="CHECK_AGENTMEMBER_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct member_no,chinese_name,ticket from CHECKIN 
+		<dynamic prepend="where">
+			<isNotEqual prepend="and" compareValue="" property="CHINESE_NAME">
+				agent = #CHINESE_NAME#
+			</isNotEqual>
+		</dynamic>
+	
+	</select>
+	
+	<select id="CHECKIN_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct member_no,chinese_name,ticket,situation,agent from CHECKIN
+		<dynamic prepend="where">
+			<isNotEqual prepend="and" compareValue="" property="chinese_name">
+				chinese_name = #chinese_name#
+			</isNotEqual>
+			<isNotEqual prepend="and" compareValue="" property="member_no">
+				member_no = #member_no#
+			</isNotEqual>
+		</dynamic>				
+	</select>
+	
+	
+	<select id="QUERY_EXTRA_EMAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct email,email_kind from EXTRA_EMAIL
+		where email_kind like '%1%' or email_kind like '%4%'
+	</select>
+	
+	<select id="QUERY_EMAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct private_email,cust_type from MEMBER
+		where cust_status='Y'
+				and private_email &lt;&gt; ''
+				order by private_email desc
+	</select>
+	
+	<select id="QUERY_EMAIL_DETAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct 
+		   ser_no
+	      ,cust_name
+	      ,cust_type
+	      ,cust_nickname
+	      ,email
+	      ,private_email
+	      ,addr_no
+	      ,addr_desc
+	      ,phone
+	      ,fax
+	      ,cell_phone
+	      ,cust_url
+	      ,cust_memo
+	      ,cust_status
+	      ,ip_base_no
+	      ,create_time
+	      ,modify_time
+	      ,member_no
+      	from MEMBER 
+		where cust_status='Y'
+				and private_email &lt;&gt; ''				
+				order by private_email desc
+			
+	</select>
+	
+	<select id="QUERY_USER" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+	  	select user_no 
+	  	from LAL.dbo.[USER] 
+	  		where USER_ADDR=#user_addr# and user_class=#user_class# and user_cname=#user_cname#
+	</select>
+	
+	<select id="QUERY_MAX_USERNO" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+	  	SELECT top 1 user_no
+	  	FROM LAL.dbo.[USER] 
+	  		WHERE user_class=#user_class# order by user_no desc
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,66 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+
+@media (max-width: 1199px) {
+    #floating {
+        position:fixed;
+        top:50%;
+        right: 0;
+        margin-right: 0;
+    }
+    #floating.fixed {
+        top:50%;
+    }
+}
+@media (max-width: 991px) {
+    .side1 .side-toggle {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: none;
+        border-bottom: 1px solid #ddd;
+        margin-top: 30px;
+    }
+    .side1 .side-toggle .glyphicon-chevron-down,
+    .side1 .side-toggle.collapsed .glyphicon-chevron-up {
+        display: none;
+    }
+    .side1 .side-toggle .glyphicon-chevron-up,
+    .side1 .side-toggle.collapsed .glyphicon-chevron-down {
+        display: inline-block;
+    }
+    .side1 .toggle-icon {
+        float: right;
+    }
+    
+}
+@media (max-width: 767px) {
+    .navbar-toggle {
+        border-color: #ddd;
+    }
+
+    .navbar-toggle:hover {
+        background-color: #ddd;
+    }
+
+    .navbar-toggle .icon-bar {
+        background-color: #888;
+    }
+    
+}
+
+/* < wrp related> */
+/*----------------------- Banner Frame -----------------------*/
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+}
+
+@media (max-width: 480px) {
+}
+/* </ wrp related> */

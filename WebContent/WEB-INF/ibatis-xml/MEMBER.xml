@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="MEMBER">
+	
+	<update id="CHECKIN" parameterClass="java.util.HashMap">
+		update CHECKIN set situation='Y'
+		<isNotEqual compareValue="" prepend="," property="agent">
+			agent = #agent#
+		</isNotEqual>
+		<isNotEqual compareValue="" prepend="," property="agent_memberno">
+			agent_memberno = #agent_memberno#
+		</isNotEqual>
+		<dynamic prepend="where">
+			<isNotEqual prepend="and" compareValue="" property="member_no">
+				member_no = #member_no#
+			</isNotEqual>
+			<isNotEqual prepend="and" compareValue="" property="chinese_name">
+				chinese_name = #chinese_name#
+			</isNotEqual>
+		</dynamic>
+	</update>
+	
+	<select id="DO_NOTE" resultClass="java.util.HashMap" >
+		SELECT  a.member_no
+			      ,a.chinese_name
+				  ,a.ticket
+				  ,a.MEMBER_REF
+			  FROM MUST_New.dbo.CHECKIN a 
+			  where ticket >0
+		order by member_no desc
+	</select>
+	
+	<select id="CHECK_MEMBER_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct member_no,chinese_name,ticket,situation,agent from CHECKIN 
+		<dynamic prepend="where">
+			<isNotEqual prepend="or" compareValue="" property="agent">
+				chinese_name = #agent#
+			</isNotEqual>
+			<isNotEqual prepend="or" compareValue="" property="agent">
+				member_no = #agent#
+			</isNotEqual>
+			<isNotEqual prepend="or" compareValue="" property="agent">
+				member_id = #agent#
+			</isNotEqual>
+		</dynamic>	
+	</select>
+	
+	<select id="CHECK_AGENTMEMBER_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct member_no,chinese_name,ticket from CHECKIN 
+		<dynamic prepend="where">
+			<isNotEqual prepend="and" compareValue="" property="CHINESE_NAME">
+				agent = #CHINESE_NAME#
+			</isNotEqual>
+		</dynamic>
+	
+	</select>
+	
+	<select id="CHECKIN_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct member_no,chinese_name,ticket,situation,agent,member_id,member_ref from CHECKIN
+		<dynamic prepend="where">
+			<isNotEqual prepend="and" compareValue="" property="chinese_name">
+				chinese_name = #chinese_name#
+			</isNotEqual>
+			<isNotEqual prepend="and" compareValue="" property="member_no">
+				member_no = #member_no#
+			</isNotEqual>
+			<isNotEqual prepend="and" compareValue="" property="member_id">
+				member_id = #member_id#
+			</isNotEqual>
+		</dynamic>
+				
+	</select>
+	
+	
+	<select id="QUERY_EXTRA_EMAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct email,email_kind from EXTRA_EMAIL
+		where email_kind like '%1%' or email_kind like '%4%'
+	</select>
+	
+	<select id="QUERY_EMAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct private_email,cust_type from MEMBER
+		where cust_status='Y'
+				and private_email &lt;&gt; ''
+				order by private_email desc
+	</select>
+	
+	<select id="QUERY_EMAIL_DETAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct 
+		   ser_no
+	      ,cust_name
+	      ,cust_type
+	      ,cust_nickname
+	      ,email
+	      ,private_email
+	      ,addr_no
+	      ,addr_desc
+	      ,phone
+	      ,fax
+	      ,cell_phone
+	      ,cust_url
+	      ,cust_memo
+	      ,cust_status
+	      ,ip_base_no
+	      ,create_time
+	      ,modify_time
+	      ,member_no
+      	from MEMBER 
+		where cust_status='Y'
+				and private_email &lt;&gt; ''				
+				order by private_email desc
+			
+	</select>
+	
+	<select id="CHECKIN_TOTAL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+	  	select SUM(ticket) as total_ticket, (select SUM(ticket) as checkin_ticket from CHECKIN where situation='Y') as checkin_ticket from CHECKIN where ticket>0
+	</select>
+	
+	<select id="CHECKIN_RATE" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select count(*) as total_member,
+			(select count(*) as checkin_ticket from CHECKIN where situation='Y' and agent is null and ticket>0) as self_checkin,
+			(select count(*) as checkin_ticket from CHECKIN where situation='Y' and agent is not null and ticket>0) as agent_checkin,
+			(select count(*) as checkin_ticket from CHECKIN where situation='Y' and ticket>0) as total_checkin,
+			(100.0*(select count(*) as checkin_ticket from CHECKIN where situation='Y'  and ticket>0)/(select count(*) as total_member from CHECKIN where ticket>0)) as checkin_rate,
+			SUM(ticket) as total_ticket,
+			(select case when SUM(ticket) is null then 0 else SUM(ticket) end as checkin_ticket from CHECKIN where situation='Y') as checkin_ticket, 
+			(select case when SUM(ticket) is null then 0 else SUM(ticket) end as checkin_ticket from CHECKIN where situation='Y' and agent is null) as self_ticket ,
+			(select case when SUM(ticket) is null then 0 else SUM(ticket) end as checkin_ticket from CHECKIN where situation='Y' and agent is not null) as agent_ticket, 
+			100.0*(select case when SUM(ticket) is null then 0 else SUM(ticket) end as checkin_ticket from CHECKIN where situation='Y')/SUM(ticket) as ticket_rate
+		 from CHECKIN where ticket>0
+	</select>
+	
+	<select id="CHECKIN_DETAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+	  SELECT  a.member_no
+	      ,a.chinese_name
+	      ,a.ticket
+	      ,a.situation
+	      ,a.agent
+	      ,a.agent_memberno
+		  , case when b.agent is null then '未接受委託' else '已受委託' end as check_agent
+	  FROM CHECKIN a 
+		left join (select agent from CHECKIN where situation='Y') b on a.chinese_name=b.agent 
+		where a.ticket>0 
+			order by ticket desc,member_no 
+	</select>
+	
+</sqlMap>

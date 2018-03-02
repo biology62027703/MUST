@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="urlSysMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	 
+		<!-- map -->
+		<property name="mappings">
+			<props>				
+				<prop key="GET_MEMBER_EMAIL.do">GET_MEMBER_EMAILController</prop>
+				<prop key="/CHECKIN/MEMBER.do">MEMBERController</prop>
+				<prop key="/CHECKIN/MEMBER_CHECK.do">MEMBER_CHECKController</prop>
+				<prop key="/CHECKIN/MEMBERCHECK_SITUATION.do">MEMBERCHECK_SITUATIONController</prop>
+				<prop key="BACKSTAGE.do">BackstageCONTROLLER</prop>		
+				<prop key="CALENDAR.do">CALENDARController</prop>
+				<prop key="UPLOADFILES.do">UploadFilesController</prop>		
+				<prop key="LAL/LAL_INSERT_POST.do">LAL_INSERT_POSTController</prop>	
+				<prop key="LAL/LAL_END_REPORT.do">LAL_END_REPORTController</prop>
+				<prop key="LICENSE.do">LICENSEController</prop>	
+				<prop key="SEND_STATEMENT_EMAIL.do">SEND_STATEMENT_EMAILController</prop>
+				<!-- <prop key="DIVA/DIVA.do">DIVAController</prop> -->									
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="UploadFilesController" class="com.sertek.form.UploadFilesController" >
+		
+	</bean>	
+	
+	<!-- <bean id="DIVAController" class="com.sertek.diva.DIVAController" >
+		<property name="sqlDBUtility_DIVA" ref="sqlDBUtility_DIVA" />
+	</bean> -->
+	
+	<bean id="LICENSEController" class="com.sertek.form.LICENSEController" >
+		<property name="sqlDBUtility_LICENSE" ref="sqlDBUtility_LICENSE" />
+		<property name="sqlDBUtility_51" ref="sqlDBUtility_51" />
+	</bean>
+	
+	<bean id="SEND_STATEMENT_EMAILController" class="com.sertek.form.SEND_STATEMENT_EMAILController" >
+		<property name="sqlDBUtility_MUST_WEB" ref="sqlDBUtility_MUST_WEB" />
+	</bean>
+	
+	<bean id="GET_MEMBER_EMAILController" class="com.sertek.form.GET_MEMBER_EMAILController" >
+		<property name="sqlDBUtility_MUST_WEB" ref="sqlDBUtility_MUST_WEB" />
+	</bean>
+	
+	<bean id="MEMBERController" class="com.sertek.form.MEMBERController" >
+		<property name="sqlDBUtility_MUST_WEB" ref="sqlDBUtility_MUST_WEB" />
+	</bean>
+	
+	<bean id="MEMBER_CHECKController" class="com.sertek.form.MEMBER_CHECKController" >
+		<property name="sqlDBUtility_MUST_WEB" ref="sqlDBUtility_MUST_WEB" />
+	</bean>
+	
+	<bean id="MEMBERCHECK_SITUATIONController" class="com.sertek.form.MEMBERCHECK_SITUATIONController" >
+		<property name="sqlDBUtility_MUST_WEB" ref="sqlDBUtility_MUST_WEB" />
+	</bean>
+	
+	<bean id="BackstageCONTROLLER" class="com.sertek.form.BackstageCONTROLLER" >
+		<property name="sqlDBUtility_51" ref="sqlDBUtility_51" />
+	</bean>
+	
+	<bean id="LAL_INSERT_POSTController" class="com.sertek.form.LAL_INSERT_POSTController" >
+		<property name="sqlDBUtility_51" ref="sqlDBUtility_51" />
+	</bean>
+	
+	<bean id="LAL_END_REPORTController" class="com.sertek.lal.LAL_END_REPORTController" >
+		<property name="sqlDBUtility_51" ref="sqlDBUtility_51" />
+	</bean>
+	
+	<bean id="CALENDARController" class="com.sertek.form.CALENDARController" >
+		<property name="sqlDBUtility_ERP" ref="sqlDBUtility_ERP" />
+	</bean>
+	
+	
+</beans>

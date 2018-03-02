@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+<settings cacheModelsEnabled="true" enhancementEnabled="true" statementCachingEnabled="true" maxSessions="128" maxTransactions="128" maxRequests="128" useStatementNamespaces="true" />
+
+	<!-- EncodingStringTypeHandlerCallback 是處理 ibatis 中文轉碼問題，從  ResultSet 取出或設定時會自動轉碼 -->
+	<typeHandler callback="com.sertek.ibatis.util.EncodingStringTypeHandlerCallback" javaType="string"/>
+	<typeHandler callback="com.sertek.ibatis.util.EncodingStringTypeHandlerCallback" javaType="object"/>
+	
+	<!-- 各作業的 ibatis 檔 -->
+	<sqlMap resource="../ibatis-xml/sof/FSO2A01.xml" />
+	
+	<!-- 各 Table 的 ibatis 檔 -->
+	<sqlMap resource="../ibatis-xml/table/BOS.xml" />
+	
+	<!-- 其他的 ibatis 檔 -->
+	<sqlMap resource="../ibatis-xml/C60_AGR.xml" />
+	<sqlMap resource="../ibatis-xml/SYS.xml" />
+	<sqlMap resource="../ibatis-xml/TABLE.xml" />
+	<sqlMap resource="../ibatis-xml/UTIL.xml" />
+	<sqlMap resource="../ibatis-xml/MEMBER.xml" />
+	<sqlMap resource="../ibatis-xml/BACKSTAGE.xml" />
+	<sqlMap resource="../ibatis-xml/CALENDAR.xml" />
+	<sqlMap resource="../ibatis-xml/LAL.xml" />
+	<sqlMap resource="../ibatis-xml/STATEMENTS.xml" />
+	<sqlMap resource="../ibatis-xml/LICENSE.xml" />
+	
+	<sqlMap resource="../ibatis-xml/lal/LAL_END_REPORT.xml" />
+</sqlMapConfig>

@@ -1,0 +1,132 @@
+<html>
+	<head>
+		<title>錯誤回報視窗</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=Big5" />
+		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
+		<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
+		<META HTTP-EQUIV="EXPIRES" CONTENT="Sun 1 Jan 2006 00:00:00 GMT" />
+		<script type="text/javascript" language="Javascript">
+			window.onload = onloadHandler;
+			
+			var closeTimeout = 3;
+			
+			function onloadHandler()
+			{
+				window.focus();
+				document.getElementById("btn_drop").focus();
+				
+				if (window.dialogArguments)
+				{
+					document.getElementById("Report").innerHTML = unescape(window.dialogArguments);
+				}
+			}
+			 
+			function showReport()
+			{
+				if (document.getElementById("Detail").style.display == "none")
+				{
+					document.getElementById("Detail").style.display = "block";
+					window.dialogHeight = parseInt(window.dialogHeight.replace(/px/g,""))+230+"px";
+					window.dialogTop = parseInt(window.dialogTop.replace(/px/g,""))-115+"px";
+					document.getElementById("btn_drop").focus();
+				}
+			}
+			
+			function sendReport()
+			{
+				if (window.dialogArguments)
+				{
+					document.getElementById("Status").style.display = "block";
+
+					var objXML = new ActiveXObject("Msxml2.XMLHTTP");
+
+					try
+					{
+						objXML.Open("POST","ErrorLog.jsp",false);			
+						objXML.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+						objXML.setRequestHeader("If-Modified-Since:","Sun,1 Jan 2006 00:00:00 GMT");
+						objXML.Send("MESSAGE=測試"+window.dialogArguments);
+						
+						if(objXML.status == 200)
+						{
+							document.getElementById("Status").innerHTML="錯誤報告已成功傳送 !";
+							document.getElementById("btn_send").style.display = "none";
+							document.getElementById("btn_drop").value = "關閉視窗 (3)";
+							closeTimeout = 3;
+							setInterval("closeWindow();",1000);
+						}
+						else
+						{
+							document.getElementById("Status").innerHTML="錯誤報告傳送失敗 !";
+						}
+					}
+					catch(ex)
+					{
+						document.getElementById("Status").innerHTML="錯誤報告傳送失敗 !";
+					}
+					finally
+					{
+						objXML = null;
+					}
+				}
+			}
+
+			function dropReport()
+			{
+				window.close();
+			}
+
+			function closeWindow()
+			{
+				closeTimeout --;
+
+				if (closeTimeout < 0)
+				{
+					window.close();
+				}
+				else
+				{
+					document.getElementById("btn_drop").value = "關閉視窗 ("+closeTimeout+")";
+				}
+			}
+
+		</script>
+	</head>
+	<body style="margin: 0px 0px 0px 0px;">
+		<table cellspacing="0" cellpadding="0" border="0" style="width: 100%; height: 100%; text-align:center">
+			<tr>
+				<td style="vertical-align: middle; font:bold 11pt 新細明體; padding: 20px 20px 20px 20px; text-align:justify; text-justify:distribute;">
+					由於網頁執行的過程中產生了例外事件, 因此必須停止該動作. 所造成不便之處我們感到十分的抱歉.
+				</td>
+			</tr>
+			<tr style="background: #D4D0C7; padding: 10px 20px 20px 20px;">
+				<td style="vertical-align: top;">
+					<p style="font:normal 11pt 新細明體;margin-top:0px;margin-bottom:10px;text-align:justify; text-justify:distribute;">
+					如果您正在進行某項作業, 該項作業畫面的資料可能會無法被正常地顯示或存檔 !
+					</p>
+					<p style="font:bold 11pt 新細明體;margin-top:0px;margin-bottom:10px;text-align:justify; text-justify:distribute;">
+					請通知系統開發/維護人員這個問題.
+					</p>
+					<p style="font:normal 11pt 新細明體;margin-top:0px;margin-bottom:10px;text-align:justify; text-justify:distribute;">
+					我們已經開發了一套錯誤回報機制能讓您幫助我們改善此系統. 傳送這份報告能有助於釐清問題發生的原因以及加速程式修正的速度.
+					</p>
+					<p style="font:normal 11pt 新細明體;margin-top:0px;margin-bottom:0px;text-align:justify; text-justify:distribute;">
+					檢視此份報告的詳細內容, <span style="cursor:pointer;color:blue" onClick="showReport();">請按這裡</span>.
+					</p>
+				</td>
+			</tr>
+			<tr style="background: #D4D0C7; padding: 10px 10px 20px 20px;">
+				<td style="vertical-align: top; text-align: right;">
+					<div id="Status" style="display: none;font:bold 10pt 新細明體;float: left;padding-top:5px"><img src="/image/loading.gif" width="16" border=0 style="vertical-align: middle" /> 正在傳送錯誤報告...</div>
+					<input id="btn_send" type="button" value="傳送錯誤報告" style="font:normal 11pt 新細明體;" onClick="sendReport();" />
+					<input id="btn_drop" type="button" value="不要傳送報告" style="font:normal 11pt 新細明體;" onClick="dropReport();" />
+				</td>
+			</tr>
+			<tr id="Detail" style="background: #D4D0C7; padding: 10px 20px 20px 20px; display: none">
+				<td style="vertical-align: top; text-align: center">
+					<div id="Report" style="width:450; height:200; overflow-y:scroll; text-align:left; background: #FFFFFF; word-break: break-all;border-width: 1px; border-style: groove"></div>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

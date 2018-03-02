@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="BIG5"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"   
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="C60_AGR">	
+	
+	<!-- 清除TMP的資料 -->
+	<update id="deleteC60_AGR_TMP" parameterClass="java.util.HashMap">
+		delete from so..c60_agr_tmp
+		where doc_no=#doc_no#
+	</update>
+	
+	<!-- 將目前所有帳號寫到TMP -->
+	<update id="insertC60_AGR_TMP" parameterClass="java.util.HashMap">
+		insert into so..c60_agr_tmp(crtid, sys, doc_no, usrid, usrnm, sysid, idnm, tabnm)
+		select distinct crtid, sys, doc_no, usrid, usrnm, sysid, idnm, tabnm
+		from (
+		  select crtid, sys, #doc_no# as doc_no, usrid, clnm as usrnm, sysid, idnm, 'C61' as tabnm
+		  from so..c61 
+		  where c_no=#c_no# and usrid is not null and usrid &lt;&gt; ''
+		  union
+		  select crtid, sys, #doc_no# as doc_no, usrid, clnm as usrnm, sysid, idnm, 'C6B' as tabnm
+		  from so..c6b
+		  where c_no=#c_no# and usrid is not null and usrid &lt;&gt; ''
+		  union
+		  select a.crtid, a.sys, a.doc_no, a.usrid, a.usrnm,
+		       case when b.crtid is not null then b.sysid when c.crtid is not null then c.sysid else d.sysid end as sysid,
+		       case when b.crtid is not null then b.idnm when c.crtid is not null then c.idnm else d.idnm end as idnm,
+		       'C60_ADD' as tabnm
+		  from so..c60_add a
+		  left join so..c61 b on a.crtid=b.crtid and a.sys=b.sys and a.c_no=b.c_no and a.s61clnm=b.clnm
+		  left join so..y61 c on a.doc_no=c.doc_no and a.usrnm=c.clnm and b.crtid is null
+		  left join so..y6a d on a.doc_no=d.doc_no and a.usrnm=d.clnm and b.crtid is null and c.crtid is null
+		  where a.doc_no=#doc_no#
+		  union
+		  select crtid, sys, doc_no, usrid, clnm as usrnm, sysid, idnm, 'Y61' as tabnm
+		  from so..y61 
+		  where doc_no=#doc_no# and usrid is not null and usrid &lt;&gt; ''
+		  union
+		  select crtid, sys, doc_no as doc_no, usrid, clnm as usrnm, sysid, idnm, 'Y6A' as tabnm
+		  from so..y6a
+		  where doc_no=#doc_no# and usrid is not null and usrid &lt;&gt; ''
+		) a
+	</update>
+	
+	<!-- 將資料寫入C60_AGR -->
+	<update id="insertC60_AGR" parameterClass="java.util.HashMap">
+		insert into so..c60_agr(crtid, sys, doc_no, usrid, usrnm, idaptnm, idnm, insdt, instm, agrdt, agrtm)
+		select distinct a.crtid, a.sys, a.doc_no, a.usrid, a.usrnm, 
+		       case when a.sysid like '1%' then '主動造' when a.sysid like '2%' then '被動造' else '第三人' end idaptnm, a.idnm,
+		       #nowdt# as insdt, #nowtm# as instm		       
+		       <isEqual prepend="," property="dlv_dtm" compareValue="">
+		    	case when a.sysid like '1%' then #rcvdt# else '' end as agrdt, 
+		    	case when a.sysid like '1%' then #rcvtm# else '' end as agrtm
+		       </isEqual>		       
+		       <isNotEqual prepend="," property="dlv_dtm" compareValue="">
+		    	case when a.tabnm in ('C61', 'C6B') then #rcvdt# else #nowdt# end as agrdt, 
+		    	case when a.tabnm in ('C61', 'C6B') then #rcvtm# else #nowtm# end as agrtm
+		       </isNotEqual>
+		from so..c60_agr_tmp a
+		left join so..c60_agr b on a.crtid=b.crtid and a.sys=b.sys and a.doc_no=b.doc_no and a.usrid=b.usrid and (b.deldt is null or b.deldt='')
+		where a.doc_no=#doc_no#
+		  and b.crtid is null
+	</update>
+	
+	<!-- 已解除委任的上DELDT -->
+	<update id="updateC60_AGR_DELDTTM" parameterClass="java.util.HashMap">
+		update so..c60_agr
+		set deldt=#nowdt#, deltm=#nowtm#
+		where doc_no=#doc_no# and (deldt is null or deldt='') and crtid+sys+usrid in (
+		  select a.crtid+a.sys+a.usrid
+		  from so..c60_agr a
+		  left join so..c60_agr_tmp b on a.crtid=b.crtid and a.sys=b.sys and a.doc_no=b.doc_no and a.usrid=b.usrid
+		  where a.doc_no=#doc_no# and b.crtid is null
+		)
+	</update>
+	
+	<!-- 更新C60_AGR.AGRDT -->
+	<update id="updateC60_AGR_AGRDTTM" parameterClass="java.util.HashMap">
+		update so..C60_AGR
+		set AGRDT=(select substring(dlv_dtm,1,7) from so..c60 a where a.doc_no=#doc_no#), AGRTM=(select substring(dlv_dtm,8,6) from so..c60 a where a.doc_no=#doc_no#)
+		where doc_no=#doc_no# 
+		  and (agrdt is null or agrdt='') 
+		  and (deldt is null or deldt='')
+	</update>
+	
+	<update id="insertC60_ARRDT" parameterClass="java.util.HashMap">
+		insert into so..c60_arrdt(crtid, sys, doc_no, odoc_no, usrid, usrnm, idaptnm, idnm, arrdt, arrtm)
+		select a.crtid, a.sys, a.doc_no, a.odoc_no, b.usrid, b.usrnm, b.idaptnm, b.idnm, #nowdt#, #nowtm#
+		from so..c60 a
+		join so..c60_agr b on b.doc_no=#doc_no#
+		left join so..c60_arrdt c on a.crtid=c.crtid and a.sys=c.sys and a.doc_no=c.doc_no and b.usrid=c.usrid
+		where (a.doc_no=#doc_no# or a.odoc_no=#doc_no# )
+		  and a.doc_no is not null and a.doc_no &lt;&gt; ''
+		  and (b.deldt is null or b.deldt='')
+		  and b.agrdt is not null and b.agrdt &lt;&gt; ''
+			and c.crtid is null
+	</update>
+		
+</sqlMap>

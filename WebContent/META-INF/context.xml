@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context
+    override="true"
+    reloadable="true"
+    cachingAllowed="false"
+    privileged="true">
+  <Resource
+    name="jdbc/ORCL"
+    type="javax.sql.DataSource"
+    password="Acer123!"
+    driverClassName="com.microsoft.jdbc.sqlserver.SQLServerDriver"
+    maxIdle="5"
+    maxWait="5000"
+    removeAbandoned="true"
+    logAbandoned="true"
+    username="sa"
+    url="jdbc:sqlserver://10.24.100.140:1433;databaseName=SO"
+    removeAbandonedTimeout="10"
+    maxActive="20"/>
+</Context>

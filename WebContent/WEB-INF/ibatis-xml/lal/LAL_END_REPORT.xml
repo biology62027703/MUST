@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="BIG5"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="LAL_END_REPORT">
+
+	<select id="LAL_QUERY_END_REPORT3" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		SELECT ROW_NUMBER() OVER(ORDER BY C.CONT_NO,M.MAC_CERNO) AS SEQ, U.USER_CNAME, convert(nvarchar,cast(C.CONT_BDATE as datetime),111) as CONT_BDATE,convert(nvarchar,cast(C.CONT_EDATE as datetime),111) as CONT_EDATE,'1' as MAC_COUNT,M.MAC_NAME,M.MAC_NO 
+			FROM LAL.dbo.[USER] U, LAL.dbo.CONTRACT C, LAL.dbo.MACHINENO M
+ 				where substring(C.CONT_NO,1,1)='P' AND U.USER_NO=C.USER_NO AND M.CONT_NO=C.CONT_NO AND 
+ 					C.INONE_SOURCE LIKE '%$INONE_SOURCE$%' ORDER BY C.CONT_NO,M.MAC_CERNO
+	</select>
+	
+	<select id="FSO2A01_Query" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		<!--
+		select rowid, crtid, sys, s_kd, c_no, c_dt, c_tm, doc_no, odoc_no, crmyy, crmid, crmno, rcvdt, rcvtm, crmdt, pedt, c_status, p_status, t_status, usrid 
+		 -->
+		 
+		select distinct a.tblnm, a.seq, a.crtid, a.sys, a.s_kd, a.c_no, a.c_dt, a.c_tm, a.doc_no, a.odoc_no, a.crmyy, a.crmid, a.crmno, a.dpt, a.rcvdt, a.rcvtm, a.crmdt, a.pedt, a.c_status, a.p_status, a.t_status, a.yesread, 
+				(select count(1) from so..c60_doc b with (nolock) where b.crtid = a.crtid and b.sys = a.sys and (b.c_no = a.c_no or b.c_no in (select c_no from so..c60 with (nolock) where odoc_no = a.doc_no and (c_status <![CDATA[ <> ]]> 'N')))) as doc_cnt,
+				a.sysid, a.def_apv, a.tostatus, a.tocrtid, a.todoc_no, 
+				(SELECT ','+org_nm+'_'+substring(org_date,1,3)+'/'+substring(org_date,4,2)+'/'+substring(org_date,6,2)+'_'+org_no FROM so..c6m b WHERE a.c_no=b.c_no FOR XML PATH('')) c6m ,
+				(SELECT ','+crmyy+'.'+crmid+'.'+crmno+ (case when dpt is null then '' else'('+dpt+')' end) FROM so..c65 b WHERE a.doc_no=b.doc_no and a.crmyy+a.crmid+a.crmno+a.dpt<![CDATA[ <> ]]>b.crmyy+b.crmid+b.crmno+b.dpt FOR XML PATH('')) c65,
+				(SELECT (case when clnm_e &lt;&gt; '' then clnm_e else clnm end) + '  ' + idno+'||' FROM so..c61 c WHERE a.c_no=c.c_no order by sysid FOR XML PATH('')) c61
+				<!-- case when b.crmyy is not null then a.doc_no else '' end -->
+		from (
+		
+		<!-- C60 //法院解除偉認後原本那位律師就不應看到
+		select 'C60' as tblnm, '0' as seq, a.crtid, a.sys, a.s_kd, a.c_no, a.c_dt, a.c_tm, a.doc_no, a.odoc_no, a.crmyy, a.crmid, a.crmno, a.dpt, a.rcvdt, a.rcvtm, a.crmdt, a.pedt, a.c_status, a.p_status, a.t_status, b.yesread, '100000' as sysid, a.def_apv
+		from so..c60 a with (nolock)
+		join so..c6b b with (nolock) on b.crtid = a.crtid and b.sys = a.sys and b.c_no = a.c_no and b.usrid = #usrid#
+		where a.syskd = #syskd#
+		   and (ltrim(rtrim(a.odoc_no)) = '' or a.odoc_no is null)
+		   and a.usrid = #usrid#
+		   
+		union 
+		-->
+		
+		<!-- C61 -->
+		select 'C61' as tblnm, '1' as seq, a.crtid, a.sys, a.s_kd, a.c_no, a.c_dt, a.c_tm, a.doc_no, a.odoc_no, a.crmyy, a.crmid, a.crmno, a.dpt, a.rcvdt, a.rcvtm, a.crmdt, a.pedt, a.c_status, a.p_status, a.t_status, b.yesread, b.sysid, a.def_apv, a.tostatus, a.tocrtid, a.todoc_no
+		from so..c60 a with (nolock)
+		join so..c61 b with (nolock) on b.crtid = a.crtid and b.sys = a.sys and b.c_no = a.c_no
+		where a.syskd = #syskd#
+		   and (ltrim(rtrim(a.odoc_no)) = '' or a.odoc_no is null)
+		   and a.c_status <![CDATA[ <> ]]> 'N'
+		   and b.usrid = #usrid#
+		   and (a.crt_apv='Y' or a.crt_apv='E' or b.sysid like '1%')
+		   
+		union
+		
+		<!-- C6B -->
+		select 'C6B' as tblnm, '2' as seq, a.crtid, a.sys, a.s_kd, a.c_no, a.c_dt, a.c_tm, a.doc_no, a.odoc_no, a.crmyy, a.crmid, a.crmno, a.dpt, a.rcvdt, a.rcvtm, a.crmdt, a.pedt, a.c_status, a.p_status, a.t_status, b.yesread, b.sysid, a.def_apv, a.tostatus, a.tocrtid, a.todoc_no
+		from so..c60 a with (nolock)
+		join so..c6b b with (nolock) on b.crtid = a.crtid and b.sys = a.sys and b.c_no = a.c_no
+		where a.syskd = #syskd#
+		   and (ltrim(rtrim(a.odoc_no)) = '' or a.odoc_no is null)
+		   and a.c_status <![CDATA[ <> ]]> 'N'
+		   and b.usrid = #usrid#
+		   and (a.crt_apv='Y' or a.crt_apv='E' or b.sysid like '1%')
+		   
+		union 
+		
+		<!-- Y61 -->
+		select 'Y61' as tblnm, '3' as seq, a.crtid, a.sys, a.s_kd, a.c_no, a.c_dt, a.c_tm, a.doc_no, a.odoc_no, a.crmyy, a.crmid, a.crmno, a.dpt, a.rcvdt, a.rcvtm, a.crmdt, a.pedt, a.c_status, a.p_status, a.t_status, b.yesread, b.sysid, a.def_apv, a.tostatus, a.tocrtid, a.todoc_no
+		from so..c60 a with (nolock)
+		join so..y61 b with (nolock) on b.crtid = a.crtid and b.sys = a.sys and b.doc_no = a.doc_no
+		where a.syskd = #syskd#
+		   and (ltrim(rtrim(a.odoc_no)) = '' or a.odoc_no is null)
+		   and a.c_status <![CDATA[ <> ]]> 'N'
+		   and b.usrid = #usrid#
+		   and (a.crt_apv='Y' or a.crt_apv='E' or b.sysid like '1%')
+		   
+		union 
+		
+		<!-- Y6A -->
+		select 'Y6A' as tblnm, '4' as seq, a.crtid, a.sys, a.s_kd, a.c_no, a.c_dt, a.c_tm, a.doc_no, a.odoc_no, a.crmyy, a.crmid, a.crmno, a.dpt, a.rcvdt, a.rcvtm, a.crmdt, a.pedt, a.c_status, a.p_status, a.t_status, b.yesread, b.sysid, a.def_apv, a.tostatus, a.tocrtid, a.todoc_no
+		from so..c60 a with (nolock)
+		join so..y6a b with (nolock) on b.crtid = a.crtid and b.sys = a.sys and b.doc_no = a.doc_no
+		where a.syskd = #syskd#
+		   and (ltrim(rtrim(a.odoc_no)) = '' or a.odoc_no is null)
+		   and a.c_status <![CDATA[ <> ]]> 'N'
+		   and b.usrid = #usrid#
+		   and (a.crt_apv='Y' or a.crt_apv='E' or b.sysid like '1%')
+		
+		union 
+		
+		<!-- C60_ADD -->
+		select 'C60_ADD' as tblnm, '5' as seq, a.crtid, a.sys, a.s_kd, a.c_no, a.c_dt, a.c_tm, a.doc_no, a.odoc_no, a.crmyy, a.crmid, a.crmno, a.dpt, a.rcvdt, a.rcvtm, a.crmdt, a.pedt, a.c_status, a.p_status, a.t_status, b.yesread, isnull(c.sysid,isnull(d.sysid,isnull(e.sysid,f.sysid))) as sysid, a.def_apv, a.tostatus, a.tocrtid, a.todoc_no
+		from so..c60 a with (nolock)
+		join so..c60_add b with (nolock) on b.crtid = a.crtid and b.sys = a.sys and b.doc_no = a.doc_no
+		left join so..c61 c with (nolock) on c.crtid = a.crtid and c.sys = a.sys and c.c_no = a.c_no and (c.clnm = b.usrnm or c.clnm = b.s61clnm)
+		left join so..c6b d with (nolock) on d.crtid = a.crtid and d.sys = a.sys and d.c_no = a.c_no and (d.clnm = b.usrnm or d.clnm = b.s61clnm)
+		left join so..y61 e with (nolock) on e.crtid = a.crtid and e.sys = a.sys and e.doc_no = a.doc_no and (e.clnm = b.usrnm or e.clnm = b.s61clnm)
+		left join so..y6a f with (nolock) on f.crtid = a.crtid and f.sys = a.sys and f.doc_no = a.doc_no and (f.clnm = b.usrnm or f.clnm = b.s61clnm)
+		where a.syskd = #syskd#
+		   and (ltrim(rtrim(a.odoc_no)) = '' or a.odoc_no is null)
+		   and a.c_status <![CDATA[ <> ]]> 'N'
+		   and b.usrid = #usrid#
+		   and (c.c_no = b.c_no or d.c_no = b.c_no or e.doc_no = b.doc_no or f.doc_no = b.doc_no)
+		   and (a.crt_apv='Y' or a.crt_apv='E' or c.sysid like '1%' or d.sysid like '1%' or e.sysid like '1%' or f.sysid like '1%')
+		) a
+		left join so..c65 b on b.doc_no=a.doc_no
+		join so..c60 c on a.doc_no=c.doc_no or c.odoc_no=a.doc_no
+		where (a.sysid not like '2%' or a.def_apv <![CDATA[ <> ]]> 'N' or a.def_apv is null)
+		
+		<isNotEqual prepend="and" property="crtid" compareValue="">
+			a.crtid = #crtid#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="sys" compareValue="">
+			a.sys = #sys#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="s_kd" compareValue="">
+			a.s_kd = #s_kd#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="c_dt1" compareValue="">
+			(a.c_dt &gt;= #c_dt1# or c.rcvdt &gt;= #c_dt1#)
+		</isNotEqual>
+		<isNotEqual prepend="and" property="c_dt2" compareValue="">
+			(a.c_dt &lt;= #c_dt2# or c.rcvdt &lt;= #c_dt1#)
+		</isNotEqual>
+		<isNotEqual prepend="and" property="doc_no" compareValue="">
+			a.doc_no = #doc_no#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="crmyy" compareValue="">
+			(a.crmyy = #crmyy# or b.crmyy = #crmyy#)
+		</isNotEqual>
+		<isNotEqual prepend="and" property="crmid" compareValue="">
+			(a.crmid = #crmid# or b.crmid = #crmid#)
+		</isNotEqual>
+		<isNotEqual prepend="and" property="crmno" compareValue="">
+			(a.crmno = #crmno# or b.crmno = #crmno#)
+		</isNotEqual>
+		<isNotEqual prepend="and" property="c_status_sql" compareValue="">
+			$c_status_sql$
+		</isNotEqual>
+		<isNotEqual prepend="and" property="p_status_sql" compareValue="">
+			$p_status_sql$
+		</isNotEqual>
+		order by a.c_dt desc, a.c_tm desc, a.seq
+	</select>
+	
+	<select id="FSO2A01_Query_ORG" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		<!--
+		select rowid, crtid, sys, s_kd, c_no, c_dt, c_tm, doc_no, odoc_no, crmyy, crmid, crmno, rcvdt, rcvtm, crmdt, pedt, c_status, p_status, t_status, usrid 
+		 -->
+		select distinct a.crtid, a.sys, a.s_kd, a.c_no, a.c_dt, a.c_tm, a.doc_no, a.odoc_no, a.crmyy, a.crmid, a.crmno, a.rcvdt, a.rcvtm, a.crmdt, a.pedt, a.c_status, a.p_status, a.t_status, 
+				(select top 1 clnm from so..c61 b where b.c_no = a.c_no order by b.sysid) as clnm, 
+				(select top 1 clnm_e from so..c61 b where b.c_no = a.c_no order by b.sysid) as clnm_e, 
+				(select top 1 idno from so..c61 b where b.c_no = a.c_no order by b.sysid) as idno,  
+				(select count(1) from so..c60_doc b where b.crtid = a.crtid and b.sys = a.sys and (b.c_no = a.c_no or b.c_no in (select c_no from so..c60 where odoc_no = a.doc_no))) as doc_cnt,
+				b.yesread as r1, 
+				c.yesread as r2, 
+				d.yesread as r3, 
+				e.yesread as r4, 
+				f.yesread as r5
+		from so..c60 a
+		left join so..c61 b on a.crtid = b.crtid and a.sys = b.sys and a.c_no = b.c_no and b.clnm = #usrnm#
+		left join so..c6b c on a.crtid = c.crtid and a.sys = c.sys and a.c_no = c.c_no and c.clnm = #usrnm#
+		left join so..y61 d on a.crtid = d.crtid and a.sys = d.sys and a.doc_no = d.doc_no and d.clnm = #usrnm#
+		left join so..y6a e on a.crtid = e.crtid and a.sys = e.sys and a.doc_no = e.doc_no and e.clnm = #usrnm#
+		left join so..c60_add f on a.crtid = f.crtid and a.sys = f.sys and a.c_no = f.c_no and f.usrnm = #usrnm#
+		where a.syskd = #syskd#
+		   and (ltrim(rtrim(a.odoc_no)) = '' or a.odoc_no is null)
+		<isNotEqual prepend="and" property="priv" compareValue="T">
+		   (
+		   a.usrid = #usrid# or
+		   b.usrid = #usrid# or
+		   c.usrid = #usrid# or
+		   d.usrid = #usrid# or
+		   e.usrid = #usrid# or
+		   f.usrid = #usrid#
+		   )
+		</isNotEqual>
+		<isNotEqual prepend="and" property="crtid" compareValue="">
+			a.crtid = #crtid#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="sys" compareValue="">
+			a.sys = #sys#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="s_kd" compareValue="">
+			a.s_kd = #s_kd#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="c_dt1" compareValue="">
+			a.c_dt >= #c_dt1#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="c_dt2" compareValue="">
+			<![CDATA[a.c_dt <= #c_dt2#]]>
+		</isNotEqual>
+		<isNotEqual prepend="and" property="doc_no" compareValue="">
+			a.doc_no = #doc_no#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="crmyy" compareValue="">
+			a.crmyy = #crmyy#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="crmid" compareValue="">
+			a.crmid = #crmid#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="crmno" compareValue="">
+			a.crmno = #crmno#
+		</isNotEqual>
+		<isNotEqual prepend="and" property="c_status_sql" compareValue="">
+			$c_status_sql$
+		</isNotEqual>
+		<isNotEqual prepend="and" property="p_status_sql" compareValue="">
+			$p_status_sql$
+		</isNotEqual>
+		order by a.c_dt desc, a.c_tm desc
+	</select>
+	
+	<select id="queryC61" resultClass="com.sertek.table.C61" parameterClass="java.util.HashMap">
+		select sysid, idnm, nat, clnm, clnm_e
+		from so..c61 with (nolock)
+		where crtid = #crtid#
+		   and sys = #sys#
+		   and c_no = #c_no#
+		   and sysid like #c61_kd# + '%'
+		order by sysid
+	</select>
+	
+	<update id="FGSO2A01_UPDATE_DEF_APV" parameterClass="java.util.HashMap">
+		update so..c60
+		set def_apv=#def_apv#
+		where c_no=#c_no#
+	</update>
+	
+	<update id="FGSO2A01_INSERT_ASKBL" parameterClass="java.util.HashMap">
+		insert into so..askbl(guid, judcd, sysmid, sysid, yy, id, num, usrid, name, askdt, asktm, flag)
+		values(#guid#, #judcd#, #sysmid#, #sysid#, #yy#, #id#, #num#, #usrid#, #name#, #askdt#, #asktm#, #flag#)
+	</update>
+	
+</sqlMap>

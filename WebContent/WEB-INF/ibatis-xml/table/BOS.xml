@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="Big5"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BOS">
+
+	<select id="queryS03Email" resultClass="com.sertek.table.S03"  parameterClass="java.util.HashMap">
+		select email
+		from bos..s03 with (nolock)
+		where usrid = #usrid#
+	</select>
+
+</sqlMap>

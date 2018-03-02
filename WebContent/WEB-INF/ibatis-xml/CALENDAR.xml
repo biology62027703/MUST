@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="CALENDAR">
+	
+	<select id="QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		SELECT top 2500 b.F521_02+' '+a.F516_11 as 'title' , SUBSTRING(convert(VARCHAR, a.F516_051, 120),0,11)+' '+DATEADD(s,a.F516_052*3600+a.F516_053*60,'1900/01/01') as 'start',  SUBSTRING(convert(VARCHAR, a.F516_061, 120),0,11)+' '+DATEADD(s,a.F516_062*3600+a.F516_063*60,'1900/01/01') as 'end', case when  a.F516_04='9' then 'green' when a.F516_04='1' then 'blue'  when a.F516_04='6' then 'orange' when a.F516_04='4' then 'black' when a.F516_04='2' then 'red' when a.F516_04='7' then 'brown'  end as 'color'
+		  FROM F516 a 
+		  	join F521 b on a.F516_02 = b.F521_K and F521_07 is null
+		  where a.F516_04 not in ('A','B','C','7') and (a.FLOWFLAG='Z' or a.FLOWFLAG='P') and a.F516_19 is null
+		  order by F516_051 DESC
+	</select>
+	
+	
+	<select id="CHECK_MEMBER_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct member_no,chinese_name,ticket,situation from CHECKIN
+		<dynamic prepend="where">
+			<isNotEqual prepend="or" compareValue="" property="agent">
+				chinese_name = #agent#
+			</isNotEqual>
+			<isNotEqual prepend="or" compareValue="" property="agent">
+				member_no = #agent#
+			</isNotEqual>
+		</dynamic>	
+	</select>
+	
+	<select id="CHECK_AGENTMEMBER_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select distinct member_no,chinese_name,ticket from CHECKIN 
+		<dynamic prepend="where">
+			<isNotEqual prepend="and" compareValue="" property="CHINESE_NAME">
+				agent = #CHINESE_NAME#
+			</isNotEqual>
+		</dynamic>
+	
+	</select>
+	
+	
+</sqlMap>

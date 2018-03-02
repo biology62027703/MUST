@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="BIG5"?>  
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"   
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="SYS">
+
+	<select id="LoginCheck" resultClass="com.sertek.table.S03" parameterClass="java.util.HashMap">
+		select sort_column, owner, syskd, scd, scdnm, priv, usrid, pswd, usrnm, idno, email, tel, mobile, addr, status, lstlgndt, lstlgntm, pswdcnt, use_flag, vip_type, lawoffice, ok_id, group_id, lawofficeadmincnt
+		from(
+		
+		select '1' as sort_column, 'SO' as owner, '' as sys, '' as syskd, '' as scd, '' as scdnm, priv, usrid, pswd, usrnm, idno, email, tel, mobile, addr, status, lstlgndt, lstlgntm, pswdcnt, 'N' as use_flag, vip_type, lawoffice,  '' as ok_id, '' as group_id,
+		       (select count(1) from so..s03 (nolock) where lawoffice=a.lawoffice and vip_type='L') as lawofficeadmincnt
+		from so..s03 a with (nolock)		
+		where usrid = #usrid#
+		   and status = 'Y'
+		<isNotNull prepend="and" property="pswd">
+		   pswd = #pswd#
+		</isNotNull>
+		
+		union
+		
+		select '2' as sort_column, 'BOS' as owner, 'A' as sys, a.syskd, a.scd, b.clnm as scdnm, a.priv, a.usrid, a.pswd, a.usrnm, a.idno, a.email, a.tel, a.mobile, a.addr, a.status, a.lstlgndt, a.lstlgntm, a.pswdcnt, a.use_flag, '' as vip_type, '' as lawoffice, ok_id, group_id, '0' as lawofficeadmincnt   
+		from bos..s03 a with (nolock)
+		left join bos..s61 b with (nolock) on b.syskd = a.syskd and b.scd = a.scd
+		where a.usrid = #usrid#
+		   and a.status = 'Y'
+		   and a.syskd in ('J', 'I', 'T')
+		   and a.priv = 'U' 
+		<isNotNull prepend="and" property="pswd">
+		   a.pswd = #pswd#
+		</isNotNull>
+		
+		) sqltable
+		order by sort_column
+	</select>
+	
+	<update id="updateSOS03Info" parameterClass="java.util.HashMap">
+		update so..s03
+		set pswdcnt = #pswdcnt#
+		<isNotNull prepend="," property="lstlgndt">
+			lstlgndt = #lstlgndt#
+		</isNotNull>
+		<isNotNull prepend="," property="lstlgntm">
+			lstlgntm = #lstlgntm#
+		</isNotNull>
+		where usrid = #usrid#
+	</update>
+	
+	<update id="updateSOS03Lastpwdtime" parameterClass="java.util.HashMap">
+		update so..s03
+		set lastpwdtime = #lastpwdtime#
+		where usrid = #usrid#
+	</update>
+	
+	<update id="updateBOSS03Info" parameterClass="java.util.HashMap">
+		update bos..s03
+		set pswdcnt = #pswdcnt#
+		<isNotNull prepend="," property="lstlgndt">
+			lstlgndt = #lstlgndt#
+		</isNotNull>
+		<isNotNull prepend="," property="lstlgntm">
+			lstlgntm = #lstlgntm#
+		</isNotNull>
+		where usrid = #usrid#
+	</update>
+	
+	<select id="CRTAPV_C60_Query" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select a.crtid, b.crtnm, a.s_kd, a.sys, a.c_no, a.crmyy, a.crmid, a.crmno, a.doc_no, a.crt_apv, a.dpt
+		from so..C60 a
+		join so..court b on a.crtid=b.crtid
+		where a.crt_apv='S' and a.doc_no is not null and a.doc_no &lt;&gt; ''
+		  and (a.odoc_no is null or a.odoc_no='')
+		order by doc_no
+	</select>
+	
+	<select id="LOGIN_USRLOG0_GetLastInfo" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select usrip, ldt, ltm, detail from (
+		SELECT a.*, ROW_NUMBER() OVER(order by a.ldt desc, a.ltm desc) r__
+		from (select * from so..usrlog where upper(usrid)=upper(#usrid#) and detail='登入成功') a
+		) a where r__=1
+		union
+		select usrip, ldt, ltm, detail from (
+		SELECT a.*, ROW_NUMBER() OVER(order by a.ldt desc, a.ltm desc) r__
+		from (select * from so..usrlog where upper(usrid)=upper(#usrid#) and detail='密碼錯誤') a
+		) a where r__=1
+	</select>
+	
+	<update id="CRTAPV_C60_Update" parameterClass="java.util.HashMap">
+		update so..C60
+		set crt_apv=#crt_apv#
+		<isEqual prepend="," property="crt_apv" compareValue="Y"> 
+			dlv_dtm = #dlv_dtm# 
+		</isEqual>
+		where crtid=#crtid# and sys=#sys# and c_no=#c_no#
+	</update>
+	
+	<select id="FUN_GROUP_Query" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select fun_id, sub_id 
+		from bos..fun_group 
+		where syskd=#syskd# and priv=#priv# and group_id=#group_id# and fun_id &lt;&gt; '00000000'
+	</select>
+	
+	<select id="S08_ADMIN_IP_select" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select argvl from bos..s08 where prgid='LOGIN' and argnm='ADMIN_IP'
+	</select>
+	
+	<select id="BOS_FUN_LIST_MENU_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select b.FUN_ID, b.FUN_NM, b.FUN_URL, b.FUN_CLICK, b.FUN_IMG
+		from bos..fun_group a 
+		join bos..fun_list b on a.syskd=b.syskd and a.priv=b.priv and a.fun_id=b.fun_id
+		where a.syskd=#syskd# and a.priv=#priv# and a.group_id=#group_id#
+		order by fun_id
+	</select>
+	
+	<select id="C60_MAIL_QUERY_BY_DOC_NO" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select a.crtid, a.sys, a.syskd, a.s_kd, a.c_no, a.c_dt, a.c_tm, a.doc_no, a.odoc_no,
+		       isnull(a.crmyy, b.crmyy) as crmyy, isnull(a.crmid, b.crmid) as crmid, isnull(a.crmno, b.crmno) as crmno, isnull(a.dpt, b.dpt) as dpt,
+		       a.rcvdt, a.rcvtm, a.crmdt, a.pedt,
+		       b.rcvdt as orcvdt, b.rcvtm as orcvtm
+		from so..c60 a with (nolock)
+		left join so..c60 b with (nolock) on a.odoc_no=b.doc_no
+		where a.doc_no=#doc_no#
+	</select>
+	
+	<select id="C60_PAY_MAIL_QUERY_BY_DOC_NO" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select crtid, sys, doc_no, p_payid, comdt, comtm, cddt, acctype
+		from so..c60_pay a with (nolock)
+		where doc_no=#doc_no#
+	</select>
+	
+	<update id="SENDMAILLOG_INSERT" parameterClass="java.util.HashMap">
+		insert into bos..sendmaillog(owner, crtid, sys, syskd, doc_no, usrnm, emails, senddt, sendtm, mailid, status)
+		select #owner#, crtid, sys, syskd, doc_no, #usrnm#, #emails#, #senddt#, #sendtm#, #mailid#, #status#
+		from $owner$..C60
+		where doc_no=#doc_no#
+	</update>
+		
+</sqlMap>

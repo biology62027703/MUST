@@ -1,0 +1,138 @@
+A {
+	COLOR: blue; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: red; TEXT-DECORATION: underline
+}
+.font12 {
+	FONT-SIZE: 12px; FONT-FAMILY: Arial
+}
+.font15 {
+	FONT-SIZE: 15px; FONT-FAMILY: Arial
+}
+
+BUTTON {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 1px solid; BACKGROUND: #eeeeee; MARGIN: 0px; BORDER-LEFT: #ffffff 1px solid; WIDTH: 100px; COLOR: black; BORDER-BOTTOM: #ffffff 1px solid; FONT-FAMILY: tahoma, arial
+}
+.btn1 {
+	BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; FONT-SIZE: 12px; BACKGROUND: #eeeeee; MARGIN: 0px; BORDER-LEFT: black 1px solid; COLOR: black; BORDER-BOTTOM: black 1px solid; FONT-FAMILY: tahoma, arial
+}
+.input1 {
+	BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; BACKGROUND: #eeeeee; MARGIN: 0px; BORDER-LEFT: #dddddd 1px solid; WIDTH: 100px; COLOR: black; BORDER-BOTTOM: #dddddd 1px solid; FONT-FAMILY: tahoma, arial
+}
+.input2 {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 12px; MARGIN: 0px; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; FONT-FAMILY: tahoma, arial
+}
+#sbPN {
+	CURSOR: hand
+}
+#sbISD {
+	CURSOR: hand
+}
+#sbTTL {
+	CURSOR: hand
+}
+.trHead {
+	FONT-SIZE: 12px; BACKGROUND: #346198; COLOR: #ffffff; TEXT-ALIGN: center
+}
+TR.trSubHead {
+	FONT-SIZE: 12px; BACKGROUND: #346198; COLOR: #ffffff
+}
+.tr1 {
+	FONT-SIZE: 12px; BACKGROUND: #eaf2fb
+}
+.tr2 {
+	FONT-SIZE: 12px; BACKGROUND: #fcfcfc
+}
+.tdHead {
+	PADDING-RIGHT: 3px; PADDING-LEFT: 3px; FONT-WEIGHT: bold; FONT-SIZE: 12px; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; TEXT-ALIGN: center
+}
+.minTable {
+	BORDER-RIGHT: #333333 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #333333 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 3px 0px 0px; BORDER-LEFT: #333333 1px solid; WIDTH: 100%; PADDING-TOP: 0px; BORDER-BOTTOM: #333333 1px solid; BORDER-COLLAPSE: collapse; fon-size: 12px
+  background:#eaf2fb
+}
+.minTable TD {
+	BORDER-RIGHT: #cccccc 1px solid; PADDING-RIGHT: 4px; BORDER-TOP: #cccccc 1px solid; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; BORDER-LEFT: #cccccc 1px solid; PADDING-TOP: 4px; BORDER-BOTTOM: #cccccc 1px solid
+}
+.myTable {
+	BORDER-RIGHT: #333333 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #333333 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; MARGIN: 5px 0px 0px; BORDER-LEFT: #333333 1px solid; WIDTH: 100%; PADDING-TOP: 5px; BORDER-BOTTOM: #333333 1px solid; BORDER-COLLAPSE: collapse; fon-size: 12px
+  background:#eaf2fb
+}
+.myTable TD {
+	PADDING-RIGHT: 4px; BORDER-TOP: medium none; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+.pnTable {
+	BORDER-RIGHT: #dddddd 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #dddddd 1px solid; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; MARGIN: 5px 0px 3px; BORDER-LEFT: #dddddd 1px solid; WIDTH: 100%; PADDING-TOP: 3px; BORDER-BOTTOM: #dddddd 1px solid; fon-size: 12px
+  background:#eaf2fb; spacing: 3px
+}
+.PatMap {
+	MARGIN: 10px
+}
+TD.MapInfo {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center
+}
+TD.MapInfo2 {
+	BORDER-RIGHT: #000000 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: #000000 1px solid; PADDING-LEFT: 3px; PADDING-BOTTOM: 1px; VERTICAL-ALIGN: middle; BORDER-LEFT: #000000 1px solid; PADDING-TOP: 4px; BORDER-BOTTOM: #000000 1px solid; WHITE-SPACE: nowrap; TEXT-ALIGN: left
+}
+.MapItem {
+	FONT-SIZE: 12px; TEXT-ALIGN: center
+}
+TABLE.pnDetailTable {
+	BORDER-RIGHT: #415283 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #415283 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 5px 0px 0px; BORDER-LEFT: #415283 1px solid; WIDTH: 100%; PADDING-TOP: 0px; BORDER-BOTTOM: #415283 1px solid; BORDER-COLLAPSE: collapse; fon-size: 12px
+  background:#eaf2fb; spacing: 3px
+}
+TABLE.DetailInnerTable {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 3px; WIDTH: 99%; PADDING-TOP: 0px; BORDER-COLLAPSE: collapse; fon-size: 12px
+  border: 1 solid #415283; spacing: 3px
+}
+TD.DInnerTDHEAD {
+	FONT-WEIGHT: bold; BACKGROUND: #cad2ec
+}
+TABLE.DetailInnerTable TD {
+	BORDER-RIGHT: #415283 1px solid; BORDER-TOP: #415283 1px solid; BORDER-LEFT: #415283 1px solid; BORDER-BOTTOM: #415283 1px solid
+}
+.DetailPN {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; FILTER: progid:DXImageTransform.Microsoft.Shadow(color="#777777", Direction=135, Strength=1); MARGIN: 0px 10px 0px 0px; WIDTH: 77px; COLOR: red
+}
+TR.DetailtrHead {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; BACKGROUND: #eff1f8; PADDING-BOTTOM: 5px; PADDING-TOP: 5px
+}
+TR.Detailtr1 {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; BACKGROUND: #eff1f8; PADDING-BOTTOM: 5px; PADDING-TOP: 5px
+}
+TR.Detailtr2 {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; BACKGROUND: #ffffff; PADDING-BOTTOM: 5px; PADDING-TOP: 5px
+}
+TABLE.pnDetailTable TD {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; spacing: 5px
+}
+TD.DetailTDHead {
+	PADDING-RIGHT: 3px; PADDING-LEFT: 3px; BACKGROUND: #bac2dc; PADDING-BOTTOM: 3px; VERTICAL-ALIGN: top; WIDTH: 120px; PADDING-TOP: 3px; spacing: 3px
+}
+TR.Detailtrtit {
+	FONT-WEIGHT: normal; FONT-SIZE: 20px; BACKGROUND: #000000; COLOR: #ffffff; LINE-HEIGHT: normal; FONT-STYLE: normal; FONT-VARIANT: normal
+}
+TR.Detailtrtit TD {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; WORD-SPACING: 2px; PADDING-TOP: 5px
+}
+.DetailContainer {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; MARGIN: 10px 0px; PADDING-TOP: 10px; BACKGROUND-COLOR: #ffffff; spancing: 10px
+}
+LEGEND.DetailInfo {
+	FONT-SIZE: 12pt; FILTER: progid:DXImageTransform.Microsoft.Shadow(color="#777777", Direction=135, Strength=1); COLOR: #804744; LETTER-SPACING: 2pt
+}
+.fullimg {
+	FONT-WEIGHT: normal; FONT-SIZE: 12px; LINE-HEIGHT: normal; FONT-STYLE: normal; FONT-VARIANT: normal
+}
+DIV.MantainInfo {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; FONT-SIZE: 12pt; FILTER: progid:DXImageTransform.Microsoft.Shadow(color="#777777", Direction=135, Strength=1); PADDING-BOTTOM: 10px; MARGIN: 10px; COLOR: #a04744; PADDING-TOP: 10px; LETTER-SPACING: 2pt; TEXT-ALIGN: center
+}
+.MinContainer {
+	PADDING-RIGHT: 3px; PADDING-LEFT: 0px; PADDING-BOTTOM: 3px; MARGIN: 3px 0px; PADDING-TOP: 3px; BACKGROUND-COLOR: #ffffff
+}
+.MinInfo {
+	FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Shadow(color="#777777", Direction=135, Strength=1); COLOR: #804744; LETTER-SPACING: 4px
+}
+.MinScroller {
+	OVERFLOW: scroll; ; WIDTH: expression(OuterContainer.width); HEIGHT: 150px
+}

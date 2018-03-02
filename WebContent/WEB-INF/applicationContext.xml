@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+	xmlns:tx="http://www.springframework.org/schema/tx"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 使用 JSTL 來承現畫面 -->
+		<property name="viewClass"> 
+			<value>org.springframework.web.servlet.view.JstlView</value> 
+		</property>
+	</bean>
+	<import resource="dataSource.xml" />
+	
+	<!-- diva交易管理 -->  
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_diva" />
+	</bean>
+	<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager"></property>
+	</bean>
+	
+	<!-- iBatis diva 設定 -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<!-- ibatis 設定檔存放路置  -->
+			<value>/WEB-INF/sqlMapConfig.xml</value>
+		</property>
+		<property name="dataSource" ref="dataSource_diva"/>
+	</bean>
+	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- ibatis diva 的 sqlMapClient 再包裝  -->
+	<bean id="sqlDBUtility" class="com.sertek.ibatis.util.SqlDBUtility">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+	
+	<bean id="paraMethodResolver" class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		<property name="paramName" value="action" /><!-- 使用 multiActionController 時，接 action 參數來辦視要跑那一個 method -->
+	</bean>
+	
+	<!-- MUST_WEB交易管理 -->  
+	<bean id="transactionManager_MUST_WEB" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_MUST_WEB" />
+	</bean>
+	<bean id="transactionTemplate_MUST_WEB" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager_MUST_WEB"></property>
+	</bean>
+	
+	<!-- iBatis MUST_WEB 設定 -->
+	<bean id="sqlMapClient_MUST_WEB" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<!-- ibatis 設定檔存放路置  -->
+			<value>/WEB-INF/sqlMapConfig.xml</value>
+		</property>
+		<property name="dataSource" ref="dataSource_MUST_WEB"/>
+	</bean>
+	<bean id="sqlMapClientTemplate_MUST_WEB" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient_MUST_WEB" />
+	</bean>
+	
+	<!-- ibatis MUST_WEB 的 sqlMapClient 再包裝  -->
+	<bean id="sqlDBUtility_MUST_WEB" class="com.sertek.ibatis.util.SqlDBUtility_MUST_WEB">
+		<property name="sqlMapClient" ref="sqlMapClient_MUST_WEB" />
+		<property name="transactionManager" ref="transactionManager_MUST_WEB" />
+	</bean>
+	
+	<!-- 51交易管理 -->  
+	<bean id="transactionManager_51" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_51" />
+	</bean>
+	<bean id="transactionTemplate_51" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager_51"></property>
+	</bean>
+	
+	<!-- iBatis 51 設定 -->
+	<bean id="sqlMapClient_51" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<!-- ibatis 設定檔存放路置  -->
+			<value>/WEB-INF/sqlMapConfig.xml</value>
+		</property>
+		<property name="dataSource" ref="dataSource_51"/>
+	</bean>
+	<bean id="sqlMapClientTemplate_51" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient_51" />
+	</bean>
+	
+	<!-- ibatis 51 的 sqlMapClient 再包裝  -->
+	<bean id="sqlDBUtility_51" class="com.sertek.ibatis.util.SqlDBUtility_51">
+		<property name="sqlMapClient" ref="sqlMapClient_51" />
+		<property name="transactionManager" ref="transactionManager_51" />
+	</bean>
+	
+	<!-- ERP交易管理 -->  
+	<bean id="transactionManager_ERP" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_ERP" />
+	</bean>
+	<bean id="transactionTemplate_ERP" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager_ERP"></property>
+	</bean>
+	
+	<!-- iBatis ERP 設定 -->
+	<bean id="sqlMapClient_ERP" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<!-- ibatis 設定檔存放路置  -->
+			<value>/WEB-INF/sqlMapConfig.xml</value>
+		</property>
+		<property name="dataSource" ref="dataSource_ERP"/>
+	</bean>
+	<bean id="sqlMapClientTemplate_ERP" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient_ERP" />
+	</bean>
+	
+	<!-- ibatis ERP 的 sqlMapClient 再包裝  -->
+	<bean id="sqlDBUtility_ERP" class="com.sertek.ibatis.util.SqlDBUtility_ERP">
+		<property name="sqlMapClient" ref="sqlMapClient_ERP" />
+		<property name="transactionManager" ref="transactionManager_ERP" />
+	</bean>
+	
+	<!-- LICENSE交易管理 -->  
+	<bean id="transactionManager_LICENSE" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_LICENSE" />
+	</bean>
+	<bean id="transactionTemplate_LICENSE" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager_LICENSE"></property>
+	</bean>
+	
+	<!-- iBatis LICENSE 設定 -->
+	<bean id="sqlMapClient_LICENSE" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<!-- ibatis 設定檔存放路置  -->
+			<value>/WEB-INF/sqlMapConfig.xml</value>
+		</property>
+		<property name="dataSource" ref="dataSource_LICENSE"/>
+	</bean>
+	<bean id="sqlMapClientTemplate_LICENSE" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient_LICENSE" />
+	</bean>
+	
+	<!-- LICENSE 的 sqlMapClient 再包裝  -->
+	<bean id="sqlDBUtility_LICENSE" class="com.sertek.ibatis.util.SqlDBUtility_LICENSE">
+		<property name="sqlMapClient" ref="sqlMapClient_LICENSE" />
+		<property name="transactionManager" ref="transactionManager_LICENSE" />
+	</bean>
+	
+	<bean id="authorizeInterceptor" class="com.sertek.spring.util.AuthorizeInterceptor">
+		<description>使用者登入攔截器</description>
+		<property name="errorView" value="/REDIRECTINDEX.jsp" />
+	</bean>
+	
+	<bean id="adminInterceptor" class="com.sertek.spring.util.AdminInterceptor">
+		<description>管理者登入攔截器</description>
+		<property name="errorView" value="/REDIRECTINDEX.jsp" />
+	</bean>
+	
+</beans>

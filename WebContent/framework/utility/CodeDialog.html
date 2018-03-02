@@ -1,0 +1,172 @@
+<script type="text/javascript" language="javascript">
+	window.onload = onloadHandler;
+	window.onerror = function() {return true};
+	
+	function onloadHandler()
+	{
+		initCode();
+
+		document.onkeydown = function () {return onkeydownHandler();};
+
+		document.forms[0].onsubmit = function () {return onsubmitHandler();};
+		document.forms[0].elements["search"].onkeyup = function () {searchCode();};
+		document.forms[0].elements["code"].onclick = function () {return onsubmitHandler();};
+		document.forms[0].elements["code"].onmousewheel = function () {return onscrollHandler();};
+
+		document.forms[0].elements["search"].value	= dialogArguments[1].value;
+		document.forms[0].elements["search"].select();
+		searchCode();
+	}
+
+	function onsubmitHandler()
+	{
+		if (document.forms[0].elements["code"].value == "") return false;
+		top.returnValue	= document.forms[0].elements["code"].value;
+		top.close();
+		return false;
+	}
+	
+	function onscrollHandler()
+	{
+		var i = -1;
+
+		for (i = 0; i < document.forms[0].elements["code"].length; i++)
+		{
+			if (document.forms[0].elements["code"].options[i].selected)
+			{
+				document.forms[0].elements["code"].options[ ((i-event.wheelDelta/120) >= 0 && (i-event.wheelDelta/120) < document.forms[0].elements["code"].length)?i-event.wheelDelta/120:i ].selected = true;
+				break;
+			}
+		}
+		if (i == document.forms[0].elements["code"].length)
+		{
+			document.forms[0].elements["code"].options[0].selected = true;
+		}
+
+		return false;
+	}
+
+	function onkeydownHandler()
+	{
+        if (event.keyCode == 13) {
+        	return onsubmitHandler();
+        }
+
+        if (event.keyCode == 27) {
+        	top.close();
+            return false;
+        }
+	}
+
+	function initCode()
+	{
+		try
+		{
+			var codeArray = dialogArguments[0];
+			var codeArrayLength = parseInt(codeArray[1]);
+			var showIndex = codeArray[2].split(',');
+			var valueIndex = codeArray[3].split(',');
+			var searchIndex = codeArray[4].split(',');
+			var filterString = dialogArguments[2];
+	
+			document.forms[0].elements["code"].length = 0;
+			for (var i = 5; i < codeArray.length; i += codeArrayLength)
+			{
+				if (filterString != null && filterString.replace(/(^\s*)|(\s*$)/g,"") != "")
+				{
+					var filterCondition = filterString;
+					
+					for (var f = 0; f < codeArrayLength; f++)
+					{
+						filterCondition = filterCondition.replace(eval("/@"+(f+1)+"/g"),"codeArray["+(i+f)+"]");
+					}
+	
+					if (!eval(filterCondition))
+					{
+						continue;
+					}
+				}
+				var	optionText	= '';
+				var	optionValue	= '';
+	
+				for (var s = 0; s < showIndex.length; s++)
+				{
+					optionText += ((optionText == '')?'':'  ')+codeArray[i+parseInt(showIndex[s])-1];
+				}
+	
+				for (var v = 0; v < valueIndex.length; v++)
+				{
+					optionValue += ((optionValue == '')?'':'--')+codeArray[i+parseInt(valueIndex[v])-1];
+				}
+	
+				document.forms[0].elements["code"].options[document.forms[0].elements["code"].length] = new Option(optionText, optionValue);
+			}
+		}
+		catch(ex)
+		{
+			alert("無法產生代碼選單");
+			top.returnValue	= null;
+			top.close();
+		}
+	}
+	
+	function searchCode()
+	{
+		var str = document.forms[0].elements["search"].value;
+
+		document.forms[0].elements["code"].value	= '';
+		
+		if (str.replace(/\s*/g, '') == '')
+		{
+			return;
+		}
+		else
+		{			
+			for (var i = 0; i < document.forms[0].elements["code"].options.length; i++)
+			{
+				if (document.forms[0].elements["code"].options[i].text.indexOf(str) == 0)
+				{
+					document.forms[0].elements["code"].value = document.forms[0].elements["code"].options[i].value;
+					return;
+				}
+			}
+			for (var i = 0; i < document.forms[0].elements["code"].options.length; i++)
+			{
+				if (document.forms[0].elements["code"].options[i].text.indexOf(str) != -1)
+				{
+					document.forms[0].elements["code"].value = document.forms[0].elements["code"].options[i].value;
+					return;
+				}
+			}
+		}
+	}
+
+	document.writeln("<html>");
+	document.writeln("	<head>");
+	document.writeln("		<title>代碼開窗 編號: " + dialogArguments[0][0] + "</title>");
+	document.writeln("		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />");
+	document.writeln("		<META HTTP-EQUIV='CACHE-CONTROL' CONTENT='NO-CACHE' />");
+	document.writeln("		<META HTTP-EQUIV='PRAGMA' CONTENT='NO-CACHE' />");
+	document.writeln("		<META HTTP-EQUIV='EXPIRES' CONTENT='Sun 1 Jan 2006 00:00:00 GMT' />");
+	document.writeln("		<style type='text/css'>");
+	document.writeln("			@import '../../css/CSS.css';");
+	document.writeln("		</style>");
+	document.writeln("	</head>");
+	document.writeln("	<body scroll='no' style='margin: 0px;'>");
+	document.writeln("	<form>");
+	document.writeln("		<table cellspacing='0' cellpadding='0' border='0' style='width:100%;height:100%;'>");
+	document.writeln("			<tr style='width:100%;height:30px'>");
+	document.writeln("				<td>");
+	document.writeln("					<input name='search' type='text' style='width:100%;padding:0px;margin:0px;'>");
+	document.writeln("				</td>");
+	document.writeln("			</tr>");
+	document.writeln("			<tr style='width:100%;'>");
+	document.writeln("				<td>");
+	document.writeln("					<select name='code' size='10' style='width:100%;height:100%;padding:0px;margin:0px;'></select>");
+	document.writeln("				</td>");
+	document.writeln("			</tr>");
+	document.writeln("		</table>");
+	document.writeln("	</form>");
+	document.writeln("	</body>");
+	document.writeln("</html>");
+</script>

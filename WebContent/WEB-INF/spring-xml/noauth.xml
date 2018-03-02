@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="urlNoAuthMapping" 
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<!-- 認証攔截器 -->
+		<!-- 
+		<property name="interceptors">
+			<list>
+				<ref bean="authorizeInterceptor" />
+			</list>
+		</property>
+		 -->
+		<!-- map -->
+		<!-- 
+		<property name="mappings">
+			<props>
+				<prop key="util/CntInfo.do">CntInfoController</prop>
+			</props>
+		</property>
+		-->
+	</bean>
+
+	<!-- 統計使用人次 -->
+	<!-- 
+	<bean id="CntInfoController" class="com.sertek.form.CntInfoController">
+		<property name="sqlDBUtility" ref="sqlDBUtility" />
+	</bean>
+	 -->
+	
+</beans>

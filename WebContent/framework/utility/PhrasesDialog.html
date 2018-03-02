@@ -1,0 +1,241 @@
+<script type="text/javascript" language="javascript">
+	window.onload = onloadHandler;
+	window.onerror = function() {return true};
+	var iScrollIndex = -1;
+	
+	function onloadHandler()
+	{
+		initPhrase();
+
+		document.onkeydown = function () {return onkeydownHandler();};
+
+		document.forms[0].onsubmit = function () {return onsubmitHandler();};
+		document.forms[0].elements["search"].onkeyup = function () {searchPhrase();};
+		document.forms[0].elements["close"].onclick = function () {top.close();};
+		document.forms[0].elements["all"].onclick = function () {selectAll(document.forms[0].elements["all"].checked);};
+		document.forms[0].elements["phrase"].onchange = function () {onchangeHandler();};
+		document.forms[0].elements["phrase"].onmousewheel = function () {return onscrollHandler();};
+		document.forms[0].elements["phrase"].ondblclick = function () {return onsubmitHandler();};
+		
+		if (dialogArguments[1].value != "")
+		{
+			var delimeterString = ((dialogArguments[3]==null)?"":dialogArguments[3]);
+			var inputArray = dialogArguments[1].value.split(delimeterString);
+
+			for (var a = 0 ; a < inputArray.length; a++)
+			{
+				inputArray[a] = inputArray[a].replace(/(^\s*)|(\s*$)/g,"");
+
+				if (inputArray[a] == "") continue;
+
+				for (var i = 0; i < document.forms[0].elements["phrase"].options.length; i++)
+				{
+					if (document.forms[0].elements["phrase"].options[i].text.indexOf(inputArray[a]) != -1)
+					{
+						document.forms[0].elements["phrase"].options[i].selected = true;
+						break;
+					}
+				}
+			}
+		}
+		else
+		{
+			if (document.forms[0].elements["phrase"].length > 0)
+			{
+				document.forms[0].elements["phrase"].options[0].selected = false;
+			}
+		}
+	}
+
+	function onsubmitHandler()
+	{
+		var delimeterString = ((dialogArguments[3]==null)?"":dialogArguments[3]);
+		var valueString = "";
+		
+		for (var i = 0 ; i < document.forms[0].elements["phrase"].length ; i++)
+		{
+			if (document.forms[0].elements["phrase"].options[i].selected)
+			{
+				valueString += ((valueString == "")?"":delimeterString) + document.forms[0].elements["phrase"].options[i].value;
+			}
+		}
+		top.returnValue	= valueString;
+		top.close();
+		return false;
+	}
+
+	function onscrollHandler()
+	{
+		if (document.forms[0].elements["phrase"].length > 0)
+		{
+			document.forms[0].elements["phrase"].focus();
+			iScrollIndex = ((iScrollIndex-event.wheelDelta/120) >= 0 && (iScrollIndex-event.wheelDelta/120) < document.forms[0].elements["phrase"].length)?iScrollIndex-event.wheelDelta/120:iScrollIndex;
+			
+			if (!document.forms[0].elements["phrase"].options[iScrollIndex].selected)
+			{
+				document.forms[0].elements["phrase"].options[iScrollIndex].selected = true;
+				document.forms[0].elements["phrase"].options[iScrollIndex].selected = false;
+			}
+			else
+			{
+				document.forms[0].elements["phrase"].options[iScrollIndex].selected = true;
+			}
+		}
+		return false;
+	}
+
+	function onkeydownHandler()
+	{
+        if (event.keyCode == 13) {
+        	return onsubmitHandler();
+        }
+
+        if (event.keyCode == 27) {
+        	top.close();
+            return false;
+        }
+	}
+
+	function initPhrase()
+	{
+		try
+		{
+			var phraseArray = dialogArguments[0];
+			var filterString = dialogArguments[2];
+	
+			document.forms[0].elements["phrase"].length = 0;
+			for (var i = 2; i < phraseArray.length; i += 2)
+			{
+				if (filterString != null && filterString.replace(/(^\s*)|(\s*$)/g,"") != "")
+				{
+					var filterCondition = filterString;
+					
+					for (var f = 0; f < 2; f++)
+					{
+						filterCondition = filterCondition.replace(eval("/@"+(f+1)+"/g"),"phraseArray["+(i+f)+"]");
+					}
+	
+					if (!eval(filterCondition))
+					{
+						continue;
+					}
+				}
+				var	optionText	= '';
+				var	optionValue	= '';
+	
+				optionText = phraseArray[i]+'  '+phraseArray[i+1];
+	
+				optionValue = phraseArray[i]+'--'+phraseArray[i+1];
+	
+				document.forms[0].elements["phrase"].options[document.forms[0].elements["phrase"].length] = new Option(optionText, optionValue);
+			}
+		}
+		catch(ex)
+		{
+			alert("無法產生片語選單");
+			top.returnValue	= null;
+			top.close();
+		}
+	}
+	
+	function searchPhrase()
+	{
+		var str = document.forms[0].elements["search"].value;
+		
+		if (str.replace(/\s*/g, '') == '')
+		{
+			return;
+		}
+		else
+		{			
+			for (var i = 0; i < document.forms[0].elements["phrase"].options.length; i++)
+			{
+				if (document.forms[0].elements["phrase"].options[i].text.indexOf(str) != -1)
+				{
+					if (document.forms[0].elements["phrase"].options[i].selected == false)
+					{
+						document.forms[0].elements["phrase"].options[i].selected = true;
+						if (document.forms[0].elements["auto"].checked == false)
+						{
+							document.forms[0].elements["phrase"].options[i].selected = false;
+						}
+					}
+					else
+					{
+						document.forms[0].elements["phrase"].options[i].selected = true;
+					}
+					break;
+				}
+			}
+		}
+	}
+		
+	function onchangeHandler()
+	{
+		iScrollIndex = document.forms[0].elements["code"].selectedIndex;
+
+		if (document.forms[0].elements["all"].checked == true)
+		{
+			document.forms[0].elements["all"].checked = false;
+		}
+		else
+		{
+			for (var i = 0; i < document.forms[0].elements["phrase"].options.length; i++)
+			{
+				if (document.forms[0].elements["phrase"].options[i].selected == false) return;
+			}
+			document.forms[0].elements["all"].checked = true;
+		}
+	}
+	
+	function selectAll(yesno)
+	{
+		var i = document.forms[0].elements["phrase"].options.length;
+		
+		while (i >= 1)
+		{
+			document.forms[0].elements["phrase"].options[--i].selected = eval(yesno);
+		}
+	}
+
+	document.writeln("<html>");
+	document.writeln("	<head>");
+	document.writeln("		<title>片語開窗 編號: " + dialogArguments[0][0]+"["+dialogArguments[0][1]+"] (多重選取)</title>");
+	document.writeln("		<meta http-equiv='Content-Type' content='text/html; charset=Big5' />");
+	document.writeln("		<META HTTP-EQUIV='CACHE-CONTROL' CONTENT='NO-CACHE' />");
+	document.writeln("		<META HTTP-EQUIV='PRAGMA' CONTENT='NO-CACHE' />");
+	document.writeln("		<META HTTP-EQUIV='EXPIRES' CONTENT='Sun 1 Jan 2006 00:00:00 GMT' />");
+	document.writeln("		<style type='text/css'>");
+	document.writeln("			@import '../../css/CSS.css';");
+	document.writeln("		</style>");
+	document.writeln("	</head>");
+	document.writeln("	<body scroll='no' style='padding:0px;margin:0px;'>");
+	document.writeln("	<form>");
+	document.writeln("		<table cellspacing='0' cellpadding='0' border='0' style='width:100%;height:100%;'>");
+	document.writeln("			<tr style='width:100%;height:30px'>");
+	document.writeln("				<td>");
+	document.writeln("					<input name='search' type='text' style='width:100%;height:30px;'>");
+	document.writeln("				</td>");
+	document.writeln("				<td>");
+	document.writeln("					<input type='submit' class='button' value='確定' style='height:30px;'><br/>");
+	document.writeln("				</td>");
+	document.writeln("			</tr>");
+	document.writeln("			<tr style='width:100%;height:30px'>");
+	document.writeln("				<td nowrap>");
+	document.writeln("					<input type='checkbox' class='checkbox' name='all'><span style='width:60px;vertical-align: middle'>全　選</span>");
+	document.writeln("					<input type='checkbox' class='checkbox' name='auto' checked><span style='width:180px;'>自動選取找到的片語</span>");
+	document.writeln("				</td>");
+	document.writeln("				<td>");
+	document.writeln("					<input name='close' type='button' class='button' value='取消' style='height:30px;'>");
+	document.writeln("				</td>");
+	document.writeln("			</tr>");
+	document.writeln("			<tr style='width:100%;'>");
+	document.writeln("				<td colspan='2' align='center'>");
+	document.writeln("					<select name='phrase' style='width:99%;height:100%;padding:0px;margin:2px 0px 0px 0px;' multiple></select>");
+	document.writeln("				</td>");
+	document.writeln("			</tr>");
+	document.writeln("		</table>");
+	document.writeln("	</form>");
+	document.writeln("	</body>");
+	document.writeln("</html>");
+</script>

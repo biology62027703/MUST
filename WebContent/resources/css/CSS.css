@@ -1,0 +1,53 @@
+body {background-color:#E8FCE4;font-family:新細明體;font-size:12pt;}
+table {font-family:新細明體;font-size:12pt;}
+input {font-size: 12pt;margin: 0pt 0pt 0pt 3pt;}
+select {font-size: 12pt;margin: 0pt 0pt 0pt 3pt;}
+textarea {font-size: 12pt;margin: 0pt 0pt 0pt 3pt;}
+A {color: 6666ff; text-decoration: none;cursor:hand;}
+A:hover {color: #ff0000; text-decoration: underline}
+img {margin: 0pt 0pt 0pt 3pt;}
+
+
+.b {font-weight: bold}
+.link {font-size:12pt;font-weight: bold}
+.button {font-size: 12pt; font-weight: bold;text-decoration: none;}
+.radio {width:17pt;height:17pt;}
+.checkbox {width:16pt;height:16pt;}
+.readonly {font-size: 12pt;margin: 0pt 0pt 0pt 3pt;background-color: #EBEBD6;}
+.title {font-size:12pt;font-weight:bold;background-color:#418282;color:#FFFFFF}
+.title_4 {font-family:標楷體; font-size: 34px; font-weight: bold; background-color:#418282;color:#FFFFFF}
+.head {text-align:center;font-size: 11pt; font-weight: bold; background-color:#FFCC00; color:#7D3F00;}
+.head-l {padding: 0pt 0pt 0pt 3pt;font-size:11pt;font-weight:bold;background-color:#FCEAC9;}
+.head-r {font-size:12pt;}
+.tr-sp {background-color:#F8FCE4;font-size: 12pt;font-weight: bold;text-align:center;color:#141414}
+.tr-1 {background-color:#FFFFFF;font-size: 12pt;}
+.tr-2 {background-color:#FCEAC9;font-size: 12pt;}
+.tr-3 {background-color:#dddddd;font-size: 12pt;}
+.tr-4 {background-color:#FFEC71;font-size: 12pt;}
+.tr-1CHD {background-color:#FFFFFF;font-size: 12pt;height:18pt;}
+.tr-2CHD {background-color:#FCEAC9;font-size: 12pt;height:18pt;}
+.tr-END     {background-color:#CCFF99;font-size: 12pt;height:18pt;}
+.tr-ONCOURT {background-color:#FF0033;font-size: 12pt;height:18pt;}
+.tr-NEXT {background-color:#FF9933;font-size: 12pt;height:18pt;}
+.tr-PREPARE {background-color:#FFFF66;font-size: 12pt;height:18pt;}
+.tdCHD {font-size: 11pt;font-weight: bold;}
+.trcolorCHD {background-color:#CCCCFF;font-size: 12pt;height:18pt;}
+.trcolor {background-color:#CCCCFF;font-size: 12pt;}
+.trcolorb {background-color:#CCCCFF;font-size: 12pt;font-weight:bold;}
+.trcolorNEW {background-color:#A9F5D9;font-size: 12pt;height:18pt;}
+.style6 {font-size: 20px}
+
+.pageMouseOver {font-family:標楷體;cursor:hand;color: #FF0000;}
+.pageMouseOut {font-family:標楷體;cursor:hand;color: #0000FF;}
+
+.unnamed1 { font-family:標楷體; font-size: 24px; font-weight: bold}
+.title_3 { font-family:標楷體; font-size: 34px; font-weight: bold}
+.clsMenuItemIE{text-decoration: none; font: bold 14pt "Verdana"; color: #ffffff; cursor: hand;}
+.clsMenuItemIE:hover{color: #ffcc33; text-decoration: underline}
+.displayboard_1 {font-family:標楷體; font-size: 60px;}
+.displayboard_2 {font-family:標楷體; font-size: 60px; font-weight: bold}
+.displayboard_3 {font-family:標楷體; font-size: 64px; background-color:#FCEAC9; font-weight: bold}
+.displayboard_4 {font-family:標楷體; font-size: 64px; font-weight: bold}
+.displayboard-1CHD {font-family:標楷體; font-size: 52px; background-color:#FFFFFF; height:70pt; font-weight: bold}
+.displayboard-2CHD {font-family:標楷體; font-size: 52px; background-color:#FCEAC9; height:70pt; font-weight: bold}
+.title_2 {font-family:標楷體; font-size: 60px; background-color:#418282;color:#FFFFFF}

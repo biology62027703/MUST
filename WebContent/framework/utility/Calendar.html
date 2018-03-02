@@ -1,0 +1,655 @@
+<html>
+<style type="text/css">
+	body
+	{
+		background: #F0ECCD;
+	}
+
+	.SunDay
+	{
+		cursor: pointer;
+		height: 33px;
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/SunDay.png');
+	}
+	
+	.SunDay span
+	{
+		height: 33px;
+		font-family:Arial;
+		font-size:12pt;
+		font-weight: bold;
+		color: #FFFFFF;
+		padding-left:6px;
+		padding-top:6px
+	}	
+
+	.SatDay
+	{
+		cursor: pointer;
+		height: 33px;
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/SatDay.png');
+	}
+	
+	.SatDay span
+	{
+		height: 33px;
+		font-family:Arial;
+		font-size:12pt;
+		font-weight: bold;
+		color: #FFFFFF;
+		padding-left:6px;
+		padding-top:6px
+	}
+  
+	.WorkDay
+	{
+		cursor: pointer;
+		height: 33px;
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/WorkDay.png');
+	}
+	
+	.WorkDay span
+	{
+		height: 33px;
+		font-family:Arial;
+		font-size:12pt;
+		font-weight: bold;
+		color: #FFFFFF;
+		padding-left:6px;
+		padding-top:6px
+	}
+
+	.GrayDay
+	{
+		height: 33px;
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/WorkDay.png');
+	}
+	
+	.GrayDay span
+	{
+		height: 33px;
+		font-family:Arial;
+		font-size:12pt;
+		font-weight: bold;
+		color: #3C3C3C;
+		padding-left:6px;
+		padding-top:6px
+	}
+	
+	.Today
+	{
+		cursor: pointer;
+		height: 33px;
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/Today.png');
+	}
+	
+	.Today span
+	{
+		height: 33px;
+		font-family:Arial;
+		font-size:12pt;
+		font-weight: bold;
+		color: #FFFFFF;
+		padding-left:6px;
+		padding-top:6px
+	}
+	
+	.PrevBtn
+	{
+		vertical-align: top;
+	}
+
+	.PrevBtn span
+	{
+		width: 24px;
+		cursor:pointer;
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/PrevBtn.png',sizingMethod ='image');
+	}
+
+	.NextBtn
+	{
+		vertical-align: top;
+	}
+
+	.NextBtn span
+	{
+		width: 24px;
+		cursor:pointer;
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/NextBtn.png',sizingMethod ='image');
+	}
+
+	.CalendarControl
+	{
+		vertical-align: middle;
+	}
+
+	.CalendarControl input
+	{
+		width: 33px;
+		height: 30px;
+		padding-left: 0px;
+		padding-right: 0px;
+		font-size:12pt;
+		border-style: groove;
+	}
+
+	.CalendarControl span
+	{
+		font-family:標楷體;
+		font-size:20pt;
+		font-weight: bolder;
+		color: #668800;
+		cursor: pointer;
+	}
+
+	.CalendarText
+	{
+		height: 40px;
+		vertical-align: bottom;
+	}  
+
+	.CalendarText span
+	{
+		font-family:標楷體;
+		font-size:22pt;
+		font-weight: bolder;
+		letter-spacing:-3;
+		color: #B2B285;
+	}
+</style>
+
+<script language="JavaScript">
+	window.onload = onloadHandler;
+	window.onerror = function() {return true};
+	
+	var hYearTimer = null;
+	var hMonthTimer = null;
+	var LongWeek = new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");	
+	var ShortWeek = new Array("Sun","Mon","Tue","Wed","Thu","Fri","Sat");
+
+	function MonthObject(LongName,ShortName,Days)
+	{
+		this.LongName = LongName;
+		this.ShortName = ShortName;
+		this.Days = Days;
+	}
+
+	function WeekObject(LongName,ShortName)
+	{
+		this.LongName = LongName;
+		this.ShortName = ShortName;
+	}
+
+	function MonthClass(Year)
+	{
+		this[1] = new MonthObject("January","Jan",31);
+		if (((Year % 4 == 0) && (Year % 100 != 0)) || (Year % 400 == 0))
+		{
+			this[2] = new MonthObject("February","Feb",29);
+		}
+		else
+		{
+			this[2] = new MonthObject("February","Feb",28);
+		}
+		this[3] = new MonthObject("March","Mar",31);
+		this[4] = new MonthObject("April","Apr",30);
+		this[5] = new MonthObject("May","May",31);
+		this[6] = new MonthObject("June","Jun",30);
+		this[7] = new MonthObject("July","Jul",31);
+		this[8] = new MonthObject("August","Aug",31);
+		this[9] = new MonthObject("September","Sep",30);
+		this[10] = new MonthObject("October","Oct",31);
+		this[11] = new MonthObject("November","Nov",30);
+		this[12] = new MonthObject("December","Dec",31);
+	}
+
+	function WeekClass()
+	{
+		this[1] = new WeekObject("Sunday","Sun");
+		this[2] = new WeekObject("Monday","Mon");
+		this[3] = new WeekObject("Tuesday","Tue");
+		this[4] = new WeekObject("Wednesday","Wed");
+		this[5] = new WeekObject("Thursday","Thu");
+		this[6] = new WeekObject("Friday","Fri");
+		this[7] = new WeekObject("Saturday","Sat");
+	}
+	
+	function GenCalendar(Year, Month)
+	{
+		var objCalendar = document.getElementById("CalendarTable");
+		var objMonth = new MonthClass(Year);
+		var objWeek = new WeekClass();
+		var objDate = new Date(Year,Month-1,1);
+		var iShowMonth = -1;
+
+		showYearControl(false);
+		showMonthControl(false);
+		document.getElementById("YearControl").onclick = function () {showYearControl(true,Year-1911,Month);};
+		document.getElementById("MonthControl").onclick = function () {showMonthControl(true,Year-1911,Month);};
+		//document.getElementById("PrevYearBtn").onclick = function () {GenCalendar(((Year-1911 == 0)?Year:(Year-1)),Month);};
+		document.getElementById("PrevYearBtn").onmousedown = function () {startYearShift(Year-1911,Month,-1);};
+		document.getElementById("PrevYearBtn").onmouseup = function () {stopYearShift();};
+		//document.getElementById("NextYearBtn").onclick = function () {GenCalendar((Year+1),Month);};
+		document.getElementById("NextYearBtn").onmousedown = function () {startYearShift(Year-1911,Month,1);};
+		document.getElementById("NextYearBtn").onmouseup = function () {stopYearShift();};
+		//document.getElementById("PrevMonthBtn").onclick = function () {GenCalendar(((Month-1 == 0)?((Year-1911 == 0)?Year:Year-1):Year),((Month-1 == 0)?((Year-1911 == 0)?Month:12):(Month-1)));};
+		document.getElementById("PrevMonthBtn").onmousedown = function () {startMonthShift(Year-1911,Month,-1);};
+		document.getElementById("PrevMonthBtn").onmouseup = function () {stopMonthShift();};
+		//document.getElementById("NextMonthBtn").onclick = function () {GenCalendar(((Month+1 > 12)?(Year+1):Year),((Month+1 > 12)?1:(Month+1)));};
+		document.getElementById("NextMonthBtn").onmousedown = function () {startMonthShift(Year-1911,Month,1);};
+		document.getElementById("NextMonthBtn").onmouseup = function () {stopMonthShift();};
+		document.getElementById("CalendarText").innerHTML="<span style=\"cursor:pointer;\" onClick=\"GenCalendar("+new Date().getYear()+","+(new Date().getMonth()+1)+");\">民國&nbsp;"+((Year-1911 == 0)?"元":(Year-1911).toString())+"&nbsp;年&nbsp;"+Month.toString()+"&nbsp;月</span>";
+
+		for (var row = 2 ; row < 8 ; ++row)
+		{
+			for (var col = 1 ; col < 8 ; ++col)
+			{
+				var objTD = objCalendar.rows[row].cells[col-1]
+
+				if (iShowMonth < 0 && col >= objDate.getDay()+1) iShowMonth = 0;
+				else if (iShowMonth == 0 && col+(row-2)*7-objDate.getDay() > objMonth[Month].Days) iShowMonth = 1;
+				
+				if (iShowMonth < 0)
+				{
+					var iPrevMonth = (Month == 1)?12:(Month-1);
+					
+					if (Year >= 1911)
+					{
+						objTD.innerHTML="<span>"+(objMonth[iPrevMonth].Days-objDate.getDay()+col)+"</span>";
+						objTD.onclick=function () {return doClickDate( ((iPrevMonth == 12)?Year-1:Year), iPrevMonth, new Number(this.childNodes[0].innerText), this.cellIndex);};
+						objTD.style.cursor="pointer";
+					}
+					else
+					{
+						objTD.innerHTML="<span>&nbsp;</span>";
+						objTD.onclick=null;
+						objTD.style.cursor="default";
+					}
+					objTD.className="GrayDay";
+				}
+				else if (iShowMonth > 0)
+				{
+					var iDay = (col+(row-2)*7-objDate.getDay()-objMonth[Month].Days);
+
+					if (iShowMonth == 1)
+					{
+						objTD.innerHTML="<span>"+((iDay<10)?"&nbsp;"+iDay:iDay)+"</span>";
+						objTD.onclick=function () {return doClickDate( ((Month == 12)?Year+1:Year), ((Month == 12)?1:Month+1), new Number(this.childNodes[0].innerText), this.cellIndex);};
+						objTD.style.cursor="pointer";
+						objTD.className="GrayDay";
+						if (row == 6 && col == 7)
+						{
+							iShowMonth = 2;
+						}
+					}
+					else
+					{
+						objTD.innerHTML="&nbsp;";
+						objTD.onclick=null;
+						objTD.style.cursor="default";
+						objTD.className="";
+					}
+				}
+				else
+				{
+					var iDay = col+(row-2)*7-objDate.getDay();
+					
+					objTD.innerHTML="<span>"+((iDay<10)?"&nbsp;"+iDay:iDay)+"</span>";
+					objTD.onclick=function () {return doClickDate( Year, Month, new Number(this.childNodes[0].innerText), this.cellIndex);};
+					if (Year == new Date().getYear() && Month-1 == new Date().getMonth() && new Date().getDate() == iDay)
+					{
+						objTD.className="Today";
+					}
+					else
+					{
+						if (col == 1)
+							objTD.className="SunDay";
+						else if (col == 7)
+							objTD.className="SatDay";
+						else
+							objTD.className="WorkDay";
+					}
+				}
+			}
+		}
+	}
+	
+	function onloadHandler()
+	{
+		document.onkeydown = function () {return onkeydownHandler();};
+		document.getElementById("CloseBtn").onclick = function () {top.close();return false;};
+		if (top.dialogArguments == null)
+		{
+			GenCalendar(new Date().getYear(), new Date().getMonth()+1);
+		}
+		else
+		{
+			GenCalendar(parseInt(top.dialogArguments.substring(0,4),10), parseInt(top.dialogArguments.substring(4,6),10));
+		}
+	}
+	
+	function doCalendarControl()
+	{
+		var iYear = -1;
+		var iMonth = -1;
+		
+		try
+		{
+			iYear = parseInt(document.getElementById("iYear").value,10);
+		}
+		catch (ex)
+		{
+			iYear = -1;
+		}
+
+		try
+		{
+			iMonth = parseInt(document.getElementById("iMonth").value,10);
+		}
+		catch (ex)
+		{
+			iMonth = -1;
+		}
+
+		if (iYear >= 0 && iMonth >= 1 && iMonth <= 12)
+		{
+			GenCalendar(iYear+1911, iMonth);
+		}
+
+		return false;
+	}
+
+	function onkeydownHandler()
+	{
+        if (event.keyCode == 13)
+        {
+        	if (event.srcElement.id == "iYear")
+        	{
+        		return doCalendarControl();
+        	}
+        	else if (event.srcElement.id == "iMonth")
+        	{
+        		return doCalendarControl();
+        	}
+        	else
+        	{
+        		return false;
+        	}
+        }
+
+        if (event.keyCode == 27)
+        {
+        	if (event.srcElement.id == "iYear")
+        	{
+        		showYearControl(false);
+        	}
+        	else if (event.srcElement.id == "iMonth")
+        	{
+        		showMonthControl(false);
+        	}
+	        else
+	        {
+	        	top.close();
+	        }
+            return false;
+        }
+	}
+	
+	function showYearControl(bEnable,iYear,iMonth)
+	{
+		if (bEnable)
+		{
+			document.getElementById("YearControl").childNodes[1].onblur = function () {showYearControl(false);};
+			document.getElementById("YearControl").childNodes[1].value="";
+			document.getElementById("MonthControl").childNodes[1].value=iMonth;
+			document.getElementById("YearControl").childNodes[0].style.display='none';
+			document.getElementById("YearControl").childNodes[1].style.display='block';
+			document.getElementById("YearControl").childNodes[1].focus();
+		}
+		else
+		{
+			document.getElementById("YearControl").childNodes[0].style.display='block';
+			document.getElementById("YearControl").childNodes[1].style.display='none';
+		}
+	}
+	
+	function showMonthControl(bEnable,iYear,iMonth)
+	{
+		if (bEnable)
+		{
+			document.getElementById("MonthControl").childNodes[1].onblur = function () {showMonthControl(false);};
+			document.getElementById("MonthControl").childNodes[1].value="";
+			document.getElementById("YearControl").childNodes[1].value=iYear;
+			document.getElementById("MonthControl").childNodes[0].style.display='none';
+			document.getElementById("MonthControl").childNodes[1].style.display='block';
+			document.getElementById("MonthControl").childNodes[1].focus();
+		}
+		else
+		{
+			document.getElementById("MonthControl").childNodes[0].style.display='block';
+			document.getElementById("MonthControl").childNodes[1].style.display='none';
+		}
+	}
+	
+	function startYearShift(iYear,iMonth,iShift)
+	{
+		var iInit = -1;
+
+		try
+		{
+			iInit = parseInt(document.getElementById("YearControl").childNodes[1].value,10);
+			iInit = ((iInit+iShift) >= 0 && (iInit+iShift) <= 999)?iInit+iShift:iInit;
+		}
+		catch (ex)
+		{
+			iInit = -1;
+		}
+		
+		if (isNaN(iInit))
+		{
+			iInit = ((iYear+iShift) >= 0)?iYear+iShift:iYear;
+		}
+		else if (iInit < 0)
+		{
+			iInit = 0;
+		}
+		else if (iInit > 999)
+		{
+			iInit = 999;
+		}
+		
+		if (hYearTimer != null)
+		{
+			clearInterval(hYearTimer);
+		}
+
+		if (iInit >= 0)
+		{
+			showYearControl(true,iYear,iMonth);
+			document.getElementById("YearControl").childNodes[1].value = iInit;
+			hYearTimer = setInterval("doYearShift("+iShift+")", 200);
+		}
+		
+		return false;
+	}
+
+	function stopYearShift()
+	{
+		clearInterval(hYearTimer);
+		doCalendarControl();
+		
+		return false;
+	}
+	
+	function doYearShift(iShift)
+	{
+		var iYear = -1;
+		
+		try
+		{
+			iYear = parseInt(document.getElementById("YearControl").childNodes[1].value,10)+iShift;
+		}
+		catch (ex)
+		{
+			iYear = -1;
+		}
+		
+		if (iYear >= 0 && iYear <= 999)
+		{
+			document.getElementById("YearControl").childNodes[1].value = iYear;
+		}
+	}
+
+	function startMonthShift(iYear,iMonth,iShift)
+	{
+		var iInit = -1;
+
+		try
+		{
+			iInit = parseInt(document.getElementById("MonthControl").childNodes[1].value,10);
+			iInit = ((iInit+iShift) >= 1 && (iInit+iShift) <= 12)?iInit+iShift:iInit;
+		}
+		catch (ex)
+		{
+			iInit = -1;
+		}
+		
+		if (isNaN(iInit))
+		{
+			iInit = ((iMonth+iShift) >= 1 && (iMonth+iShift) <= 12)?iMonth+iShift:iMonth;
+		}
+		else if (iInit < 1)
+		{
+			iInit = 1;
+		}
+		else if (iInit > 12)
+		{
+			iInit = 12;
+		}
+		
+		if (hMonthTimer != null)
+		{
+			clearInterval(hMonthTimer);
+		}
+
+		if (iInit >= 0)
+		{
+			showMonthControl(true,iYear,iMonth);
+			document.getElementById("MonthControl").childNodes[1].value = iInit;
+			hMonthTimer = setInterval("doMonthShift("+iShift+")", 200);
+		}
+		return false;
+	}
+
+	function stopMonthShift()
+	{
+		clearInterval(hMonthTimer);
+		doCalendarControl();
+	}
+	
+	function doMonthShift(iShift)
+	{
+		var iMonth = -1;
+		
+		try
+		{
+			iMonth = parseInt(document.getElementById("MonthControl").childNodes[1].value,10)+iShift;
+		}
+		catch (ex)
+		{
+			iMonth = -1;
+		}
+		
+		if (iMonth >= 1 && iMonth <=12)
+		{
+			document.getElementById("MonthControl").childNodes[1].value = iMonth;
+		}
+	}
+
+	function doClickDate(Year, Month, Day, Week)
+	{
+		top.returnValue = Year.toString()+'--'+Month.toString()+'--'+Day.toString()+'--'+Week.toString();
+		top.close();
+		return false;
+	}
+</script>
+<head>
+	<title>月曆開窗</title>
+</head>
+<body style="paddings:3px" scroll="no">
+	<table id="CalendarTable" cellspacing=0 cellpadding=0 border=0 align="center">
+		<tr>
+			<td>
+				<input id="CloseBtn" type="image" src="../image/fail.gif" alt="關閉">
+			</td>
+			<td class="PrevBtn" align="right"><span id="PrevYearBtn"></span></td>
+			<td id="YearControl" align="center" class="CalendarControl">
+				<span>年</span><input type="text" id="iYear" maxLength="3">
+			</td>
+			<td class="NextBtn" align="left"><span id="NextYearBtn"></td>
+			<td class="PrevBtn" align="right"><span id="PrevMonthBtn"></span></td>
+			<td id="MonthControl" align="center" class="CalendarControl">
+				<span>月</span><input type="text" id="iMonth" maxLength="2">
+			</td>
+			<td class="NextBtn" align="left"><span id="NextMonthBtn"></td>
+		</tr>
+		<tr>
+			<td id="CalendarText" class="CalendarText" colspan="7" align='center'></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>表單檢查視窗</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=MS950" />
+		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
+		<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
+		<META HTTP-EQUIV="EXPIRES" CONTENT="Sun 1 Jan 2006 00:00:00 GMT" />
+
+		<script type="text/javascript" language="javascript">
+			window.onload = onloadHandler;
+			
+			function onloadHandler()
+			{
+				window.focus();
+				document.getElementById("btn_close").focus();
+
+				if (window.dialogArguments)
+				{					
+					document.getElementById("Report").innerHTML = unescape(window.dialogArguments);
+				}
+			}
+		</script>
+	</head>
+	<body style="margin: 0px 0px 0px 0px;background-color:#E8FCE4;">
+		<table cellspacing="0" cellpadding="0" border="0" style="width: 100%; height: 100%;">
+			<tr style="height:60px; vertical-align: middle; background-color:#418282; color:#FFFFFF;">
+				<td style="text-align: left; padding: 10px 20px 10px 20px;">
+					<p style=" font:bold 20pt 新細明體;">表單檢查結果</p>
+				</td>
+				<td style="text-align: right; padding: 10px 20px 10px 20px;">
+					<input id="btn_close" type="button" value="關閉視窗" style="width: 100px; height: 36px;font:bold 12pt 新細明體;" onClick="window.close();"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="vertical-align: top; background-color:#FCEAC9; padding: 20px 20px 20px 20px;">
+					<div id="Report" style="height:250px; overflow-y:auto; font:normal 14pt 新細明體; color:red; vertical-align:top"></div>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

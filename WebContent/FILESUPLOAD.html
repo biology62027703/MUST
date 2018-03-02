@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8" />
+    <title>File API</title>  
+    <script language="javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("input[type='file']").bind("change", function (event) {
+				
+                if (event.target.files.length > 0) {
+
+                    for (var i = 0; i < event.target.files.length; i++) {
+
+                        var file = event.target.files[i];
+						//alert($("#fileUpload").val()	);
+                        $("div[data-id='fileContainer'] > ul").append(
+                            $("<li style='padding: 3px' />").html("檔名: " + file.name + "<br /> 大小: " + file.size + "<br /> 類型: " + file.type)
+                        );
+
+                    }
+                }
+                else {
+                    $("div[data-id='fileContainer'] > ul").empty();
+                }
+
+            });
+			$("#go").on("click",function(){
+				//alert(0);
+				form.submit();
+			})
+        });
+    
+    </script>
+</head>
+<body style="font-size: 12px;">
+<form name="form" action="UPLOADFILES.do?action=doPost" method="post" enctype="multipart/form-data" >
+    Choose Files:<br />
+    <div style="width: 700px; height: 300px; overflow: auto; border: 2px inset #000000;" data-id="fileContainer">
+        <ul style="list-style: none; padding: 0px;">
+        </ul>
+    </div>
+    <input type="file" multiple="multiple" name="FILE" id="file" data-id="fileUpload" />
+    <br />
+    <br />
+    <input type="button" id="go" value="Upload" />
+    </form>
+</body>
+</html>

@@ -1,0 +1,1 @@
+var __DEFINE_BASEFRAME__ = true;

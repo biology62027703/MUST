@@ -1,0 +1,388 @@
+<html>
+<style type="text/css">
+	body
+	{
+		background: #F0ECCD;
+	}
+
+	.CloseBtn
+	{
+		width: 33px;
+		vertical-align: top;
+	}
+
+	.PrevBtn
+	{
+		width: 33px;
+		vertical-align: top;
+	}
+
+	.PrevBtn span
+	{
+		width: 24px;
+		cursor:pointer;
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/PrevBtn.png',sizingMethod ='image');
+	}
+
+	.NextBtn
+	{
+		width: 33px;
+		vertical-align: top;
+	}
+
+	.NextBtn span
+	{
+		width: 24px;
+		cursor:pointer;
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/NextBtn.png',sizingMethod ='image');
+	}
+
+	.ClockControl
+	{
+		width: 33px;
+		vertical-align: middle;
+	}
+
+	.ClockControl input
+	{
+		width: 30px;
+		height: 30px;
+		padding-left: 0px;
+		padding-right: 0px;
+		font-size:12pt;
+		border-style: groove;
+	}
+
+	.ClockControl span
+	{
+		font-family:標楷體;
+		font-size:20pt;
+		font-weight: bolder;
+		color: #668800;
+		cursor: pointer;
+	}
+
+	.ClockText
+	{
+		vertical-align: bottom;
+	}  
+
+	.ClockText span
+	{
+		font-family:'Arial Black';
+		font-size:36pt;
+		font-weight: bolder;
+		letter-spacing:5;
+		color: #B2B285;
+	}
+</style>
+
+<script language="JavaScript">
+	window.onload = onloadHandler;
+	//window.onerror = function() {return true};
+	
+	var hHourTimer = null;
+	var hMinuteTimer = null;
+	
+	function onloadHandler()
+	{
+		document.onkeydown = function () {return onkeydownHandler();};
+		document.getElementById("CloseBtn").onclick = function () {top.close();return false;};
+		if (top.dialogArguments == null)
+		{
+			GenClock(new Date().getHours(), new Date().getMinutes());
+		}
+		else
+		{
+			GenClock(parseInt(top.dialogArguments.substring(0,2),10), parseInt(top.dialogArguments.substring(2,4),10));
+		}
+	}
+	
+	function GenClock(Hour,Minute)
+	{
+		showHourControl(false);
+		showMinuteControl(false);
+		document.getElementById("HourControl").onclick = function () {showHourControl(true,Hour,Minute);};
+		document.getElementById("MinuteControl").onclick = function () {showMinuteControl(true,Hour,Minute);};
+		document.getElementById("PrevYearBtn").onmousedown = function () {startHourShift(Hour,Minute,-1);};
+		document.getElementById("PrevYearBtn").onmouseup = function () {stopHourShift();};
+		document.getElementById("NextYearBtn").onmousedown = function () {startHourShift(Hour,Minute,1);};
+		document.getElementById("NextYearBtn").onmouseup = function () {stopHourShift();};
+		document.getElementById("PrevMonthBtn").onmousedown = function () {startMinuteShift(Hour,Minute,-1);};
+		document.getElementById("PrevMonthBtn").onmouseup = function () {stopMinuteShift();};
+		document.getElementById("NextMonthBtn").onmousedown = function () {startMinuteShift(Hour,Minute,1);};
+		document.getElementById("NextMonthBtn").onmouseup = function () {stopMinuteShift();};
+		document.getElementById("ClockText").innerHTML="<span style=\"cursor:pointer;\" onClick=\"doClickTime("+Hour.toString()+","+Minute.toString()+");\">"+((Hour < 10)?"0"+Hour.toString():Hour.toString()) + ":" + ((Minute < 10)?"0"+Minute.toString():Minute.toString())+"</span>";
+	}
+	
+	function doClockControl()
+	{
+		var iHour = -1;
+		var iMinute = -1;
+		
+		try
+		{
+			iHour = parseInt(document.getElementById("iHour").value,10);
+		}
+		catch (ex)
+		{
+			iHour = -1;
+		}
+
+		try
+		{
+			iMinute = parseInt(document.getElementById("iMinute").value,10);
+		}
+		catch (ex)
+		{
+			iMinute = -1;
+		}
+
+		if (iHour >= 0 && iHour <= 23 && iMinute >= 0 && iMinute <= 59)
+		{
+			GenClock(iHour, iMinute);
+		}
+
+		return false;
+	}
+
+	function onkeydownHandler()
+	{
+        if (event.keyCode == 13)
+        {
+        	if (event.srcElement.id == "iHour")
+        	{
+        		return doClockControl();
+        	}
+        	else if (event.srcElement.id == "iMinute")
+        	{
+        		return doClockControl();
+        	}
+        	else
+        	{
+        		return false;
+        	}
+        }
+
+        if (event.keyCode == 27)
+        {
+        	if (event.srcElement.id == "iHour")
+        	{
+        		showHourControl(false);
+        	}
+        	else if (event.srcElement.id == "iMinute")
+        	{
+        		showMinuteControl(false);
+        	}
+	        else
+	        {
+				GenClock(new Date().getHours(), new Date().getMinutes());
+	        }
+            return false;
+        }
+	}
+	
+	function showHourControl(bEnable,iHour,iMinute)
+	{
+		if (bEnable)
+		{
+			document.getElementById("HourControl").childNodes[1].onblur = function () {showHourControl(false);};
+			document.getElementById("HourControl").childNodes[1].value="";
+			document.getElementById("MinuteControl").childNodes[1].value=iMinute;
+			document.getElementById("HourControl").childNodes[0].style.display='none';
+			document.getElementById("HourControl").childNodes[1].style.display='block';
+			document.getElementById("HourControl").childNodes[1].focus();
+		}
+		else
+		{
+			document.getElementById("HourControl").childNodes[0].style.display='block';
+			document.getElementById("HourControl").childNodes[1].style.display='none';
+		}
+	}
+	
+	function showMinuteControl(bEnable,iHour,iMinute)
+	{
+		if (bEnable)
+		{
+			document.getElementById("MinuteControl").childNodes[1].onblur = function () {showMinuteControl(false);};
+			document.getElementById("MinuteControl").childNodes[1].value="";
+			document.getElementById("HourControl").childNodes[1].value=iHour;
+			document.getElementById("MinuteControl").childNodes[0].style.display='none';
+			document.getElementById("MinuteControl").childNodes[1].style.display='block';
+			document.getElementById("MinuteControl").childNodes[1].focus();
+		}
+		else
+		{
+			document.getElementById("MinuteControl").childNodes[0].style.display='block';
+			document.getElementById("MinuteControl").childNodes[1].style.display='none';
+		}
+	}
+	
+	function startHourShift(iHour,iMinute,iShift)
+	{
+		var iInit = -1;
+
+		try
+		{
+			iInit = parseInt(document.getElementById("HourControl").childNodes[1].value,10);
+			iInit = ((iInit+iShift) >= 0 && (iInit+iShift) <= 23)?iInit+iShift:iInit;
+		}
+		catch (ex)
+		{
+			iInit = -1;
+		}
+		
+		if (isNaN(iInit))
+		{
+			iInit = ((iHour+iShift) >= 0)?iHour+iShift:iHour;
+		}
+		else if (iInit < 0)
+		{
+			iInit = 0;
+		}
+		else if (iInit > 23)
+		{
+			iInit = 23;
+		}
+		
+		if (hHourTimer != null)
+		{
+			clearInterval(hHourTimer);
+		}
+
+		if (iInit >= 0)
+		{
+			showHourControl(true,iHour,iMinute);
+			document.getElementById("HourControl").childNodes[1].value = iInit;
+			hHourTimer = setInterval("doHourShift("+iShift+")", 200);
+		}
+		
+		return false;
+	}
+
+	function stopHourShift()
+	{
+		clearInterval(hHourTimer);
+		doClockControl();
+		
+		return false;
+	}
+	
+	function doHourShift(iShift)
+	{
+		var iHour = -1;
+		
+		try
+		{
+			iHour = parseInt(document.getElementById("HourControl").childNodes[1].value,10)+iShift;
+		}
+		catch (ex)
+		{
+			iHour = -1;
+		}
+		
+		if (iHour >= 0 && iHour <= 23)
+		{
+			document.getElementById("HourControl").childNodes[1].value = iHour;
+		}
+	}
+
+	function startMinuteShift(iHour,iMinute,iShift)
+	{
+		var iInit = -1;
+
+		try
+		{
+			iInit = parseInt(document.getElementById("MinuteControl").childNodes[1].value,10);
+			iInit = ((iInit+iShift) >= 0 && (iInit+iShift) <= 59)?iInit+iShift:iInit;
+		}
+		catch (ex)
+		{
+			iInit = -1;
+		}
+		
+		if (isNaN(iInit))
+		{
+			iInit = ((iMinute+iShift) >= 0 && (iMinute+iShift) <= 59)?iMinute+iShift:iMinute;
+		}
+		else if (iInit < 0)
+		{
+			iInit = 0;
+		}
+		else if (iInit > 59)
+		{
+			iInit = 59;
+		}
+		
+		if (hMinuteTimer != null)
+		{
+			clearInterval(hMinuteTimer);
+		}
+
+		if (iInit >= 0)
+		{
+			showMinuteControl(true,iHour,iMinute);
+			document.getElementById("MinuteControl").childNodes[1].value = iInit;
+			hMinuteTimer = setInterval("doMinuteShift("+iShift+")", 200);
+		}
+		return false;
+	}
+
+	function stopMinuteShift()
+	{
+		clearInterval(hMinuteTimer);
+		doClockControl();
+	}
+	
+	function doMinuteShift(iShift)
+	{
+		var iMinute = -1;
+		
+		try
+		{
+			iMinute = parseInt(document.getElementById("MinuteControl").childNodes[1].value,10)+iShift;
+		}
+		catch (ex)
+		{
+			iMinute = -1;
+		}
+		
+		if (iMinute >= 0 && iMinute <=59)
+		{
+			document.getElementById("MinuteControl").childNodes[1].value = iMinute;
+		}
+	}
+
+	function doClickTime(Hour, Minute)
+	{
+		top.returnValue = Hour.toString()+'--'+Minute.toString();
+		top.close();
+		return false;
+	}
+</script>
+<head>
+	<title>時鐘開窗</title>
+</head>
+<body style="paddings:3px" scroll="no">
+	<table id="CalendarTable" cellspacing=0 cellpadding=0 border=0 align="center">
+		<tr>
+			<td class="CloseBtn">
+				<input id="CloseBtn" type="image" src="../image/fail.gif" alt="關閉">
+			</td>
+			<td class="PrevBtn" align="right"><span id="PrevYearBtn"></span></td>
+			<td id="HourControl" align="center" class="ClockControl">
+				<span>時</span><input type="text" id="iHour" maxLength="2">
+			</td>
+			<td class="NextBtn" align="left"><span id="NextYearBtn"></td>
+			<td class="PrevBtn" align="right"><span id="PrevMonthBtn"></span></td>
+			<td id="MinuteControl" align="center" class="ClockControl">
+				<span>分</span><input type="text" id="iMinute" maxLength="2">
+			</td>
+			<td class="NextBtn" align="left"><span id="NextMonthBtn"></td>
+		</tr>
+		<tr>
+			<td id="ClockText" class="ClockText" colspan="7" align='center'></td>
+		</tr>
+	</table>
+</body>
+</html>

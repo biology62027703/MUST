@@ -1,0 +1,190 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "微軟正黑體";
+    color:#333;
+    margin: 0;
+    padding: 0;
+}
+.page_wrapper,
+.header,
+.header_top, 
+.header_ex,
+.main,
+.main_top,
+.main_ex,
+.footer_top,
+.footer,
+.container,
+.side,
+.content {
+    position: relative;
+}
+.page_wrapper,
+.header,
+.main,
+.footer,
+.container {
+    background: no-repeat center top;
+}
+.page_wrapper {
+    overflow: hidden;
+}
+
+#floating {
+    display: block;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    z-index: 900;
+    text-align: center;
+    margin-right: -640px;
+    -webkit-transition: all 0.3s ease;                  
+    -moz-transition: all 0.3s ease;                 
+    -o-transition: all 0.3s ease;   
+    -ms-transition: all 0.3s ease;          
+    transition: all 0.3s ease;
+}
+#floating.fixed {
+    position:fixed;
+    top:10px;
+}
+
+a:focus,
+input:focus,
+.btn:focus,
+.btn:active:focus, 
+.btn.active:focus,
+.nav>li>a:hover, 
+.nav>li>a:focus { 
+    outline: none;
+}
+a:hover, a:focus {
+    text-decoration: none;
+}
+.list-inline a,
+.list-unstyled a {
+    display: inline-block;
+}
+.breadcrumb {
+    background: none;
+}
+.header .navbar {
+    margin: 0;
+}
+
+.page_wrapper .bx-wrapper {
+    margin-bottom: 0;
+}
+.page_wrapper .bx-wrapper .bx-viewport {
+    -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border:  none;
+	left: 0;
+	background: none;
+	
+	/*fix other elements on the page moving (on Chrome)*/
+	-webkit-transform: none;
+	-moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
+.page_wrapper .bx-wrapper .bx-viewport .bxslider {
+    -webkit-transform: none;
+	-moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
+.page_wrapper .bx-wrapper .bx-controls-direction a {
+    z-index: 8000;
+}
+.header .navbar { z-index: 20; }
+.banner { z-index: 10; }
+.banner .frame { z-index: 10; }
+.header_ex { z-index: 30; }
+
+.header_exbg {
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-position: center top;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+.side .side-toggle {
+    display: none;
+}
+label.required:before {
+    content: "*";
+    color: #F00;
+}
+
+/* < wrp related> */
+/*----------------------- Banner Frame -----------------------*/
+.banner .wrp_frame {
+    position: absolute;
+    z-index: 200;
+    
+}
+.banner .wrp_frame.border-LT,
+.banner .wrp_frame.border-RT,
+.banner .wrp_frame.border-LB,
+.banner .wrp_frame.border-RB {
+    background-repeat: no-repeat;
+    z-index: 201;
+}
+.banner .wrp_frame.border-CT,
+.banner .wrp_frame.border-CB {
+    background-repeat: repeat-x;
+    left: 0;
+    right: 0;
+}
+.banner .wrp_frame.border-LM,
+.banner .wrp_frame.border-RM {
+    background-repeat: repeat-y;
+    top: 0;
+    bottom: 0;
+}
+
+.header .wrp-deco {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background-position: center top;
+    background-repeat: no-repeat;
+    min-height: 10px;
+}
+.header .wrp-deco.top {
+    top: 0;
+}
+.header .wrp-deco.bottom {
+    bottom: 0;
+}
+/* </ wrp related> */
+
+
+
+/* < editor related> */
+.txt img,
+.editor img {
+    max-width:100%;
+    height:auto !important;
+}
+.editor table.border th,
+.editor table.border td {
+      border: 1px solid #666;
+}
+/* </ editor related> */
+
+
+

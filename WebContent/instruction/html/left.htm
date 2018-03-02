@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>未命名文件</title>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<style type="text/css">
+<!--
+body {
+	background-color: #E9F9F9;
+	font-family: Verdana, Geneva, sans-serif;
+	color:#535353;
+}
+
+.title{
+	font-family: "微軟正黑體";
+	font-weight: bold;
+	background-color:#A8CCCC;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	min-height:200px;
+	height:400px;
+}
+
+.c_home{
+	font-size: 36px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	padding-left: 8px;
+	background-color:#639999;
+}
+.c_project{
+	font-size: 26px;
+	padding-left: 14px;
+	background-color:#D1E6E6;
+	margin-top: 3px;
+	margin-right: 3px;
+	margin-bottom: 3px;
+	margin-left: 30px;
+}
+div img {
+  vertical-align : middle;
+}
+.a_project{
+	font-size: 26px;
+	margin: 3px;
+	padding-left: 14px;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #639999;
+}
+-->
+</style></head>
+<script src="script/jquery-1.6.4.min.js" language="javascript"></script>
+<script src="script/jquery.corner.js" language="javascript"></script>
+<script language="JavaScript">
+<!--
+$(".title").corner();
+$(".c_project").corner();
+
+$(function(){
+	$(".c_home")
+		.mouseover(function(){$(this).css({"background-color":"#ECEDEF","cursor":"pointer"});})
+		.mouseout(function(){ $(this).css("background-color","#639999"); });
+	$(".c_project")
+		.mouseover(function(){$(this).css({"background-color":"#ECEDEF","cursor":"pointer"});})
+		.mouseout(function(){ $(this).css("background-color","#D1E6E6"); });
+	
+	$(".c_home,.c_project").click(function(){
+		url = $(this).attr("url");
+		if(url != "" &&  "undefined" != ""+url)
+		{
+			form.action = url;
+			form.target = "mainFrame";
+			form.submit();
+		}
+	});
+});
+//-->
+</script>
+<body bgcolor="#6CC" text="#000000">
+<form name="form">
+<div class="title">
+	<div class="c_home" url="main.htm"><img src="..\\img\home.ico" name="Image2" height="36" border="0">回首頁</div>
+<br>
+
+	<div class="a_project">稅務行政事件</div>
+    <div class="c_project" url="1.htm"><img name="Image2" border="0" src="..\\img\tag.png" height="25">線上遞狀系統</div>	
+<br>
+	<div class="a_project">續予、延長收容事件</div>
+    <div class="c_project" url="2.htm"><img name="Image2" border="0" src="..\\img\tag.png" height="25">線上遞狀系統</div>
+	<div class="c_project" url="3.htm"><img name="Image2" border="0" src="..\\img\tag.png" height="25">後台管理</div>
+</div>
+</form>
+</body>
+</html>

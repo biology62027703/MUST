@@ -1,0 +1,381 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=big5">
+<meta name=Generator content="Microsoft Word 14 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:新細明體;
+	panose-1:2 2 5 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"\@新細明體";
+	panose-1:2 2 5 0 0 0 0 0 0 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{mso-style-link:"頁首 字元";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	layout-grid-mode:char;
+	font-size:10.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{mso-style-link:"頁尾 字元";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	layout-grid-mode:char;
+	font-size:10.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"註解方塊文字 字元";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:9.0pt;
+	font-family:"Cambria","serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:24.0pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+span.a
+	{mso-style-name:"頁首 字元";
+	mso-style-link:頁首;}
+span.a0
+	{mso-style-name:"頁尾 字元";
+	mso-style-link:頁尾;}
+span.a1
+	{mso-style-name:"註解方塊文字 字元";
+	mso-style-link:註解方塊文字;
+	font-family:"Cambria","serif";}
+.MsoChpDefault
+	{font-family:"Calibri","sans-serif";}
+ /* Page Definitions */
+ @page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	layout-grid:18.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body lang=ZH-TW style='text-justify-trim:punctuation'>
+
+<div class=WordSection1 style='layout-grid:18.0pt'>
+
+<p class=MsoListParagraph style='margin-left:21.25pt;text-indent:-21.25pt'><span
+lang=EN-US>1<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"新細明體","serif"'>將檔案匯入</span><span
+lang=EN-US>SQL SERVER</span></p>
+
+<p class=MsoListParagraph style='margin-left:49.6pt;text-indent:-1.0cm'><span
+lang=EN-US>1.1<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"新細明體","serif"'>打開</span><span
+lang=EN-US>DD</span><span style='font-family:"新細明體","serif"'>給的分配代號</span><span
+lang=EN-US>-work detail </span><span style='font-family:"新細明體","serif"'>的</span><span
+lang=EN-US>.CSV</span><span style='font-family:"新細明體","serif"'>檔如下圖</span><span
+lang=EN-US>:</span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt'><span lang=EN-US><img
+width=554 height=359 id="圖片 6" src="CROSS_SOP.files/image001.jpg"></span></p>
+
+<p class=MsoListParagraph style='margin-left:49.6pt;text-indent:-1.0cm'><span
+lang=EN-US>1.2<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"新細明體","serif"'>在後面加上欄位</span><span
+lang=EN-US>soc-distno</span><span style='font-family:"新細明體","serif"'>，這個欄位是</span><span
+lang=EN-US>Society Code(</span><span style='font-family:"新細明體","serif"'>三碼，左側補</span><span
+lang=EN-US>0)-Adj Dist No(</span><span style='font-family:"新細明體","serif"'>四碼，左側補</span><span
+lang=EN-US>0)</span><span style='font-family:"新細明體","serif"'>這兩個欄位合併所產生的內容，公式</span><span
+lang=EN-US>:
+=TEXT(D2,&quot;000&quot;)&amp;&quot;-&quot;&amp;TEXT(E2,&quot;0000&quot;)</span><span
+style='font-family:"新細明體","serif"'>。</span><span lang=EN-US>(</span><span
+style='font-family:"新細明體","serif"'>此為第一攔，需向下填滿，如下圖</span><span lang=EN-US>:</span></p>
+
+<p class=MsoListParagraph style='margin-left:49.6pt'><span lang=EN-US><img
+width=573 height=327 id="圖片 1" src="CROSS_SOP.files/image002.jpg"></span></p>
+
+<p class=MsoListParagraph style='margin-left:49.6pt;text-indent:-1.0cm'><span
+lang=EN-US>1.3<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"新細明體","serif"'>另存成</span><span
+lang=EN-US>.xlsx</span><span style='font-family:"新細明體","serif"'>檔</span></p>
+
+<p class=MsoListParagraph style='margin-left:49.6pt;text-indent:-1.0cm'><span
+lang=EN-US>1.4<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"新細明體","serif"'>把這個</span><span
+lang=EN-US>work detail.xlsx</span><span style='font-family:"新細明體","serif"'>檔及另外一個</span><span
+lang=EN-US>DD</span><span style='font-family:"新細明體","serif"'>提供的</span> <span
+style='font-family:"新細明體","serif"'>分配代號</span><span lang=EN-US>-retain</span><span
+style='font-family:"新細明體","serif"'>的</span><span lang=EN-US>xlsx</span><span
+style='font-family:"新細明體","serif"'>檔匯入</span><span lang=EN-US>SQL SERVER</span><span
+style='font-family:"新細明體","serif"'>。<span style='color:red'>注意</span></span><span
+lang=EN-US style='color:red'>:</span><span lang=EN-US> <span style='color:red'>work
+detail.xlsx</span></span><span style='font-family:"新細明體","serif";color:red'>裡面的</span>
+<span lang=EN-US style='color:red'>Royalties</span><span style='font-family:
+"新細明體","serif";color:red'>這個欄位儲存格格式要為數字，其他欄位儲存格格式為文字。</span></p>
+
+<p class=MsoListParagraph style='margin-left:49.6pt;text-indent:-1.0cm'><span
+lang=EN-US>1.5<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"新細明體","serif"'>匯入完如下圖</span><span
+lang=EN-US>:</span></p>
+
+<p class=MsoListParagraph style='margin-left:49.6pt'><span lang=EN-US><img
+width=248 height=489 id="圖片 2" src="CROSS_SOP.files/image003.png"></span></p>
+
+<p class=MsoListParagraph style='margin-left:49.6pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-left:49.6pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-left:21.25pt;text-indent:-21.25pt'><span
+lang=EN-US>2<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"新細明體","serif"'>執行以下指令</span><span
+lang=EN-US>(</span><span style='font-family:"新細明體","serif";color:red'>注意</span><span
+lang=EN-US style='color:red'>:</span><span style='font-family:"新細明體","serif";
+color:red'>黃底跟綠底的螢光筆要改成匯入</span><span lang=EN-US style='color:red'>DB</span><span
+style='font-family:"新細明體","serif";color:red'>時的</span><span lang=EN-US
+style='color:red'>TABLE NAME</span><span lang=EN-US>):</span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>DECLARE</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New"'> <span
+style='color:teal'>@cols</span> <span style='color:blue'>AS</span> <span
+style='color:blue'>NVARCHAR</span><span style='color:gray'>(</span><span
+style='color:fuchsia'>MAX</span><span style='color:gray'>),</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New"'>&nbsp;&nbsp;&nbsp; <span
+style='color:teal'>@query</span>&nbsp; <span style='color:blue'>AS</span> <span
+style='color:blue'>NVARCHAR</span><span style='color:gray'>(</span><span
+style='color:fuchsia'>MAX</span><span style='color:gray'>)</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:gray'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>select</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New"'> <span
+style='color:teal'>@cols</span> <span style='color:gray'>=</span> <span
+style='color:fuchsia'>STUFF</span><span style='color:gray'>((</span><span
+style='color:blue'>SELECT</span> <span style='color:red'>','</span> <span
+style='color:gray'>+</span> <span style='color:fuchsia'>QUOTENAME</span><span
+style='color:gray'>(</span><span style='color:teal'>[soc-distno]</span><span
+style='color:gray'>)</span> </span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style='color:blue'>from</span> <span style='color:teal;background:yellow'>[O162-work
+detail]</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style='color:blue'>group</span> <span style='color:blue'>by</span> <span
+style='color:teal'>[soc-distno]</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style='color:blue'>order</span> <span style='color:blue'>by</span> <span
+style='color:teal'>[soc-distno]</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style='color:blue'>FOR</span> <span style='color:blue'>XML</span> <span
+style='color:blue'>PATH</span><span style='color:gray'>(</span><span
+style='color:red'>''</span><span style='color:gray'>),</span> <span
+style='color:blue'>TYPE</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style='color:gray'>).</span><span style='color:teal'>value</span><span
+style='color:gray'>(</span><span style='color:red'>'.'</span><span
+style='color:gray'>,</span> <span style='color:red'>'NVARCHAR(MAX)'</span><span
+style='color:gray'>)</span> </span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style='color:gray'>,</span>1<span style='color:gray'>,</span>1<span
+style='color:gray'>,</span><span style='color:red'>''</span><span
+style='color:gray'>)</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:gray'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>set</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New"'> <span
+style='color:teal'>@query</span> <span style='color:gray'>=</span> <span
+style='color:red'>'select [Dist No] as Expr1 ,[Account Id] AS Expr2 ,[chinese
+name] AS Expr3 ,[</span></span><span style='font-size:10.0pt;font-family:"新細明體","serif";
+color:red'>合計</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:red'>Royalties],'</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New"'> <span style='color:gray'>+</span> <span
+style='color:teal'>@cols</span> <span style='color:gray'>+</span> <span
+style='color:red'>' from&nbsp; (</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+select a.[Dist No] ,a.[Account Id],sum(a.[Royalties]) as
+Royalties,a.[soc-distno],b.[</span><span style='font-size:10.0pt;font-family:
+"新細明體","serif";color:red'>合計</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:red'>Royalties],c.[chinese name]</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+from <span style='background:yellow'>[O162-work detail]</span> a</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+join (select [Account Id],sum([Royalties]) as [</span><span style='font-size:
+10.0pt;font-family:"新細明體","serif";color:red'>合計</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>Royalties] from <span
+style='background:yellow'>[O162-work detail]</span> group by [Account Id]) b on
+b.[Account Id] = a.[Account Id]</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+left join <span style='background:lime'>[O162-retain]</span> c on a.[Account
+Id] = c.[ip base no]</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+group by a.[Dist No] ,a.[Account Id],a.[soc-distno] ,b.[</span><span
+style='font-size:10.0pt;font-family:"新細明體","serif";color:red'>合計</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:red'>Royalties],c.[chinese
+name]</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+) x</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pivot </span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sum(Royalties)</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+for [soc-distno] in ('</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New"'> <span style='color:gray'>+</span> <span
+style='color:teal'>@cols</span> <span style='color:gray'>+</span> <span
+style='color:red'>')</span></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+) p </span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+order by [Account Id]</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+'</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:blue'>execute</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:gray'>(</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>@query</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:gray'>);</span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-left:21.25pt;text-indent:-21.25pt'><span
+lang=EN-US>3<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"新細明體","serif"'>把結果複製到</span><span
+lang=EN-US>EXCEL(</span><span style='font-family:"新細明體","serif"'>再結果的畫面按左上角就會全部複製如下圖</span><span
+lang=EN-US>):</span></p>
+
+<p class=MsoListParagraph style='margin-left:24.0pt'><span lang=EN-US><img
+width=554 height=276 id="圖片 3" src="CROSS_SOP.files/image004.jpg"></span></p>
+
+<p class=MsoListParagraph style='margin-left:24.0pt'><span style='font-family:
+"新細明體","serif"'>並把</span><span lang=EN-US>NULL</span><span style='font-family:
+"新細明體","serif"'>取代成空白。結果如下圖</span><span lang=EN-US>:</span></p>
+
+<p class=MsoListParagraph style='margin-left:24.0pt'><span lang=EN-US><img
+width=554 height=228 id="圖片 4" src="CROSS_SOP.files/image005.jpg"></span></p>
+
+<p class=MsoListParagraph style='margin-left:21.25pt;text-indent:-21.25pt'><span
+lang=EN-US>4<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"新細明體","serif"'>協會的部份由於沒有</span><span
+lang=EN-US>IP_Base_No</span><span style='font-family:"新細明體","serif"'>，因此</span><span
+lang=EN-US>Expr3</span><span style='font-family:"新細明體","serif"'>欄位會比對不到，要再比對一次協會的部份</span><span
+lang=EN-US>(</span><span style='font-family:"新細明體","serif"'>去</span><span
+lang=EN-US>72</span><span style='font-family:"新細明體","serif"'>那台比對</span><span
+lang=EN-US>(</span><span style='font-family:"新細明體","serif"'>註一</span><span
+lang=EN-US>))</span><span style='font-family:"新細明體","serif"'>，檢查</span><span
+lang=EN-US>Expr3</span><span style='font-family:"新細明體","serif"'>是否還有空白的，如果有的話需於</span><span
+lang=EN-US>Diva</span><span style='font-family:"新細明體","serif"'>或官網查詢</span><span
+lang=EN-US>!</span></p>
+
+<p class=MsoListParagraph style='margin-left:21.25pt;text-indent:-21.25pt'><span
+lang=EN-US>5<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"新細明體","serif"'>將</span><span
+lang=EN-US>Royalties</span><span style='font-family:"新細明體","serif"'>為</span><span
+lang=EN-US>0</span><span style='font-family:"新細明體","serif"'>的資料刪掉，最後將結果存檔後寄給</span><span
+lang=EN-US>Tokyo</span><span style='font-family:"新細明體","serif"'>，完成</span><span
+lang=EN-US>!</span><span style='font-family:"新細明體","serif"'>如下圖</span><span
+lang=EN-US>:</span></p>
+
+<p class=MsoListParagraph style='margin-left:21.25pt'><span lang=EN-US><img
+width=553 height=223 id="圖片 5" src="CROSS_SOP.files/image006.jpg"></span></p>
+
+<p class=MsoListParagraph style='margin-left:21.25pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:21.25pt'><span style='font-family:"新細明體","serif";
+color:red'>註一</span><span lang=EN-US style='color:red'>:</span><span
+lang=EN-US> <span style='color:red'>SELECT TOP 1000 [society]</span></span></p>
+
+<p class=MsoNormal style='margin-left:21.25pt'><span lang=EN-US
+style='color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ,[society_code]</span></p>
+
+<p class=MsoNormal style='margin-left:21.25pt'><span lang=EN-US
+style='color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ,[society_pwd]</span></p>
+
+<p class=MsoNormal style='margin-left:21.25pt'><span lang=EN-US
+style='color:red'>&nbsp; FROM [MUST_New].[dbo].[society_ftp_password]</span></p>
+
+<p class=MsoNormal style='margin-left:21.25pt'><span lang=EN-US
+style='color:red'>&nbsp; order by society_code</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>
