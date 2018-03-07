@@ -98,11 +98,15 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 				$(":input").each(function(){
 					$(this).prop("disabled",true);
 				});
+				//授權期間可修正
+				$( "input[name^='cont_']").each(function(){
+					$(this).prop("disabled",false);
+				});
 				$("#msg").append(
-					"<textarea name='msg' id='message' cols='40' rows='6' placeholder='退回原因(同意免填)'  ></textarea>"	
+					"<textarea name='msg' id='message' cols='40' rows='6' placeholder='退回原因(同意如有改授權期間也建議填寫)'  ></textarea>"	
 				)
 				$("#confirm").append(
-					"<button class='submit' onclick='return false' name='back'>退回</button>&nbsp&nbsp&nbsp&nbsp"+
+					"<button class='submit' onclick='return false' name='back'><font color='red'>退回</font></button>&nbsp&nbsp&nbsp&nbsp"+
 					"<button class='submit' onclick='return false' name='submit' >同意</button>"
 				)
 				

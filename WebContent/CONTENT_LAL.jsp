@@ -16,7 +16,8 @@
 				<div class="inner">
 					<h1>法務授權需求</h1>
 					<p class="view_lal"><a class="fancybox" href="FRAME.jsp?mainUrl=LAL/LAL_INSERT_CONTRACT_CASE_PREPARE.jsp">法務授權門市續約繳款單匯入</a></p>	
-					<p><a class="fancybox" href="FRAME.jsp?mainUrl=LICENSE_LIST.jsp">線上授權待確認清單</a></p>									
+					<p><a class="fancybox" href="FRAME.jsp?mainUrl=LICENSE_LIST.jsp">線上授權待確認清單</a></p>
+					<p><a class="fancybox" href="FRAME.jsp?mainUrl=LICENSE_APPLYLIST.jsp">線上授權已確認清單</a></p>									
 				</div>
 			</div>
 		</div>

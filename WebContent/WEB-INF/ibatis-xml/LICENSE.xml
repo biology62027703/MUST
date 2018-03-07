@@ -187,7 +187,7 @@
 	
 	<update id="UPDATE_LICENSE" parameterClass="java.util.HashMap">
 		update license_main 
-			set status='1'
+			set status='1',msg=''
 			<isNotNull  prepend="," property="user_copman">
 				user_copman=#user_copman#
 			</isNotNull>
@@ -265,12 +265,42 @@
 		update license_main 
 			set status=#status#,
 				msg=''
+			<isNotNull  prepend="," property="cont_bdate">
+				cont_bdate=#cont_bdate#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_edate">
+				cont_edate=#cont_edate#
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_dprice">
+				rec_dprice=#rec_dprice#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_no">
+				user_no=#user_no#
+			</isNotNull>				
 			where doc_no=#doc_no#
 	</update>
 	
+	<select id="QUERY_LICENSE_PRICE" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select (price * convert(int,(select count(1) as cnt from LICENSE_MACHINE where doc_no=#doc_no#))) as rec_dprice, price
+			from LICENSE_PRICE 
+			<dynamic prepend="where" >			
+			<isNotNull  prepend="and" property="user_class">
+				user_class=#user_class#
+			</isNotNull>
+			<isNotNull  prepend="and" property="kind">
+				kind=#kind#
+			</isNotNull>			
+			</dynamic>
+	</select>
+	
 	<select id="QUERY_LICENSE_MAIN" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
-		select doc_no,user_cname,user_copman,user_tel,user_copno from license_main 
-			where status='1' order by doc_no 
+		select doc_no,user_cname,user_copman,user_tel,user_copno,user_no,cont_bdate,cont_edate,rec_dprice from license_main 
+		<dynamic prepend="where" >			
+			<isNotNull  prepend="and" property="status">
+				status=#status#
+			</isNotNull>
+		</dynamic>
+			order by doc_no 
 	</select>
 	
 	<select id="QUERY_LICENSE_MAIN_DETAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">

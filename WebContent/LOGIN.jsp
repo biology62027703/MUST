@@ -25,11 +25,7 @@
 	String sol_valid =  "";
 	String usridtxt =  "";
 	String pswdtxt =  "";
-	
-	/* HashMap form = (HashMap)request.getAttribute("form");
-	if(form != null){
-		
-	} */
+
 	errmsg = "";
 	usridtxt =  (String)check.checkNull(request.getParameter("usridtxt"), "");
 	pswdtxt =  (String)check.checkNull(request.getParameter("pswdtxt"), "");
@@ -59,18 +55,6 @@
 			}
 		}
 	}
-	//String logincaaount=System.getProperty("user.name");
-	/* if(logincaaount.indexOf(".")>-1) {
-		ADCHECK ADCHECK = new ADCHECK(logincaaount,"");
-		String group = ADCHECK.getgroup();
-		if(!group.equals("")) {
-			Cookie cookie1 = new Cookie("user_group", group);
-			cookie1.setMaxAge(604800);
-			response.addCookie(cookie1);			
-			response.sendRedirect("INDEX.jsp");			
-		}
-	} */
-	//String JSS_REG =  StaticObj.getS08("JSS_REG", "PEO_REG");
 
 %>
 <html>
@@ -79,14 +63,10 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<!-- <link rel="shortcut icon" href="favicon.ico" />
-<link rel="stylesheet" href="css/CSS.css" type="text/css">
-<link rel="stylesheet" href="jquery/css/theme.ice.css" type="text/css">
-<link rel="stylesheet" href="jquery/css/theme.blue.css" type="text/css"> -->
-<link rel="stylesheet" href="assets/css/main.css" />
-<script src="sweetalert-master/dist/sweetalert.min.js"></script>
 <link rel="icon" type="<%=request.getContextPath()%>/image/png" sizes="16x16" href="<%=request.getContextPath()%>/images/logo.png">
+<link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" type="text/css" href="sweetalert-master/dist/sweetalert.css">
+<script src="sweetalert-master/dist/sweetalert.min.js"></script>
 <style>
 	body { 
 	    background-image: url('images/login_bg.jpg');
@@ -119,14 +99,9 @@
 </div>
 <div align="center">
 
- <font color="#CCFF99" size="3" face="新細明體">
- 	<%=errmsg %>
- </font>
-
-
-
-
-<!-- <table class="border_login" cellpadding="10" style="display:none"> -->
+<font color="#CCFF99" size="3" face="新細明體">
+	<%=errmsg %>
+</font>
 
 <div class="field">
 	<input type="text" name="usridtxt" value="<%=usridtxt%>"  placeholder="請輸入AD帳號">
@@ -160,16 +135,12 @@
 			return false;
 		}
 		form.method.value = "login";
-		//form.usrid.value = form.usridtxt.value;
-		//form.pswd.value = form.pswdtxt.value;
-		//var b = new base64encode();
 		form.usridtxt.value=base64encode(form.usridtxt.value); 
 		form.pswdtxt.value=base64encode(form.pswdtxt.value);
 		form.action = "LOGIN.jsp"; 
 		form.target = "_self";
 		form.submit();
 	}
-	
 
 </script>
 </body>
