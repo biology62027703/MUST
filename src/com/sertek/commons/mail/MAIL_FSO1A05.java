@@ -17,11 +17,11 @@ public class MAIL_FSO1A05 extends MAIL_TEMPLATE {
 		String acctype = check.checkNull(param.get("ACCTYPE"), "").toString();
 		String mail_subject = "";
 		if (XDHelper.ACCTYPE_4_CODE.equals(acctype)) {
-			mail_subject = "¡m¥qªk°|½u¤W°_¶D¤Î®Ñª¬¶Ç°e§@·~¥­¥x¡n½u¤WµêÀÀ±b¸¹Ãº¶O§¹¦¨³qª¾«H";
+			mail_subject = "ã€Šå¸æ³•é™¢ç·šä¸Šèµ·è¨´åŠæ›¸ç‹€å‚³é€ä½œæ¥­å¹³å°ã€‹ç·šä¸Šè™›æ“¬å¸³è™Ÿç¹³è²»å®Œæˆé€šçŸ¥ä¿¡";
 		} else if (XDHelper.ACCTYPE_3_CODE.equals(acctype)) {
-			mail_subject = "¡m¥qªk°|½u¤W°_¶D¤Î®Ñª¬¶Ç°e§@·~¥­¥x¡n½u¤WWeb ATMÃº¶O§¹¦¨³qª¾«H";
+			mail_subject = "ã€Šå¸æ³•é™¢ç·šä¸Šèµ·è¨´åŠæ›¸ç‹€å‚³é€ä½œæ¥­å¹³å°ã€‹ç·šä¸ŠWeb ATMç¹³è²»å®Œæˆé€šçŸ¥ä¿¡";
 		} else if (XDHelper.ACCTYPE_1_CODE.equals(acctype) || XDHelper.ACCTYPE_2_CODE.equals(acctype)) {
-			mail_subject = "¡m¥qªk°|½u¤W°_¶D¤Î®Ñª¬¶Ç°e§@·~¥­¥x¡n½u¤WID+AccountÃº¶O§¹¦¨³qª¾«H";
+			mail_subject = "ã€Šå¸æ³•é™¢ç·šä¸Šèµ·è¨´åŠæ›¸ç‹€å‚³é€ä½œæ¥­å¹³å°ã€‹ç·šä¸ŠID+Accountç¹³è²»å®Œæˆé€šçŸ¥ä¿¡";
 		}
 		return mail_subject;
 	}

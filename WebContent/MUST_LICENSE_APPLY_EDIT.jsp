@@ -57,7 +57,7 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 						$("input[name='user_tel_1']").val(jsonData.data[i].USER_TEL.split("-")[0]);
 						$("input[name='user_tel_2']").val(jsonData.data[i].USER_TEL.split("-")[1]);
 						$("input[name='user_fax_1']").val(jsonData.data[i].USER_FAX.split("-")[0]);
-						$("input[name='user_fax_1']").val(jsonData.data[i].USER_FAX.split("-")[1]);
+						$("input[name='user_fax_2']").val(jsonData.data[i].USER_FAX.split("-")[1]);
 						$("input[name='user_post']").val(jsonData.data[i].USER_POST);
 						$("input[name='user_addr']").val(jsonData.data[i].USER_ADDR);
 						$("input[name='user_cpost']").val(jsonData.data[i].USER_CPOST);
@@ -141,20 +141,50 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 			}
 		})
 		//必填欄位驗證通過才會到這邊
-		$("#form").submit(function () {			
-			formUtil.submitTo({
-				url: "LICENSE.do?action=doSave",
-				async: true,
-				formObj: $(form),
-				onSuccess: function(jsonData){
-					$("input[type='text']").each(function(){
-						$(this).prop("disabled",true);
-					});
-					setTimeout(function(){
-						swal("", "修改完成，資料已送出。", "success");
-					}, 200);					
-				}
-			});
+		$("#form").submit(function () {	
+			var check= true;
+			if(!$("input[name='user_fax_1']").val()==""||!$("input[name='user_fax_2']").val()=="") {
+				$("input[name^='user_fax_']").each(function(){
+					if($(this).val()=="") {
+						alert("請填寫完整的傳真號碼");
+						$(this).focus();
+						check = false;
+					}
+				});
+			}
+			if(!$("input[name='cnt2_fax_1']").val()==""||!$("input[name='cnt2_fax_2']").val()=="") {
+				$("input[name^='cnt2_fax_']").each(function(){
+					if($(this).val()=="") {
+						alert("請填寫完整的傳真號碼");
+						$(this).focus();
+						check = false;
+					}
+				});
+			}
+			if($("input[name='cont_bdate_yy']").val()+$("input[name='cont_bdate_mm']").val()+$("input[name='cont_bdate_dd']").val()>=$("input[name='cont_edate_yy']").val()+$("input[name='cont_edate_mm']").val()+$("input[name='cont_edate_dd']").val()){
+				alert("授權起日>=授權迄日，請重新確認授權日期!");
+				check = false;
+			}
+			if(check) {
+				formUtil.submitTo({
+					url: "LICENSE.do?action=doSave",
+					async: true,
+					formObj: $(form),
+					onSuccess: function(jsonData){
+						alert(jsonData.data.msg);
+						if(jsonData.data.msg!=""){
+							alert(jsonData.data.msg);
+						} else {
+							$("input[type='text']").each(function(){
+								$(this).prop("disabled",true);
+							});
+							setTimeout(function(){
+								swal("", "修改完成，資料已送出。", "success");
+							}, 200);
+						}
+					}
+				});
+			}
             return false;
         });
 		$( "input[name^='cont_']").focusout(function(){
@@ -202,7 +232,7 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 			<div  class="required_notification" style="margin-left:6%">
 				請選擇類型:
 		 		<select id="kind" name="kind">
-					  <option value="電腦伴唱機音樂著作公開演出申請表" selected>一般</option>
+					  <option value="電腦伴唱機音樂著作公開演出申請表" selected>營利</option>
 					  <option value="電腦伴唱機(公益且無營利)音樂著作公開演出申請表">公益且無營利</option>
 					  <option value="電腦伴唱機(文化教育)音樂著作公開演出申請表">文化教育</option>
 				</select>
@@ -281,8 +311,8 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 			</ol>
           	</div>
           	<div align="center">
-          	<p><a class="fancybox" href="Kar2.html">公開演出概括授權契約書(點此進一步了解)</a></p>
-          	<input type="checkbox" class="w3-check" name="iagree"><font color="red">本人已閱覽並同意接受本申請表之條款內容，且願履行及遵守該等約定條款。</font>         	
+          	<p><a class="fancybox" href="Kar2.html">公開演出概括授權契約書</a></p>
+          	<input type="checkbox" class="w3-check" name="iagree"><font color="red">本人已閱覽並同意接受本申請表及條款內容，且願履行及遵守該等約定條款。</font>         	
           	<br><br><br>
           	<button class="submit" type="submit" name="submit" disabled>確認送出</button></div> <br> <br>
 	</div>

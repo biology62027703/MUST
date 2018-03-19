@@ -6,7 +6,7 @@
 		SELECT top 2500 b.F521_02+' '+a.F516_11 as 'title' , SUBSTRING(convert(VARCHAR, a.F516_051, 120),0,11)+' '+DATEADD(s,a.F516_052*3600+a.F516_053*60,'1900/01/01') as 'start',  SUBSTRING(convert(VARCHAR, a.F516_061, 120),0,11)+' '+DATEADD(s,a.F516_062*3600+a.F516_063*60,'1900/01/01') as 'end', case when  a.F516_04='9' then 'green' when a.F516_04='1' then 'blue'  when a.F516_04='6' then 'orange' when a.F516_04='4' then 'black' when a.F516_04='2' then 'red' when a.F516_04='7' then 'brown'  end as 'color'
 		  FROM F516 a 
 		  	join F521 b on a.F516_02 = b.F521_K and F521_07 is null
-		  where a.F516_04 not in ('A','B','C','7') and (a.FLOWFLAG='Z' or a.FLOWFLAG='P') and a.F516_19 is null
+		  where a.F516_04 not in ('A','B','C','7') and (a.FLOWFLAG='Z') and a.F516_19 is null
 		  order by F516_051 DESC
 	</select>
 	

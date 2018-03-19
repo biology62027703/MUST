@@ -100,9 +100,7 @@ public class SEND_EMAIL extends BaseAbstractCommandController{
 	public static void main(String[] args) throws IOException, ServletException, SQLException {
 	
 		//String emailPwd = "G16kHU4vo";
-		
-		
 		//信任從19主機發出去的MAIL所以不用帶密碼
-		//sendEmail(mailserver, from, fromName,recipient, subject, emailAcct, "", emailauth);
+		//sendEmail("192.168.1.19", "member@must.org.tw", "MUST會員通知","James.huang@must.org.rw", "TEST", "member", "", 1);
 	}
 }

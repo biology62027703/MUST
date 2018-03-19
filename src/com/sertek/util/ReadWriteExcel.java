@@ -20,7 +20,6 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.lowagie.text.Row;
 import com.sertek.form.REPORT_FORMAT;
 //
 @SuppressWarnings("rawtypes")
@@ -110,11 +109,8 @@ public class ReadWriteExcel {
 		for (int i = 0; i < list1.length; i++) {
 			System.out.println(folder1+"\\"+list1[i]);	
 			if(list1[i].toString().indexOf(".xlsx")>-1) {
-				InputStream ExcelFileToRead = new FileInputStream(folder1+"//"+list1[i]);
-			
+				InputStream ExcelFileToRead = new FileInputStream(folder1+"//"+list1[i]);			
 				XSSFWorkbook  wb = new XSSFWorkbook(ExcelFileToRead);
-				
-				//XSSFWorkbook test = new XSSFWorkbook(); 				
 				XSSFSheet sheet = wb.getSheetAt(0);
 				XSSFRow row; 
 				XSSFCell cell;		
@@ -157,13 +153,10 @@ public class ReadWriteExcel {
 	
 	public void writeXLSXFile_google(String FileName,List<String[]> ls) throws IOException {
 		
-		//String excelFileName = "C:/Test.xlsx";//name of excel file
-		//System.out.println("1----------");
 		String sheetName = "Sheet1";//name of sheet
 
 		XSSFWorkbook wb = new XSSFWorkbook();
 		XSSFSheet sheet = wb.createSheet(sheetName) ;
-		//System.out.println("2----------");
 		
 		//REPORT_FORMAT RF= new REPORT_FORMAT();
 		
@@ -195,12 +188,8 @@ public class ReadWriteExcel {
                 }
             }
            
-            //System.out.println("22----------");
             if(r!=0 && r%20000==0){
-        		//write this workbook to an Outputstream.            
             	System.out.println(r);
-            	//wb = new XSSFWorkbook();
-            	//sheet = wb.createSheet(sheetName) ;
             	System.gc();
             }
         }
@@ -213,7 +202,7 @@ public class ReadWriteExcel {
 		fileOut.close();
 		System.out.println("檔案寫入完畢");
 		ls.clear();
-		System.gc();//GC
+		System.gc();
 		
 	}
 	

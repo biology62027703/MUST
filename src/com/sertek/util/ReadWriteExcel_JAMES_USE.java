@@ -30,7 +30,6 @@ public class ReadWriteExcel_JAMES_USE {
 	static HashMap hm = new HashMap();
 	public void readXLSFile(String Filename) throws IOException
 	{
-		//InputStream ExcelFileToRead = new FileInputStream("D:/MUST_playlist_2016_01.xls");
 		InputStream ExcelFileToRead = new FileInputStream(Filename);
 		HSSFWorkbook wb = new HSSFWorkbook(ExcelFileToRead);
 
@@ -51,12 +50,10 @@ public class ReadWriteExcel_JAMES_USE {
 		
 				if (cell.getCellType() == HSSFCell.CELL_TYPE_STRING)
 				{
-					//System.out.print(cell.getStringCellValue()+" ");
 					putdata(temp_int,cell.getStringCellValue());
 				}
 				else if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
 				{
-					//System.out.print((int)cell.getNumericCellValue()+" ");
 					putdata(temp_int,(int)cell.getNumericCellValue());
 					
 				}
@@ -81,54 +78,71 @@ public class ReadWriteExcel_JAMES_USE {
 				
 			if(list1[i].toString().indexOf(".xlsx")>-1) {
 				System.out.println(folder1+"\\"+list1[i]);
-				InputStream ExcelFileToRead = new FileInputStream(folder1+"//"+list1[i]);
-			
-				XSSFWorkbook  wb = new XSSFWorkbook(ExcelFileToRead);
-				
-				//XSSFWorkbook test = new XSSFWorkbook(); 				
-				XSSFSheet sheet = wb.getSheetAt(0);
-				XSSFRow row; 
-				XSSFCell cell;		
-				Iterator rows = sheet.rowIterator();
-				int r=0;
-				root:while (rows.hasNext())
-				{
-					hm = new HashMap(); 
-					temp_int=0;
-					row=(XSSFRow) rows.next();
-					Iterator cells = row.cellIterator();
-					while (cells.hasNext())
+				try {				
+					InputStream ExcelFileToRead = new FileInputStream(folder1+"//"+list1[i]);
+					XSSFWorkbook  wb = new XSSFWorkbook(ExcelFileToRead);					
+					XSSFSheet sheet = wb.getSheetAt(0);
+					XSSFRow row; 
+					XSSFCell cell;		
+					Iterator rows = sheet.rowIterator();
+					int r=0;
+					root:while (rows.hasNext())
 					{
-						cell=(XSSFCell) cells.next();
-						if (cell.getCellType() == XSSFCell.CELL_TYPE_STRING)
+						hm = new HashMap(); 
+						temp_int=0;
+						row=(XSSFRow) rows.next();
+						Iterator cells = row.cellIterator();
+						while (cells.hasNext())
 						{
-							if(cell.getStringCellValue().equals("D")){
-								System.out.println("抬頭欄");
-								continue root;
+							cell=(XSSFCell) cells.next();
+							if (cell.getCellType() == XSSFCell.CELL_TYPE_STRING)
+							{
+								if(cell.getStringCellValue().equals("Video ID")){
+									System.out.println("抬頭欄");
+									continue root;
+								}
+								putdata(temp_int,cell.getStringCellValue());							
 							}
-							putdata(temp_int,cell.getStringCellValue());							
+							else if(cell.getCellType() == XSSFCell.CELL_TYPE_NUMERIC)
+							{
+								putdata(temp_int,(int)cell.getNumericCellValue());
+							}
+							else
+							{
+								//U Can Handel Boolean, Formula, Errors
+								System.out.println("沒東西?");
+							}
+							temp_int++;
 						}
-						else if(cell.getCellType() == XSSFCell.CELL_TYPE_NUMERIC)
-						{
-							putdata(temp_int,(int)cell.getNumericCellValue());
-						}
-						else
-						{
-							//U Can Handel Boolean, Formula, Errors
-							System.out.println("沒東西?");
-						}
-						temp_int++;
-					}
-					if(Integer.parseInt(hm.get("Views").toString())>=2000000) {
-						ls.add(hm);
 						
+						/*char[] str2 = hm.get("Views").toString().toCharArray();
+						boolean checknum=true;
+						for(int index=0; index < hm.get("Views").toString().length(); index++) {
+						     if(!Character.isDigit(str2[index])) {
+						    	 //System.out.println("這字串包含非數字的字原");
+						    	 checknum = false;
+						    	 break; //字串中出現一個非數值的字原就結束 loop, 因為這不是我們要的字串
+						     }
+						}
+						if(checknum&&Integer.parseInt(hm.get("Views").toString())>=500000) {
+							ls.add(hm);							
+						}*/
+						
+						if (hm.get("Video Title").toString().indexOf("不曾回來過")>-1||hm.get("Song Title").toString().indexOf("不曾回來過")>-1) {
+							ls.add(hm);	
+						}
+						
+						r++;
+						if(r!=0 && r%20000==0){		        		          
+			            	System.out.println(r);
+			            	System.gc();
+			            }
 					}
-					r++;
-					if(r!=0 && r%20000==0){		        		          
-		            	System.out.println(r);
-		            	System.gc();
-		            }
+				}catch(Exception e) {
+					System.out.println(e);
 				}
+			
+				
 			}
 		}
 		return ls;
@@ -220,12 +234,10 @@ public class ReadWriteExcel_JAMES_USE {
 	}
 
 	public static void main(String[] args) throws IOException {
-		//writeXLSFile();
-		//readXLSFile();	
 		setKeys(new String[]{"D","Video ID","Video Title","Views","Gross Revenue","Revenue Currency","Song Title","ISRC","ISWC","Publishers","Artist","P","T"});
-		List ls= readXLSXFile("D:\\google相關\\2017Q2\\xlsx");
+		List ls= readXLSXFile("D:\\google相關\\2017Q4\\xlsx");
 		System.out.println(ls);
-		writeXLSXFile_google("D:\\google相關\\2017Q2\\xlsx\\2017Q2_2000000.xlsx", ls);
+		writeXLSXFile_google("D:\\google相關\\2017Q4\\xlsx\\2017Q4_不曾回來過.xlsx", ls);
 	}
 	
 	public static String[] getKeys() {

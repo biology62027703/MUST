@@ -34,6 +34,9 @@
 <%@include file="FANCYBOX_REL.jsp"%>
 <script>
 	$(document).ready(function(){
+		$("a.fancybox").click(function(){
+			$("input[type='checkbox']").prop("disabled",false);
+		});
 		
 		$("button[name='add']").on("click",function(){
 			$("table[id='use_machine']").append(
@@ -57,6 +60,7 @@
 		});
 		
 		$("input[type='checkbox']").on("click",function(){
+			
 			if($("input[type='checkbox']").prop("checked")) {
 				$("button[name='submit']").prop("disabled",false);
 			} else {
@@ -64,40 +68,70 @@
 			}
 		})
 		//必填欄位驗證通過才會到這邊
-		$("#form").submit(function () {			
-			formUtil.submitTo({
-				url: "LICENSE.do?action=doSave",
-				async: true,
-				formObj: $(form),
-				onSuccess: function(jsonData){
-					swal({
-						  title: "資料已送出",
-						  text: "是否保留收件人或代辦、聯絡電話、EMAIL資料?",
-						  type: "warning",
-						  showCancelButton: true,
-						  confirmButtonColor: "#DD6B55",
-						  confirmButtonText: "確認",
-						  cancelButtonText: "取消",
-						  closeOnConfirm: false,
-						  closeOnCancel: false
-						},
-					function(isConfirm){
-						if (isConfirm) {
-							$("input[type='text']").each(function(){
-								if(!($(this).attr("name")=="cnt1_name"||$(this).attr("name")=="cnt1_sphone"||$(this).attr("name")=="cnt1_email")){
-									$(this).val("");
-								}
-							});
-							swal("", "資料保留成功", "success");
+		$("#form").submit(function () {
+			var check= true;
+			if(!$("input[name='user_fax_1']").val()==""||!$("input[name='user_fax_2']").val()=="") {
+				$("input[name^='user_fax_']").each(function(){
+					if($(this).val()=="") {
+						alert("請填寫完整的傳真號碼");
+						$(this).focus();
+						check = false;
+					}
+				});
+			}
+			if(!$("input[name='cnt2_fax_1']").val()==""||!$("input[name='cnt2_fax_2']").val()=="") {
+				$("input[name^='cnt2_fax_']").each(function(){
+					if($(this).val()=="") {
+						alert("請填寫完整的傳真號碼");
+						$(this).focus();
+						check = false;
+					}
+				});
+			}
+			if($("input[name='cont_bdate_yy']").val()+$("input[name='cont_bdate_mm']").val()+$("input[name='cont_bdate_dd']").val()>=$("input[name='cont_edate_yy']").val()+$("input[name='cont_edate_mm']").val()+$("input[name='cont_edate_dd']").val()){
+				alert("授權起日>=授權迄日，請重新確認授權日期!");
+				check = false;
+			}
+			if(check) {
+				formUtil.submitTo({
+					url: "LICENSE.do?action=doSave",
+					async: true,
+					formObj: $(form),
+					onSuccess: function(jsonData){
+						
+						if(jsonData.data.msg!=""){
+							alert(jsonData.data.msg);
 						} else {
-							$("input[type='text']").each(function(){
-								$(this).val("");
-							});
-							swal("", "完成填寫", "success");
+							swal({
+								  title: "資料已送出",
+								  text: "是否保留收件人或代辦、聯絡電話、EMAIL資料?",
+								  type: "warning",
+								  showCancelButton: true,
+								  confirmButtonColor: "#DD6B55",
+								  confirmButtonText: "確認",
+								  cancelButtonText: "取消",
+								  closeOnConfirm: false,
+								  closeOnCancel: false
+								},
+							function(isConfirm){
+								if (isConfirm) {
+									$("input[type='text']").each(function(){
+										if(!($(this).attr("name")=="cnt1_name"||$(this).attr("name")=="cnt1_sphone"||$(this).attr("name")=="cnt1_email")){
+											$(this).val("");
+										}
+									});
+									swal("", "資料保留成功", "success");
+								} else {
+									$("input[type='text']").each(function(){
+										$(this).val("");
+									});
+									swal("", "完成填寫", "success");
+								}
+							});	
 						}
-					});	
-				}
-			});
+					}
+				});
+			}
             return false;
         });
 		$( "input[name^='cont_']").focusout(function(){
@@ -140,7 +174,7 @@
 			<div  class="required_notification" style="margin-left:6%">
 				請選擇類型:
 		 		<select id="kind" name="kind">
-					  <option value="電腦伴唱機音樂著作公開演出申請表" selected>一般</option>
+					  <option value="電腦伴唱機音樂著作公開演出申請表" selected>營利</option>
 					  <option value="電腦伴唱機(公益且無營利)音樂著作公開演出申請表">公益且無營利</option>
 					  <option value="電腦伴唱機(文化教育)音樂著作公開演出申請表">文化教育</option>
 				</select>
@@ -172,13 +206,13 @@
 	 				<font class="required_notification">發票抬頭：&nbsp</font><input type="text" name="user_title" style="width:40%"  required />  <button name="title" class="submit" onclick="return false;">同營業場所名稱 </button>       			
 	 			</div>
 	 			<div class="content">
-	 				<font class="required_notification">申請授權期間：</font>西元 <input type="text" name="cont_bdate_yy" style="width:8%" title="請輸入西元年共4碼數字" min="0" max="9999" pattern="[0-9]{4}" maxlength ="4" required/> 年 <input type="text" name="cont_bdate_mm" style="width:6%" pattern="\d*" maxlength ="2" required/> 月 <input type="text" name=cont_bdate_dd style="width:6%" pattern="\d*" maxlength ="2" required/> 日起至西元 <input type="text" name="cont_edate_yy" style="width:8%" title="請輸入西元年共4碼數字" min="0" max="9999" pattern="[0-9]{4}" maxlength ="4" required/> 年 <input type="text" name="cont_edate_mm" style="width:6%" pattern="\d*" maxlength ="2" required/> 月 <input type="text" name="cont_edate_dd" style="width:6%" pattern="\d*" maxlength ="2" required/> 日止        			
+	 				<font class="required_notification">申請授權期間：</font>西元 <input type="text" name="cont_bdate_yy" style="width:8%" title="請輸入西元年共4碼數字" min="0" max="9999" pattern="[0-9]{4}" maxlength ="4" required/> 年 <input type="text" name="cont_bdate_mm" style="width:6%" pattern="\d*" maxlength ="2" required/> 月 <input type="text" name=cont_bdate_dd style="width:6%" pattern="\d*" maxlength ="2" required/> 日起至西元 <input type="text" name="cont_edate_yy" style="width:8%" title="請輸入西元年共4碼數字" min="0" max="9999" pattern="[0-9]{4}" maxlength ="4" required/> 年 <input type="text" name="cont_edate_mm" style="width:6%" pattern="\d*" maxlength ="2" required/> 月 <input type="text" name="cont_edate_dd" style="width:6%" pattern="\d*" maxlength ="2" required/> 迄日止        			
 	 			</div>
 	 			<div class="content">
 	 				<font class="required_notification">營業地址：</font><input type="text" name="user_post" placeholder="郵遞區號" title="請輸3碼數字" min="0" max="999" pattern="[0-9]{3}" maxlength ="3" style="width:6%" required /> <input type="text" name="user_addr" style="width:40%"  required />        			
 	 			</div>
 	 			<div class="content">
-	 				<font class="required_notification">郵寄地址：</font><input type="text" name="user_cpost" placeholder="郵遞區號" title="請輸3碼數字" min="0" max="999" pattern="[0-9]{3}" maxlength ="3" style="width:6%" required /> <input type="text" name="user_caddr" style="width:40%"  required /><button name="caddr" class="submit" onclick="return false;">同營業地址 </button> 
+	 				<font class="required_notification">郵寄地址：</font><input type="text" name="user_cpost" placeholder="郵遞區號" title="請輸3碼數字" min="0" max="999" pattern="[0-9]{3}" maxlength ="3" style="width:6%" required /> <input type="text" name="user_caddr" style="width:40%"  required />&nbsp<button name="caddr" class="submit" onclick="return false;">同營業地址 </button> 
 	 			</div>
 	 			<div class="content">
 	 				<font class="required_notification">收件人或代辦：</font><input type="text" name="cnt1_name" style="width:15%"  required />        			
@@ -223,8 +257,8 @@
 			</ol>
           	</div>
           	<div align="center">
-          	<p><a class="fancybox" href="Kar2.html">公開演出概括授權契約書(點此進一步了解)</a></p>
-          	<input type="checkbox" class="w3-check" name="iagree"><font color="red">本人已閱覽並同意接受本申請表之條款內容，且願履行及遵守該等約定條款。</font>         	
+          	<p><a class="fancybox" href="Kar2.html">公開演出概括授權契約書</a></p>
+          	<input type="checkbox" class="w3-check" name="iagree" disabled><font color="red">本人已閱覽並同意接受本申請表之條款內容，且願履行及遵守該等約定條款。(請先閱讀公開演出概括授權契約書)</font>         	
           	<br><br><br>
           	<button class="submit" type="submit" name="submit" disabled>確認送出</button></div> <br> <br>
 	</div>

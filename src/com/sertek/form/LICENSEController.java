@@ -58,6 +58,7 @@ public class LICENSEController extends BaseAbstractCommandController {
 		HashMap hm = new HashMap();
 		hm.put("doc_no", form.get("doc_no"));
 		this.getSqlDBUtility_LICENSE().insert("LICENSE.DELETE_MACHINE", hm);
+		boolean check=true;
 		if(form.get("factory").toString().indexOf("@")>-1) {
 			String [] factoryarray = request.getParameterValues("factory[]");
 			String [] machinearray = request.getParameterValues("machine[]");
@@ -65,7 +66,16 @@ public class LICENSEController extends BaseAbstractCommandController {
 				if(!factoryarray[i].equals("")&&!machinearray[i].equals("")) {
 					
 					hm.put("factory",URLDecoder.decode(factoryarray[i], "utf-8").replaceAll("%20", " "));
-					hm.put("machine", URLDecoder.decode(machinearray[i], "utf-8"));		
+					hm.put("machine", URLDecoder.decode(machinearray[i], "utf-8"));
+					List ls = this.getSqlDBUtility_LICENSE().queryForList("LICENSE.QUERY_LICENSE_MAIN_MACHINE",hm);
+					if(ls.size()>0) {
+						this.getSqlDBUtility_LICENSE().insert("LICENSE.DELETE_MACHINE", hm);
+						this.getSqlDBUtility_LICENSE().insert("LICENSE.DELETE_LICENSE", hm);
+						data.put("msg", "機台號碼重複，請確認填寫資料。");
+						responseBean.setAjaxData(data);	
+						check=false;
+						break;
+					}
 					this.getSqlDBUtility_LICENSE().insert("LICENSE.INSERT_MACHINE", hm);
 				}
 			}
@@ -73,23 +83,25 @@ public class LICENSEController extends BaseAbstractCommandController {
 			this.getSqlDBUtility_LICENSE().insert("LICENSE.INSERT_MACHINE", form);
 		}
 		System.out.println(form);		
-		
-		//寄給填表單的人
-		StringBuffer htmlCode = new StringBuffer() ;
-		htmlCode.append("敬啟者 您好,<BR>");
-		htmlCode.append("您申請的電腦伴唱機線上授權流水編號為:"+form.get("doc_no")+"<BR>");
-		htmlCode.append("我們會盡快回覆您審查結果，審查期間若有其他問題，<BR>");
-		htmlCode.append("請與窗口【 陳佩君小姐, 電話: 02-25110869 分機260】連繫。");
-		new SEND_EMAIL("must.license@must.org.tw","MUST授權部",form.get("cnt1_email").toString(),"MUST 線上授權申請",htmlCode);
-		//寄給內部同事
-		htmlCode = new StringBuffer() ;
-		htmlCode.append("您好,<BR>");
-		htmlCode.append("電腦伴唱機線上授權流水編號為:"+form.get("doc_no")+"<BR>");
-		htmlCode.append("請點選以下網址確認:<BR>");
-		htmlCode.append("<a href='http://imust.must.org.tw:9000/MUST/LICENSE_CONFIRM.jsp?doc_no="+form.get("doc_no")+"'>請點此進行MUST線上授權資料審核<br></a>");
-		htmlCode.append("有任何問題請與姆斯聯絡!");
-		new SEND_EMAIL("must.license@must.org.tw","MUST授權部","Pallas.chen@must.org.tw,james.huang@must.org.tw","MUST 線上授權申請需求單",htmlCode);
-		responseBean.setAjaxData(data);	
+		if(check) {
+			//寄給填表單的人
+			StringBuffer htmlCode = new StringBuffer() ;
+			htmlCode.append("敬啟者 您好,<BR>");
+			htmlCode.append("您申請的電腦伴唱機線上授權流水編號為:"+form.get("doc_no")+"<BR>");
+			htmlCode.append("我們會盡快回覆您審查結果，審查期間若有其他問題，<BR>");
+			htmlCode.append("請與窗口【 陳佩君小姐, 電話: 02-25110869 分機260】連繫。");
+			new SEND_EMAIL("must.license@must.org.tw","MUST授權部",form.get("cnt1_email").toString(),"MUST 線上授權申請",htmlCode);
+			//寄給內部同事
+			htmlCode = new StringBuffer() ;
+			htmlCode.append("您好,<BR>");
+			htmlCode.append("電腦伴唱機線上授權流水編號為:"+form.get("doc_no")+"<BR>");
+			htmlCode.append("請點選以下網址確認:<BR>");
+			htmlCode.append("<a href='http://imust.must.org.tw:9000/MUST/LICENSE_CONFIRM.jsp?doc_no="+form.get("doc_no")+"'>請點此進行MUST線上授權資料審核<br></a>");
+			htmlCode.append("有任何問題請與姆斯聯絡!");
+			new SEND_EMAIL("must.license@must.org.tw","MUST授權部","Pallas.chen@must.org.tw,james.huang@must.org.tw","MUST 線上授權申請需求單",htmlCode);
+			data.put("msg", "");
+			responseBean.setAjaxData(data);	
+		}
 		
 	}
 	
@@ -143,14 +155,17 @@ public class LICENSEController extends BaseAbstractCommandController {
 					if(!((String)check.checkNull(form.get("msg").toString(), "")).equals("")) {
 						htmlCode.append("<font color='red'>審核人員備註:<BR>"+form.get("msg").toString()+"</font><BR>");
 					}
-					htmlCode.append("請於近日內撥冗匯款，以利本會發證，謝謝!<BR><BR>");
-					htmlCode.append("繳費方式：(※請勿自行內扣手續費)");
+					htmlCode.append("請於近日內撥冗匯款，以利本會發證，匯款資料如下:<BR><BR>");
 					htmlCode.append("<div style='margin-left:5%'>");
 					htmlCode.append("<ol>");
-					htmlCode.append("<li>可至郵局劃撥（劃撥帳號：19321052，戶名：社團法人中華音樂著作權協會），另可銀行匯款至本協會銀行帳戶(帳戶名：社團法人中華音樂著作權協會)匯款銀行：台新國際商業銀行(銀行代號：812) 南京東路分行(分行代碼：0115) 帳號：2011-01-00021680  或開立7天內之即期支票 (檯頭：社團法人中華音樂著作權協會)。</li>");
-					htmlCode.append("<li>備妥上述劃撥單收據影本、匯款收據影本或即期支票傳真或掛號寄至本協會。</li>");
-					htmlCode.append("<li>本次授權金額為新台幣"+ut.addComma(form.get("rec_dprice").toString())+"元(含稅)。<BR>");
-					htmlCode.append("<li>契約存續期間內，如台端(貴單位)有新增或淘汰停用機台時，應於發生日起10日內以書面檢附相關證明文件通知本會，供本會更新授權資料及核算當年度應加計之授權金（詳申請表第2頁「概括授權契約書」第二點）。</li>");
+					htmlCode.append("<li>本次授權金額為<font color='red'>新台幣"+ut.addComma(form.get("rec_dprice").toString())+"元(含稅)</font>。<BR>");
+					htmlCode.append("<li>繳費方式(擇一)：(※請勿自行內扣手續費)</li>");
+					htmlCode.append("<ol type='a'>");
+					htmlCode.append("<li>郵局劃撥---劃撥帳號：19321052，戶名：社團法人中華音樂著作權協會</li>");
+					htmlCode.append("<li>銀行匯款---匯款銀行：台新國際商業銀行(銀行代號：812) 南京東路分行(分行代碼：0115)<br> 帳號：2011-01-00021680帳戶名：社團法人中華音樂著作權協會</li>");
+					htmlCode.append("<li>開立7天內之即期支票 （檯頭：社團法人中華音樂著作權協會）。</li>");
+					htmlCode.append("</ol>");
+					htmlCode.append("<li>備妥上述劃撥單收據影本、匯款收據影本或即期支票傳真或掛號寄至本協會，以利本會後續結案發證作業。</li>");					
 					htmlCode.append("</ol>");
 					htmlCode.append("</div>");					
 					htmlCode.append("有任何問題請與窗口【 陳佩君小姐, 電話: 02-25110869 分機260】連繫。");

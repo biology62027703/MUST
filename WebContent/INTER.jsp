@@ -39,7 +39,7 @@ if(ip.indexOf("192.168.")>-1){
 					<p class="inter_view"><a href="https://www.must.org.tw/admin/INDEX.aspx">MÜST官網後台</a></p>
 					<p class="inter_view"><a href="http://list.must.org.tw/list_login.asp">清單系統</a></p>
 					<p class="inter_view"><a href="http://win2k.must.org.tw/mis1/lal/lal_login.asp">法務暨授權業務管理資訊系統</a></p>
-					<!-- <p><a class="fancybox" href="C:\Users\James.huang\Desktop\DIVA\DIVA_RUN_UNMATCH.txt">DIVA跑無法辨識</a></p>	 -->								
+					<p><a href="https://msa.must.org.tw">WEB MAIL</a></p>									
 				</div>
 			</div>
 		</div>			

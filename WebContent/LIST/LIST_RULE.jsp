@@ -35,10 +35,7 @@
 	</div>
 </div>
 
-	
-	
-	
-</form>
+
 </div>
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/skel.min.js"></script>

@@ -185,6 +185,11 @@
 			where doc_no=#doc_no#
 	</update>
 	
+	<update id="DELETE_LICENSE" parameterClass="java.util.HashMap">
+		delete from license_main
+			where doc_no=#doc_no#
+	</update>
+	
 	<update id="UPDATE_LICENSE" parameterClass="java.util.HashMap">
 		update license_main 
 			set status='1',msg=''
@@ -339,6 +344,12 @@
 		      ,machine
 		  FROM LICENSE.dbo.LICENSE_MACHINE
 			where DOC_NO=#doc_no#
+			<isNotNull  prepend="and" property="factory">
+				factory=#factory#
+			</isNotNull>
+			<isNotNull  prepend="and" property="machine">
+				machine=#machine#
+			</isNotNull>
 	</select>
 	
 	
