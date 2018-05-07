@@ -11,27 +11,4 @@
 	</select>
 	
 	
-	<select id="CHECK_MEMBER_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
-		select distinct member_no,chinese_name,ticket,situation from CHECKIN
-		<dynamic prepend="where">
-			<isNotEqual prepend="or" compareValue="" property="agent">
-				chinese_name = #agent#
-			</isNotEqual>
-			<isNotEqual prepend="or" compareValue="" property="agent">
-				member_no = #agent#
-			</isNotEqual>
-		</dynamic>	
-	</select>
-	
-	<select id="CHECK_AGENTMEMBER_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
-		select distinct member_no,chinese_name,ticket from CHECKIN 
-		<dynamic prepend="where">
-			<isNotEqual prepend="and" compareValue="" property="CHINESE_NAME">
-				agent = #CHINESE_NAME#
-			</isNotEqual>
-		</dynamic>
-	
-	</select>
-	
-	
 </sqlMap>

@@ -1,24 +1,5 @@
-/*
- * ----------------------------------------------------------------------------------------
-問題單號：Bug #942 - CHD0MA0950002 
-修改摘要：修正 getDays 計算方式
-更新版本：V9512
-修改人員：daniel                                
-修改日期：0951116  
-----------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------
-問題單號：Bug #826 - TPD0EC0950005
-修改摘要：修正 compareDate 計算方式
-更新版本：V9509
-修改人員：Richard
-修改日期：0951013
-----------------------------------------------------------------------------------------
-問題單號：Bug #826 - TPD0EC0950005
-修改摘要：新增 compareDateB(),除mills[2]為終止日期扣除起始日期,其餘與compareDate()均無異
-修改人員：balasom                                
-修改日期：95.08.14               
-更新版本：v9509
-----------------------------------------------------------------------------------------
+/**
+   @Author:James
 */
 package com.sertek.util;
 
@@ -326,25 +307,6 @@ public class util_date
  public String nowMilliTime() {
   return nowMilliTime(Calendar.getInstance());
  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1106,7 +1068,6 @@ end;{_date2str}
        return result_0;
    }
 
-  //2006.08.14 modified by balasom [Bug #826 - TPD0EC0950005]
   //新增 compareDateB(),除mills[2]為終止日期扣除起始日期,其餘與compareDate()均無異
   public String compareDateB(String Start_i,String End_i,int flag,int l) throws IOException
     {
@@ -1476,6 +1437,32 @@ try {
 		
 		return result;
 	}
+	/**
+	 * 日期加減20180430 -2個月-> 20180228
+	 * @param 
+	 * @return 西元八碼
+	 * @throws ParseException 
+	 */
+	@SuppressWarnings("static-access")
+	public String addDate(String date,int add_num,String unit) throws ParseException {		
+		SimpleDateFormat df=new SimpleDateFormat("yyyyMMdd");
+		Date datetmp = df.parse(date);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(datetmp);
+		switch(unit) {
+			case "date":
+				cal.add(cal.DATE, add_num);
+				break;
+			case "month":
+				cal.add(cal.MONTH, add_num);
+				break;
+			case "year":
+				cal.add(cal.YEAR, add_num);
+				break;			
+		}
+		return df.format(cal.getTime()).toString();
+	}
+	
 	
 //	public String getDayOfWeek(String cdate) {
 //		String result = "";

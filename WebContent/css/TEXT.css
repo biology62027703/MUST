@@ -14,7 +14,7 @@
    
 }  
 .contact_form label {  
-    width:80px;
+    /*width:80px;*/
     margin-top: 3px;  
     display:inline-block;  
     float:left;  
@@ -118,4 +118,68 @@ button.submit:active {
     -moz-box-shadow: 0 0 10px 5px #356b0b inset;  
     -ms-box-shadow: 0 0 10px 5px #356b0b inset;  
     -o-box-shadow: 0 0 10px 5px #356b0b inset;  
-}  
+}
+  
+input[type="radio"] {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	display: block;
+	float: left;
+	margin-right: -2em;
+	opacity: 0;
+	width: 0.6em;
+	z-index: -1;
+}
+
+input[type="radio"] + label {
+	text-decoration: none;
+	color: #585858;
+	cursor: pointer;
+	display: inline-block;
+
+	padding-left: 2.55em;
+	padding-right: 0.75em;
+	position: relative;
+}
+
+input[type="radio"] + label:before {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-family: FontAwesome;
+	font-style: normal;
+
+	text-transform: none !important;
+}
+
+input[type="radio"] + label:before {
+	border-radius: 4px;
+	border: solid 1px #c9c9c9;
+	content: '';
+	display: inline-block;
+	height: 1.8em;
+	left: 0;
+	line-height: 1.725em;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 1.8em;
+}
+
+input[type="radio"]:checked + label:before {
+	background: #585858;
+	border-color: #585858;
+	color: #ffffff;
+	
+}
+
+input[type="radio"]:focus + label:before {
+	border-color: #f2849e;
+	box-shadow: 0 0 0 1px #f2849e;
+}
+
+
+input[type="radio"] + label:before {
+	border-radius: 100%;
+}

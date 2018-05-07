@@ -19,7 +19,8 @@
 				<prop key="UPLOADFILES.do">UploadFilesController</prop>		
 				<prop key="LAL/LAL_INSERT_POST.do">LAL_INSERT_POSTController</prop>	
 				<prop key="LAL/LAL_END_REPORT.do">LAL_END_REPORTController</prop>
-				<prop key="LICENSE.do">LICENSEController</prop>	
+				<prop key="LAL/LAL_CONTRACT_EXTENSIONController.do">LAL_CONTRACT_EXTENSIONController</prop>				
+				<prop key="/LICENSE/LICENSE.do">LICENSEController</prop>	
 				<prop key="SEND_STATEMENT_EMAIL.do">SEND_STATEMENT_EMAILController</prop>
 				<!-- <prop key="DIVA/DIVA.do">DIVAController</prop> -->									
 			</props>
@@ -68,6 +69,10 @@
 	</bean>
 	
 	<bean id="LAL_END_REPORTController" class="com.sertek.lal.LAL_END_REPORTController" >
+		<property name="sqlDBUtility_51" ref="sqlDBUtility_51" />
+	</bean>
+	
+	<bean id="LAL_CONTRACT_EXTENSIONController" class="com.sertek.lal.LAL_CONTRACT_EXTENSIONController" >
 		<property name="sqlDBUtility_51" ref="sqlDBUtility_51" />
 	</bean>
 	

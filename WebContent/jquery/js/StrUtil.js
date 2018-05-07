@@ -99,7 +99,6 @@ StrUtil.prototype.getMappingData = function(datamapping, map, key) {
 }
 
 StrUtil.prototype.tranPattern = function(pattern, para, datamapping) {
-
 	while( getKey(pattern) != "" ){
 		var Key = getKey(pattern);
 		if( Key.indexOf(":")==-1 && Key.indexOf("-")==-1 )

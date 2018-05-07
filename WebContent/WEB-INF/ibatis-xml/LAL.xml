@@ -156,6 +156,266 @@
 		)
 		</dynamic>
 	</update>
+	<update id="INSERT_CASE" parameterClass="java.util.HashMap">
+		insert into LAL.dbo.[CASE] 
+		<dynamic prepend="(" >			
+			<isNotNull  prepend="," property="case_no">
+				case_no
+			</isNotNull>
+			<isNotNull  prepend="," property="user_no">
+				user_no
+			</isNotNull>
+			<isNotNull  prepend="," property="case_sname">
+				case_sname
+			</isNotNull>
+			<isNotNull  prepend="," property="case_kdate">
+				case_kdate
+			</isNotNull>
+						
+		)
+		</dynamic>
+		values
+		<dynamic prepend="(" >			
+			<isNotNull  prepend="," property="case_no">
+				#case_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_no">
+				#user_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="case_sname">
+				#case_sname#
+			</isNotNull>
+			<isNotNull  prepend="," property="case_kdate">
+				#case_kdate#
+			</isNotNull>
+		)
+		</dynamic>
+	</update>
+	
+	<update id="INSERT_CONTRACT" parameterClass="java.util.HashMap">
+		insert into LAL.dbo.[CONTRACT] 
+		<dynamic prepend="(" >			
+			<isNotNull  prepend="," property="cont_name">
+				cont_name
+			</isNotNull>
+			<isNotNull  prepend="," property="user_no">
+				user_no
+			</isNotNull>
+			<isNotNull  prepend="," property="case_no">
+				case_no
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_no">
+				cont_no
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_cname">
+				cont_cname
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_rname">
+				cont_rname
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_kdate">
+				cont_kdate
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_bdate">
+				cont_bdate
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_edate">
+				cont_edate
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_sdate">
+				cont_sdate
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_cdate">
+				cont_cdate
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_rtotal">
+				cont_rtotal
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_itotal">
+				cont_itotal
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_ytotal">
+				cont_ytotal
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_rprice">
+				cont_rprice
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_rmethod">
+				cont_rmethod
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_rstage">
+				cont_rstage
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_type">
+				cont_type
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_atype">
+				cont_atype
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_note">
+				cont_note
+			</isNotNull>			
+		)
+		</dynamic>
+		values
+		<dynamic prepend="(" >			
+			<isNotNull  prepend="," property="cont_name">
+				#cont_name#
+			</isNotNull>
+			<isNotNull  prepend="," property="user_no">
+				#user_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="case_no">
+				#case_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_no">
+				#cont_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_cname">
+				#cont_cname#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_rname">
+				#cont_rname#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_kdate">
+				#cont_kdate#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_bdate">
+				#cont_bdate#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_edate">
+				#cont_edate#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_sdate">
+				#cont_sdate#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_cdate">
+				#cont_cdate#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_rtotal">
+				#cont_rtotal#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_itotal">
+				#cont_itotal#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_ytotal">
+				#cont_ytotal#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_rprice">
+				#cont_rprice#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_rmethod">
+				#cont_rmethod#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_rstage">
+				#cont_rstage#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_type">
+				#cont_type#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_atype">
+				#cont_atype#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_note">
+				#cont_note#
+			</isNotNull>
+		)
+		</dynamic>
+	</update>
+	
+	<update id="INSERT_RECEIVE" parameterClass="java.util.HashMap">
+		insert into LAL.dbo.[RECEIVE] 
+		<dynamic prepend="(" >			
+			<isNotNull  prepend="," property="cont_no">
+				cont_no
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_seqno">
+				rec_seqno
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_stageno">
+				rec_stageno
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_date">
+				rec_date
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_price">
+				rec_price
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_dprice">
+				rec_dprice
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_duty">
+				rec_duty
+			</isNotNull>						
+		)
+		</dynamic>
+		values
+		<dynamic prepend="(" >			
+			<isNotNull  prepend="," property="cont_no">
+				#cont_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_seqno">
+				#rec_seqno#
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_stageno">
+				#rec_stageno#
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_date">
+				#rec_date#
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_price">
+				#rec_price#
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_dprice">
+				#rec_dprice#
+			</isNotNull>
+			<isNotNull  prepend="," property="rec_duty">
+				#rec_duty#
+			</isNotNull>
+		)
+		</dynamic>
+	</update>
+	
+	<update id="INSERT_MACHINENO" parameterClass="java.util.HashMap">
+		insert into LAL.dbo.[MACHINENO] 
+		<dynamic prepend="(" >			
+			<isNotNull  prepend="," property="cont_no">
+				cont_no
+			</isNotNull>
+			<isNotNull  prepend="," property="mac_seqno">
+				mac_seqno
+			</isNotNull>
+			<isNotNull  prepend="," property="mac_kdate">
+				mac_kdate
+			</isNotNull>
+			<isNotNull  prepend="," property="mac_name">
+				mac_name
+			</isNotNull>
+			<isNotNull  prepend="," property="mac_no">
+				mac_no
+			</isNotNull>		
+		)
+		</dynamic>
+		values
+		<dynamic prepend="(" >			
+			<isNotNull  prepend="," property="cont_no">
+				#cont_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="mac_seqno">
+				#mac_seqno#
+			</isNotNull>
+			<isNotNull  prepend="," property="mac_kdate">
+				#mac_kdate#
+			</isNotNull>
+			<isNotNull  prepend="," property="mac_name">
+				#mac_name#
+			</isNotNull>
+			<isNotNull  prepend="," property="mac_no">
+				#mac_no#
+			</isNotNull>
+		)
+		</dynamic>
+	</update>
 	
 	<update id="POST_INSERT" parameterClass="java.util.HashMap">
 		insert into LAL.dbo.[POST]  
@@ -233,8 +493,96 @@
 		)
 		</dynamic>
 	</update>
-	
-	
+	<update id="DELETE_CONTRACT" parameterClass="java.util.HashMap">
+		delete from LAL.dbo.[contract] where cont_no=#cont_no#
+	</update>
+	<update id="DELETE_RECEIVE" parameterClass="java.util.HashMap">
+		delete from LAL.dbo.[RECEIVE] where cont_no=#cont_no#
+	</update>
+	<update id="DELETE_MACHINENO" parameterClass="java.util.HashMap">
+		delete from LAL.dbo.[MACHINENO] where cont_no=#cont_no#
+	</update>
+	<update id="DELETE_BUSNO" parameterClass="java.util.HashMap">
+		delete from LAL.dbo.[BUSNO] where cont_no=#cont_no#
+	</update>
+	<!--以下是續約用-->
+	<update id="CONTRACT_EXTENSION" parameterClass="java.util.HashMap">
+		insert into LAL.dbo.[contract] 
+			([USER_NO]
+			      ,[CASE_NO]
+			      ,[CONT_NO]
+			      ,[CONT_CNAME]
+			      ,[CONT_RNAME]
+			      ,[CONT_NAME]
+			      ,[CONT_RMETHOD]
+			      ,[CONT_RSTAGE]
+			      ,[CONT_RPRICE]
+			      ,[CONT_YTOTAL]
+			      ,[CONT_ITOTAL]
+			      ,[CONT_RTOTAL]
+			      ,[CONT_SDATE]
+			      ,[CONT_BDATE]
+			      ,[CONT_EDATE]
+			      ,[CONT_CDATE]
+			      ,[CONT_TYPE]
+			      ,[CONT_ATYPE]
+			      ,[CONT_ANAME]
+			      ,[CONT_ATIME]
+			      ,[CONT_APLACE]
+			      ,[CONT_KDATE])
+			values 
+			(		#USER_NO#
+				  ,#CASE_NO#
+			      ,#CONT_NO#
+			      ,#CONT_CNAME#
+			      ,#CONT_RNAME#
+			      ,#CONT_NAME#
+			      ,#CONT_RMETHOD#
+			      ,#CONT_RSTAGE#
+			      ,#CONT_RPRICE#
+			      ,#CONT_YTOTAL#
+			      ,#CONT_ITOTAL#
+			      ,#CONT_RTOTAL#
+			      ,#CONT_SDATE#
+			      ,#CONT_BDATE#
+			      ,#CONT_EDATE#
+			      ,#CONT_CDATE#
+			      ,#CONT_TYPE#
+			      ,#CONT_ATYPE#
+			      ,#CONT_ANAME#
+			      ,#CONT_ATIME#
+			      ,#CONT_APLACE#
+			      ,#CONT_KDATE#
+			)
+	</update>
+	<update id="RECEIVE_EXTENSION" parameterClass="java.util.HashMap">
+		insert into LAL.dbo.[receive] (cont_no,rec_seqno,rec_stageno,rec_date,rec_price,rec_dprice,rec_duty)			
+			(
+			select #cont_no#,rec_seqno, case when rec_stageno is null or rec_stageno='0' then '1' else rec_stageno end as rec_stageno ,#today#,rec_price,rec_dprice,rec_duty 
+				from LAL.dbo.[receive]
+				where cont_no=#LASTcont_no#
+			)
+	</update>
+	<update id="MACHINENO_EXTENSION" parameterClass="java.util.HashMap">
+		insert into LAL.dbo.[MACHINENO] 
+			(
+			cont_no,mac_seqno,mac_kdate,mac_name,mac_no
+			)		
+			(
+			select #cont_no#,mac_seqno,#today#,mac_name,mac_no
+				from LAL.dbo.[MACHINENO]
+				where cont_no=#LASTcont_no#
+			)
+	</update>
+	<update id="BUSNO_EXTENSION" parameterClass="java.util.HashMap">
+		insert into LAL.dbo.[BUSNO] (cont_no,bus_seqno,bus_no,bus_Kdate
+			(
+			select #cont_no#,bus_seqno,bus_no,#today#
+				from LAL.dbo.[BUSNO]
+				where cont_no=#LASTcont_no#
+			)
+	</update>
+	<!--續約用結束-->
 	<select id="POST_EXCEL_FILE_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
 		select CASE_NO
 		      ,POST_TYPE
@@ -256,72 +604,16 @@
 		SELECT MAX(POST_AUTO_NO) as POST_AUTO_NO FROM LAL.dbo.POST
 	</select>
 	
-	<select id="CHECK_AGENTMEMBER_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
-		select distinct member_no,chinese_name,ticket from CHECKIN 
-		<dynamic prepend="where">
-			<isNotEqual prepend="and" compareValue="" property="CHINESE_NAME">
-				agent = #CHINESE_NAME#
-			</isNotEqual>
-		</dynamic>
-	
-	</select>
-	
-	<select id="CHECKIN_QUERY" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
-		select distinct member_no,chinese_name,ticket,situation,agent from CHECKIN
-		<dynamic prepend="where">
-			<isNotEqual prepend="and" compareValue="" property="chinese_name">
-				chinese_name = #chinese_name#
-			</isNotEqual>
-			<isNotEqual prepend="and" compareValue="" property="member_no">
-				member_no = #member_no#
-			</isNotEqual>
-		</dynamic>				
-	</select>
-	
-	
-	<select id="QUERY_EXTRA_EMAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
-		select distinct email,email_kind from EXTRA_EMAIL
-		where email_kind like '%1%' or email_kind like '%4%'
-	</select>
-	
-	<select id="QUERY_EMAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
-		select distinct private_email,cust_type from MEMBER
-		where cust_status='Y'
-				and private_email &lt;&gt; ''
-				order by private_email desc
-	</select>
-	
-	<select id="QUERY_EMAIL_DETAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
-		select distinct 
-		   ser_no
-	      ,cust_name
-	      ,cust_type
-	      ,cust_nickname
-	      ,email
-	      ,private_email
-	      ,addr_no
-	      ,addr_desc
-	      ,phone
-	      ,fax
-	      ,cell_phone
-	      ,cust_url
-	      ,cust_memo
-	      ,cust_status
-	      ,ip_base_no
-	      ,create_time
-	      ,modify_time
-	      ,member_no
-      	from MEMBER 
-		where cust_status='Y'
-				and private_email &lt;&gt; ''				
-				order by private_email desc
-			
-	</select>
-	
 	<select id="QUERY_USER" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
 	  	select user_no 
 	  	from LAL.dbo.[USER] 
 	  		where USER_ADDR=#user_addr# and user_class=#user_class# and user_cname=#user_cname#
+	</select>
+	
+	<select id="QUERY_LOGIN_USER" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+	  	select login_name 
+	  	from LAL.dbo.[LOGIN_USER] 
+	  		where login_id=#login_id# 
 	</select>
 	
 	<select id="QUERY_MAX_USERNO" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
@@ -330,4 +622,41 @@
 	  		WHERE user_class=#user_class# order by user_no desc
 	</select>
 	
+	<select id="QUERY_MAX_CASE" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+	  	select top 1 case_no from LAL.dbo.[case] 
+	  		<dynamic prepend="where">
+	  			<isNotEqual prepend="and" compareValue="" property="case_notitle">
+					case_no like #case_notitle# + '%'
+				</isNotEqual>
+	  		</dynamic>
+	  		 order by case_no desc
+	</select>
+	
+	<select id="QUERY_MAX_CONT" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+	  	select top 1 cont_no from LAL.dbo.[contract] 
+	  		<dynamic prepend="where">
+	  			<isNotEqual prepend="and" compareValue="" property="cont_notitle">
+					cont_no like #cont_notitle# + '%'
+				</isNotEqual>
+	  		</dynamic>
+	  		 order by cont_no desc
+	</select>
+	
+	<!--以下是續約用 -->
+	<select id="CHECK_CONT_NO" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+	  	select * from LAL.dbo.[contract] 
+	  		<dynamic prepend="where">
+	  			<isNotEqual prepend="and" compareValue="" property="user_no">
+					user_no=#user_no#
+				</isNotEqual>
+				<isNotEqual prepend="and" compareValue="" property="year">
+					(cont_no like '%L' + #year# + '%' or cont_no like '%P' + #year# + '%')
+				</isNotEqual>
+	  		</dynamic>
+	</select>
+	<select id="CHECK_CONT_NO_BY_CASE_NO" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+	  	select * from LAL.dbo.[contract] 
+				where case_no=#case_no#
+	</select>
+	<!--是續約用結束 -->
 </sqlMap>

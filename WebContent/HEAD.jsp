@@ -4,7 +4,7 @@
 	<title>MÜST內網</title>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="apple-touch-icon" sizes="57×57" href="images/mustlogo.png"> 
+	<link rel="apple-touch-icon" sizes="57×57" href="<%=request.getContextPath()%>/images/mustlogo.png"> 
 	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/main.css" />
 	<link rel="icon" type="<%=request.getContextPath()%>/image/png" sizes="16x16" href="<%=request.getContextPath()%>/images/logo.png">
@@ -17,7 +17,7 @@
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 	<style>
 	body { 
-	    background-image: url('images/image19201080.jpg');
+	    background-image: url('<%=request.getContextPath()%>/images/image19201080.jpg');
 	    background-size: cover;
 	    background-repeat: no-repeat;
 	    background-attachment: fixed;

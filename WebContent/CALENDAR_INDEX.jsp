@@ -120,10 +120,10 @@
 			}
 		}); */
 		
-		$(":button[class='button']").click(function(){
+		/* $(":button[class='button']").click(function(){
 			alert(0);
 			alert(this.value);
-		})
+		}) */
 		
 	});
 

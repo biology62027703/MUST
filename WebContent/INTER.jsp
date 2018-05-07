@@ -38,6 +38,7 @@ if(ip.indexOf("192.168.")>-1){
 					<p><a href="https://www.must.org.tw/">MÜST官網</a></p>	
 					<p class="inter_view"><a href="https://www.must.org.tw/admin/INDEX.aspx">MÜST官網後台</a></p>
 					<p class="inter_view"><a href="http://list.must.org.tw/list_login.asp">清單系統</a></p>
+					<p class="inter_view"><a href="http://google-list.must.org.tw/list_login.asp">GOOGLE清單系統</a></p>
 					<p class="inter_view"><a href="http://win2k.must.org.tw/mis1/lal/lal_login.asp">法務暨授權業務管理資訊系統</a></p>
 					<p><a href="https://msa.must.org.tw">WEB MAIL</a></p>									
 				</div>

@@ -5,13 +5,14 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 	<%@include file="../HEAD.jsp"%>	
-	<%@include file="FANCYBOX_REL.jsp"%>
-	<%@include file="COOKIE_URL.jsp"%>
+	<%@include file="../FANCYBOX_REL.jsp"%>
+	<%@include file="../COOKIE_URL.jsp"%>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/jquery/js/jquery.metadata.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/jquery/js/json2.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/jquery/js/FormUtil.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/jquery/js/RenderUtil.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/jquery/js/StrUtil.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/script/DATAMAPPING.js"></script>
 	<script src="<%=request.getContextPath()%>/sweetalert-master/dist/sweetalert.min.js"></script>
 	<%@include file="../utility/tablesorder.jsp"%>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/sweetalert-master/dist/sweetalert.css">
@@ -36,7 +37,7 @@
 								"<thead>" +
 									"<tr>" +
 										"<th style='width:5%'>序號</th>"+
-										"<th style='width:15%'>線上申請流水號</th>"+
+										"<th style='width:15%'>線上申請流水號<BR>申請類型</th>"+
 										"<th style='width:30%'>營業場所名稱</th>"+
 										"<th style='width:10%'>負責人</th>"+
 										"<th style='width:15%'>營業場所電話</th>"+
@@ -51,7 +52,7 @@
 					if( jsonData.data.length==0 ) {
 						$tbody.html("<tr><td colspan='6'>查無資料</td></tr>"); 
 					}else{
-						pattern = "<td>@{DOC_NO}</td>";
+						pattern = "<td>@{DOC_NO}<BR><font color='red'>@{NATURE-nature}</font></td>";
 						pattern+= "<td>@{USER_CNAME}</td>";
 						pattern+= "<td>@{USER_COPMAN}</td>";
 						pattern+= "<td>@{USER_TEL}</td>";
@@ -59,13 +60,13 @@
 						for(var i=0;i<jsonData.data.length;i++) {
 							$tr = $("<tr id='go' class='fancybox' doc_no='"+jsonData.data[i].DOC_NO+"' style='cursor:pointer'></tr>").data("json", jsonData.data[i]).appendTo($tbody);					
 							$tr.append("<td>"+(i+1)+"</td>");		
-							$tr.append(strUtil.tranPattern(pattern, jsonData.data[i], ""));
+							$tr.append(strUtil.tranPattern(pattern, jsonData.data[i], datamapping));
 						}
 						set_table();
 					}	
 					
 					$("tr[id='go']").on("click",function(){
-						window.location.href="<%=request.getContextPath()%>/LICENSE_CONFIRM.jsp?doc_no="+$(this).attr("doc_no");
+						window.location.href="<%=request.getContextPath()%>/LICENSE/LICENSE_CONFIRM.jsp?doc_no="+$(this).attr("doc_no");
 					})
 				}
 			});

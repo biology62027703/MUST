@@ -5,6 +5,7 @@
 <%
 CheckObject Check = new CheckObject();
 String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
+String edit=(String)Check.checkNull(request.getParameter("edit"), "") ;
 %>
 <html>
 <head>
@@ -32,14 +33,14 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 <script type="text/javascript" src="<%=request.getContextPath()%>/jquery/js/jquery.tablesorter.widgets.min.js"></script>
 <script src="<%=request.getContextPath()%>/sweetalert-master/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/sweetalert-master/dist/sweetalert.css">
-<%@include file="FANCYBOX_REL.jsp"%>
+<%@include file="../FANCYBOX_REL.jsp"%>
 <%@include file="../utility/tablesorder.jsp"%>
-<%@include file="COOKIE_URL.jsp"%>
+<%@include file="../COOKIE_URL.jsp"%>
 <script>
 	$(document).ready(function(){
 		var doc_no = "<%=doc_no%>";
 		if(!doc_no==""){
-			formUtil.submitTo({
+			formUtil.submitTo({ 
 				url: "LICENSE.do?action=doQueryDetail",
 				async: true,
 				formObj: $(form),
@@ -75,6 +76,11 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 						$("input[name='user_class']").val(jsonData.data[i].USER_CLASS);						
 						$("input[name='kind']").val(jsonData.data[i].KIND);
 						$("#title_name").html(jsonData.data[i].KIND);
+						$("input[name='nature']").each(function(){							
+							if($(this).val()==jsonData.data[i].NATURE) {
+								$(this).prop("checked",true);
+							}
+						});
 					}
 					
 				}
@@ -102,6 +108,15 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 				$( "input[name^='cont_']").each(function(){
 					$(this).prop("disabled",false);
 				});
+				//新客戶、新增機台、舊客戶續約可修正
+				$( "input[name='nature']").each(function(){
+					$(this).prop("disabled",false);
+				});
+				
+				//alert($("input[name='nature']:checked").val());
+				
+				$("input[name='user_no']").prop("disabled",false);
+
 				$("#msg").append(
 					"<textarea name='msg' id='message' cols='40' rows='6' placeholder='退回原因(同意如有改授權期間也建議填寫)'  ></textarea>"	
 				)
@@ -127,20 +142,43 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 						
 					}
 				});
-				$("button[name='submit']").on("click",function(){					
+				$("button[name='submit']").on("click",function(){
+					if($("input[name='nature']").val()==""){
+						alert("請選擇客戶類別!");
+						check = false;
+					}
+					if($("input[name='nature']:checked").val()=='2'||$("input[name='nature']:checked").val()=='3') {
+						if($("input[name='user_no']").val().trim()=='') {
+							swal("", "請填寫客戶編號", "info");
+							return false;
+						}
+					}
+					if($("input[name='nature']:checked").val()=="1"){
+						if($("input[name='user_no']").val().trim()!='') {
+							swal("", "新客戶請勿填寫客戶編號", "info");
+							return false;
+						}
+					}
 					$("input[name='status']").val("2");
+					
 					formUtil.submitTo({
 						url: "LICENSE.do?action=doUpdate",
 						async: true,
 						formObj: $(form),
-						onSuccess: function(jsonData){
-							
+						onSuccess: function(jsonData){							
 							swal("", jsonData.data.MSG , "info");
-
 							setTimeout(function(){ window.location.href="LICENSE_LIST.jsp" }, 2000);								
 						}
 					});
 				});
+				
+				if("<%=edit%>"=="none") {
+
+					$(":input").each(function(){
+						$(this).prop("disabled",true);
+					});
+
+				}
 			}, 200);
 			
 		}
@@ -154,6 +192,21 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 <div  style="width:87%;margin: 0 auto;background-color:#FFFFFF;font-size:14px;">			
 	 <div align="center"><font size="5"><b><BR><font id="title_name">電腦伴唱機音樂著作公開演出申請表</font></b></font></div>
  		<div style="margin-left:5%;margin-top:60px">
+ 		客戶類別:
+ 		<div>
+			<input type="radio" id="demo-priority-low" name="nature" value="1" >
+			<label for="demo-priority-low">新客戶</label>
+		</div>
+		<div>
+			<input type="radio" id="demo-priority-normal" name="nature" value="2" >
+			<label for="demo-priority-normal">舊客戶(續約)</label>
+		</div>
+		<div>
+			<input type="radio" id="demo-priority-high" name="nature" value="3" >
+			<label for="demo-priority-high">舊客戶(新增機台)</label>
+		</div>
+		<br>
+		<br>
  		<h2>一、持證人或負責人資料：</h2>
  		<div style="margin-left:5%">
  			<div class="content">
@@ -202,6 +255,10 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 	 				</tr>
 	 				
  				</table>
+ 			</div>
+ 			<div class="content">
+ 				<font>客戶編號：</font>
+ 				<input type="text" name="user_no" style="width:40%" >
  			</div>
  			<div id="msg" name="msg" class="content">
  				

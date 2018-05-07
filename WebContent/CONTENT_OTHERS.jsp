@@ -15,7 +15,8 @@
 			<div id="main">
 				<div class="inner">
 					<h1>其他相關需求</h1>
-					<p><a class="fancybox" href="http://192.168.1.51/song/song_frame.asp">之前51匯入資料相關http://192.168.1.51/song/song_frame.asp</a></p>											
+					<p><a class="fancybox" href="http://192.168.1.51/song/song_frame.asp">之前51匯入資料相關http://192.168.1.51/song/song_frame.asp</a></p>	
+					<p><a class="fancybox" href="/post/POST_RECORD.jsp">函文記錄</a></p>										
 				</div>
 			</div>
 		</div>

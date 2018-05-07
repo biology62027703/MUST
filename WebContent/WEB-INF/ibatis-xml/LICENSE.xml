@@ -74,6 +74,12 @@
 			<isNotNull  prepend="," property="kind">
 				kind
 			</isNotNull>
+			<isNotNull  prepend="," property="nature">
+				nature
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_Kind">
+				cont_Kind
+			</isNotNull>
 		)
 		</dynamic>
 		values
@@ -146,6 +152,12 @@
 			</isNotNull>
 			<isNotNull  prepend="," property="kind">
 				#kind#
+			</isNotNull>
+			<isNotNull  prepend="," property="nature">
+				#nature#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_Kind">
+				cont_Kind
 			</isNotNull>
 		)
 		</dynamic>
@@ -256,6 +268,12 @@
 			<isNotNull  prepend="," property="kind">
 				kind=#kind#
 			</isNotNull>
+			<isNotNull  prepend="," property="nature">
+				nature=#nature#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_Kind">
+				cont_Kind
+			</isNotNull>
 			where doc_no=#doc_no#
 	</update>
 	
@@ -281,6 +299,12 @@
 			</isNotNull>
 			<isNotNull  prepend="," property="user_no">
 				user_no=#user_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="case_no">
+				case_no=#case_no#
+			</isNotNull>
+			<isNotNull  prepend="," property="cont_no">
+				cont_no=#cont_no#
 			</isNotNull>				
 			where doc_no=#doc_no#
 	</update>
@@ -299,13 +323,28 @@
 	</select>
 	
 	<select id="QUERY_LICENSE_MAIN" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
-		select doc_no,user_cname,user_copman,user_tel,user_copno,user_no,cont_bdate,cont_edate,rec_dprice from license_main 
+		select doc_no,user_cname,user_title,user_copman,user_tel,user_copno,user_no,cont_bdate,cont_edate,rec_dprice,nature,kind,case_no,cont_no from license_main 
 		<dynamic prepend="where" >			
 			<isNotNull  prepend="and" property="status">
 				status=#status#
 			</isNotNull>
 		</dynamic>
 			order by doc_no 
+	</select>
+		
+	<select id="CHECK_LICENSE_MAIN" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+		select user_no from license_main 
+			<dynamic prepend="where" >	
+			<isNotNull  prepend="and" property="user_no">
+				user_no=#user_no#
+			</isNotNull>
+			<isNotNull  prepend="and" property="cont_bdate">
+				cont_bdate=#cont_bdate#
+			</isNotNull>
+			<isNotNull  prepend="and" property="cont_edate">
+				cont_edate=#cont_edate#
+			</isNotNull>	
+			</dynamic>
 	</select>
 	
 	<select id="QUERY_LICENSE_MAIN_DETAIL" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
@@ -333,6 +372,7 @@
 		      ,status
 		      ,user_class
 		      ,kind
+		      ,nature
 		  FROM LICENSE.dbo.LICENSE_MAIN
 			where DOC_NO=#doc_no#
 			

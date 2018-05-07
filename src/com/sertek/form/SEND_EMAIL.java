@@ -1,24 +1,20 @@
 package com.sertek.form;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Properties;
-import java.util.Vector;
-
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.servlet.ServletException;
 
-import com.sertek.db.DBUtility;
-
-
 public class SEND_EMAIL extends BaseAbstractCommandController{
 
-	String mailserver = "192.168.1.19";
+	final String mailserver = "192.168.1.19";
+	final String emailAcct = "member";	
+	final String emailPwd = "";
+	final String emailauth = "1" ;	
+	//final String emailPwd = "G16kHU4vo";
 	String fromName="MUST會員通知";
 	String from = "member@must.org.tw";
 	//String recipient = "james.huang@must.org.tw,jamesaaa00205@gmail.com,william.huang@must.org.tw";
@@ -26,10 +22,8 @@ public class SEND_EMAIL extends BaseAbstractCommandController{
 	String subject = "";
 	StringBuffer htmlCode ;
 	//1為需驗證 0為不需驗證
-	//final String emailPwd = "G16kHU4vo";
-	final String emailPwd = "";
-	final String emailauth = "1" ;
-	final String emailAcct = "member";	
+	
+	
 	
 	SEND_EMAIL(String from,String fromName,String recipient,String subject,StringBuffer htmlCode ) throws IOException, ServletException, SQLException {
 		this.recipient=recipient;
@@ -44,8 +38,7 @@ public class SEND_EMAIL extends BaseAbstractCommandController{
 		//type="Nmust";
 		InternetAddress[] address = null;
 		Session mailSession=null;	
-		try {
-			
+		try {			
 		  	Properties props = new Properties(); 
 		  	props.put("mail.host", mailserver);
 			if("1".equals(emailauth)){

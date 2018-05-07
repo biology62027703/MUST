@@ -28,7 +28,7 @@ $(document).ready(function(){
 	if(check=="Y"){
 		
 	} else {
-		window.location.href="LOGIN.jsp?url="+url;
+		window.location.href="<%=request.getContextPath()%>/LOGIN.jsp?url="+url;
 	}
 });
 </script>

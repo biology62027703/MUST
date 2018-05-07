@@ -3,15 +3,18 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
-CheckObject Check = new CheckObject();
-String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
+
 %>
 <html>
 <head>
 <title>MÜST線上授權</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
+<meta name="keywords" content="MUST線上授權,線上申請授權,MUST申請授權,申請授權">
+<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="description" content="MUST線上授權服務" />
+<meta name="author" content="James">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mustweb/base.css" type="text/css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mustweb/style.css" type="text/css">
 <link rel="icon" type="<%=request.getContextPath()%>/image/png" sizes="16x16" href="<%=request.getContextPath()%>/images/license_logo.PNG">
@@ -32,88 +35,12 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 <script type="text/javascript" src="<%=request.getContextPath()%>/jquery/js/jquery.tablesorter.widgets.min.js"></script>
 <script src="<%=request.getContextPath()%>/sweetalert-master/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/sweetalert-master/dist/sweetalert.css">
-
+<%@include file="../FANCYBOX_REL.jsp"%>
 <script>
-	var status="";
-	$(document).ready(function(){	
-		var doc_no="<%=doc_no%>";
-		if(!doc_no==""){
-			formUtil.submitTo({
-				url: "LICENSE.do?action=doQueryDetail",
-				async: false,
-				formObj: $(form),
-				onSuccess: function(jsonData){
-					for(i=0;i<jsonData.data.length;i++){
-						$("input[name='user_copman']").val(jsonData.data[i].USER_COPMAN);
-						$("input[name='idno']").val(jsonData.data[i].IDNO);
-						$("input[name='cnt2_tel1_1']").val(jsonData.data[i].CNT2_TEL1.split("-")[0]);
-						$("input[name='cnt2_tel1_2']").val(jsonData.data[i].CNT2_TEL1.split("-")[1]);
-						$("input[name='cnt2_sphone']").val(jsonData.data[i].CNT2_SPHONE);
-						$("input[name='cnt2_fax_1']").val(jsonData.data[i].CNT2_FAX.split("-")[0]);
-						$("input[name='cnt2_fax_2']").val(jsonData.data[i].CNT2_FAX.split("-")[1]);
-						$("input[name='user_title']").val(jsonData.data[i].USER_TITLE);
-						$("input[name='user_cname']").val(jsonData.data[i].USER_CNAME);
-						$("input[name='user_copno']").val(jsonData.data[i].USER_COPNO);
-						$("input[name='user_tel_1']").val(jsonData.data[i].USER_TEL.split("-")[0]);
-						$("input[name='user_tel_2']").val(jsonData.data[i].USER_TEL.split("-")[1]);
-						$("input[name='user_fax_1']").val(jsonData.data[i].USER_FAX.split("-")[0]);
-						$("input[name='user_fax_2']").val(jsonData.data[i].USER_FAX.split("-")[1]);
-						$("input[name='user_post']").val(jsonData.data[i].USER_POST);
-						$("input[name='user_addr']").val(jsonData.data[i].USER_ADDR);
-						$("input[name='user_cpost']").val(jsonData.data[i].USER_CPOST);
-						$("input[name='user_caddr']").val(jsonData.data[i].USER_CADDR);
-						$("input[name='cnt1_name']").val(jsonData.data[i].CNT1_NAME);
-						$("input[name='cnt1_sphone']").val(jsonData.data[i].CNT1_SPHONE);
-						$("input[name='cnt1_email']").val(jsonData.data[i].CNT1_EMAIL);
-						$("input[name='cont_bdate_yy']").val(jsonData.data[i].CONT_BDATE.substring(0,4));
-						$("input[name='cont_bdate_mm']").val(jsonData.data[i].CONT_BDATE.substring(4,6));
-						$("input[name='cont_bdate_dd']").val(jsonData.data[i].CONT_BDATE.substring(6,8));
-						$("input[name='cont_edate_yy']").val(jsonData.data[i].CONT_EDATE.substring(0,4));
-						$("input[name='cont_edate_mm']").val(jsonData.data[i].CONT_EDATE.substring(4,6));
-						$("input[name='cont_edate_dd']").val(jsonData.data[i].CONT_EDATE.substring(6,8));
-						$("#kind").children().each(function(){
-							if($(this).val()==jsonData.data[i].KIND){
-								$(this).prop("selected",true);
-								changetitle($(this).val());
-							}
-						})
-						
-						status=jsonData.data[i].STATUS;
-					}
-					
-				}
-			});
-			setTimeout(function(){
-				formUtil.submitTo({
-					url: "LICENSE.do?action=doQueryMachine",
-					async: false,
-					formObj: $(form),
-					onSuccess: function(jsonData){
-						for(i=0;i<jsonData.data.length;i++){
-							$("#use_machine").append(
-							"<tr>"+
-		 						"<td><input type='text' name='factory' value='"+jsonData.data[i].FACTORY+"' ></td><td><input type='text' name='machine' value='"+jsonData.data[i].MACHINE+"' ></td>"+
-		 					"</tr>"		
-							)
-						}
-						if(status=="1") {
-							$(":input").each(function(){
-								$(this).prop("disabled",true);
-							});
-							swal("", "您的資料已送出無須再修改", "info");
-						}
-						if(status=="2") {			
-							$(":input").each(function(){
-								$(this).prop("disabled",true);
-							});
-							swal("", "您的線上申請授權(流水號:"+doc_no+")已通過", "info");
-						}
-					}
-				});				
-			}, 200);			
-			
-		}
-		
+	$(document).ready(function(){
+		$("a.fancybox").click(function(){
+			$("input[type='checkbox']").prop("disabled",false);
+		});
 		
 		$("button[name='add']").on("click",function(){
 			$("table[id='use_machine']").append(
@@ -132,8 +59,12 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 			$("input[name='user_caddr']").val($("input[name='user_addr']").val());
 			$("input[name='user_cpost']").val($("input[name='user_post']").val());
 		});
+		$("button[name='title']").on("click",function(){
+			$("input[name='user_title']").val($("input[name='user_cname']").val());
+		});
 		
 		$("input[type='checkbox']").on("click",function(){
+			
 			if($("input[type='checkbox']").prop("checked")) {
 				$("button[name='submit']").prop("disabled",false);
 			} else {
@@ -141,7 +72,7 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 			}
 		})
 		//必填欄位驗證通過才會到這邊
-		$("#form").submit(function () {	
+		$("#form").submit(function () {
 			var check= true;
 			if(!$("input[name='user_fax_1']").val()==""||!$("input[name='user_fax_2']").val()=="") {
 				$("input[name^='user_fax_']").each(function(){
@@ -165,22 +96,46 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 				alert("授權起日>=授權迄日，請重新確認授權日期!");
 				check = false;
 			}
+			if($("input[name='nature']").val()==""){
+				alert("請選擇客戶類別!");
+				check = false;
+			}
 			if(check) {
 				formUtil.submitTo({
 					url: "LICENSE.do?action=doSave",
 					async: true,
 					formObj: $(form),
 					onSuccess: function(jsonData){
-						alert(jsonData.data.msg);
+						
 						if(jsonData.data.msg!=""){
 							alert(jsonData.data.msg);
 						} else {
-							$("input[type='text']").each(function(){
-								$(this).prop("disabled",true);
-							});
-							setTimeout(function(){
-								swal("", "修改完成，資料已送出。", "success");
-							}, 200);
+							swal({
+								  title: "資料已送出",
+								  text: "是否保留收件人或代辦、聯絡電話、EMAIL資料?",
+								  type: "warning",
+								  showCancelButton: true,
+								  confirmButtonColor: "#DD6B55",
+								  confirmButtonText: "確認",
+								  cancelButtonText: "取消",
+								  closeOnConfirm: false,
+								  closeOnCancel: false
+								},
+							function(isConfirm){
+								if (isConfirm) {
+									$("input[type='text']").each(function(){
+										if(!($(this).attr("name")=="cnt1_name"||$(this).attr("name")=="cnt1_sphone"||$(this).attr("name")=="cnt1_email")){
+											$(this).val("");
+										}
+									});
+									swal("", "資料保留成功", "success");
+								} else {
+									$("input[type='text']").each(function(){
+										$(this).val("");
+									});
+									swal("", "完成填寫", "success");
+								}
+							});	
 						}
 					}
 				});
@@ -202,25 +157,20 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 		});
 		$("#kind").change(function(){
 			$("#title_name").html($(this).val());
-			changetitle($(this).val());
-		})
-		
+			if($(this).val()=="電腦伴唱機音樂著作公開演出申請表") {
+				$("li[id='word']").html("本會電腦伴唱機使用報酬率每台每一年度(12個月)為新台幣伍仟元整(含稅後為伍仟貳佰伍拾元整)，實際應支付本會新台幣伍仟貳佰伍拾元整(含稅)，期滿後須再續約。新增機台請提出證明文件確立使用起始時間，再依照月份比例支付音樂授權費用。");
+			}
+			if($(this).val()=="電腦伴唱機(公益且無營利)音樂著作公開演出申請表") {
+				$("li[id='word']").html("本會為公益性等目的而利用電腦伴唱機且無涉及營利之使用報酬率每台每一年度(12個月)為新台幣叁仟貳佰元(含稅後為叁仟叁佰陸拾元整)，實際應支付本會新台幣叁仟叁佰陸拾元整(含稅)，期滿後須再續約。新增機台請提出證明文件確立使用起始時間，再依照月份比例支付音樂授權費用。");
+			}
+			if($(this).val()=="電腦伴唱機(文化教育)音樂著作公開演出申請表") {
+				$("li[id='word']").html("本會為文化、教育或其他公益性之目的而利用電腦伴唱機之使用報酬率每台每一年度(12個月)為新台幣肆仟元整(含稅後為肆仟貳佰元整)，實際應支付本會新台幣肆仟貳佰元整(含稅)，期滿後須再續約。新增機台請提出證明文件確立使用起始時間，再依照月份比例支付音樂授權費用。");
+			}
+		});
 	});
-	function changetitle(value){
-		$("#title_name").html(value);
-		if(value=="電腦伴唱機音樂著作公開演出申請表") {
-			$("li[id='word']").html("本會電腦伴唱機使用報酬率每台每一年度(12個月)為新台幣伍仟元整(含稅後為伍仟貳佰伍拾元整)，實際應支付本會新台幣伍仟貳佰伍拾元整(含稅)，期滿後須再續約。新增機台請提出證明文件確立使用起始時間，再依照月份比例支付音樂授權費用。");
-		}
-		if(value=="電腦伴唱機(公益且無營利)音樂著作公開演出申請表") {
-			$("li[id='word']").html("本會為公益性等目的而利用電腦伴唱機且無涉及營利之使用報酬率每台每一年度(12個月)為新台幣叁仟貳佰元(含稅後為叁仟叁佰陸拾元整)，實際應支付本會新台幣叁仟叁佰陸拾元整(含稅)，期滿後須再續約。新增機台請提出證明文件確立使用起始時間，再依照月份比例支付音樂授權費用。");
-		}
-		if(value=="電腦伴唱機(文化教育)音樂著作公開演出申請表") {
-			$("li[id='word']").html("本會為文化、教育或其他公益性之目的而利用電腦伴唱機之使用報酬率每台每一年度(12個月)為新台幣肆仟元整(含稅後為肆仟貳佰元整)，實際應支付本會新台幣肆仟貳佰元整(含稅)，期滿後須再續約。新增機台請提出證明文件確立使用起始時間，再依照月份比例支付音樂授權費用。");
-		}
-	}
+	
 	
 </script>
-<%@include file="FANCYBOX_REL.jsp"%>
 </head>
 
 <body text="#000000" leftmargin="0" topmargin="0" >
@@ -228,7 +178,24 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 <img src="<%=request.getContextPath()%>/images/banner.jpg" style="width:100%">
 <div  style="width:87%;margin: 0 auto;background-color:#FFFFFF;font-size:14px;">			
 	 		<div align="center"><font size="5"><b><BR><font id="title_name">電腦伴唱機音樂著作公開演出申請表</font></b></font></div>
-	 		<div style="margin-left:5%;margin-top:60px">	 		
+	 		<div style="margin-left:5%;margin-top:60px">
+		 		<div  class="required_notification" style="margin-left:6%">
+		 		請選擇客戶類別:
+		 		<div>
+					<input type="radio" id="demo-priority-low" name="nature" value="1">
+					<label for="demo-priority-low">新客戶</label>
+				</div>
+				<div>
+					<input type="radio" id="demo-priority-normal" name="nature" value="2">
+					<label for="demo-priority-normal">舊客戶(續約)</label>
+				</div>
+				<div>
+					<input type="radio" id="demo-priority-high" name="nature" value="3">
+					<label for="demo-priority-high">舊客戶(新增機台)</label>
+				</div>	
+			</div>
+			<br>
+			<br> 		
 			<div  class="required_notification" style="margin-left:6%">
 				請選擇類型:
 		 		<select id="kind" name="kind">
@@ -254,26 +221,26 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
           	<div style="margin-left:5%">
 	 			<div class="content">
 	 				<font class="required_notification">營業場所名稱：</font>  <input type="text" name="user_cname" style="width:40%" maxlength="60" required />  
-	 				&nbsp&nbsp <font class="required_notification">統編：</font> <input type="text" maxlength="8" style="width:16%"  name="user_copno" required />(若無統編請填無)   
+	 				&nbsp&nbsp <font class="required_notification">統編：</font> <input type="text" maxlength="8" style="width:16%"  name="user_copno" required />(若無統編請填無)    
 	 			</div>
 	 			<div class="content">
 	 				<font class="required_notification">營業場所電話：&nbsp</font><input type="text" name="user_tel_1" placeholder="" pattern="\d*" maxlength ="3" style="width:6%" required /> - <input type="text" name="user_tel_2" placeholder="" maxlength="8" style="width:16%" pattern="\d*" required />
         			&nbsp&nbsp傳真:&nbsp<input type="text" name="user_fax_1" placeholder="" pattern="\d*" maxlength ="3" size='3'/> - <input type="text" name="user_fax_2" placeholder="" maxlength="8" style="width:16%" pattern="\d*" />(性質：餐廳、釣蝦場、卡拉OK......)  		            
 	 			</div>
 	 			<div class="content">
-	 				<font class="required_notification">發票抬頭：&nbsp</font><input type="text" name="user_title" style="width:40%"  required />        			
+	 				<font class="required_notification">發票抬頭：&nbsp</font><input type="text" name="user_title" style="width:40%"  required />  <button name="title" class="submit" onclick="return false;">同營業場所名稱 </button>       			
 	 			</div>
 	 			<div class="content">
-					<font class="required_notification">申請授權期間：</font>西元 <input type="text" name="cont_bdate_yy" style="width:8%" title="請輸入西元年共4碼數字" min="0" max="9999" pattern="[0-9]{4}" maxlength ="4" required/> 年 <input type="text" name="cont_bdate_mm" style="width:6%" pattern="\d*" maxlength ="2" required/> 月 <input type="text" name=cont_bdate_dd style="width:6%" pattern="\d*" maxlength ="2" required/> 日起至西元 <input type="text" name="cont_edate_yy" style="width:8%" title="請輸入西元年共4碼數字" min="0" max="9999" pattern="[0-9]{4}" maxlength ="4" required/> 年 <input type="text" name="cont_edate_mm" style="width:6%" pattern="\d*" maxlength ="2" required/> 月 <input type="text" name="cont_edate_dd" style="width:6%" pattern="\d*" maxlength ="2" required/> 日止	 			
-				</div>
-	 			<div class="content">
-	 				<font class="required_notification">營業地址：</font><input type="text" name="user_post" placeholder="郵遞區號" pattern="\d*" maxlength ="3" style="width:6%" required /> <input type="text" name="user_addr" style="width:40%"  required />        			
+	 				<font class="required_notification">申請授權期間：</font>西元 <input type="text" name="cont_bdate_yy" style="width:8%" title="請輸入西元年共4碼數字" min="0" max="9999" pattern="[0-9]{4}" maxlength ="4" required/> 年 <input type="text" name="cont_bdate_mm" style="width:6%" pattern="\d*" maxlength ="2" required/> 月 <input type="text" name=cont_bdate_dd style="width:6%" pattern="\d*" maxlength ="2" required/> 日起至西元 <input type="text" name="cont_edate_yy" style="width:8%" title="請輸入西元年共4碼數字" min="0" max="9999" pattern="[0-9]{4}" maxlength ="4" required/> 年 <input type="text" name="cont_edate_mm" style="width:6%" pattern="\d*" maxlength ="2" required/> 月 <input type="text" name="cont_edate_dd" style="width:6%" pattern="\d*" maxlength ="2" required/> 迄日止        			
 	 			</div>
 	 			<div class="content">
-	 				<font class="required_notification">郵寄地址：</font><input type="text" name="user_cpost" placeholder="郵遞區號" pattern="\d*" maxlength ="3" style="width:6%" required /> <input type="text" name="user_caddr" style="width:40%"  required /><button name="caddr" class="submit" onclick="return false;">同營業地址 </button> 
+	 				<font class="required_notification">營業地址：</font><input type="text" name="user_post" placeholder="郵遞區號" title="請輸3碼數字" min="0" max="999" pattern="[0-9]{3}" maxlength ="3" style="width:6%" required /> <input type="text" name="user_addr" style="width:40%"  required />        			
 	 			</div>
 	 			<div class="content">
-	 				<font class="required_notification">收件人或代辦：</font><input type="text" name="cnt1_name" style="width:30%"  required />        			
+	 				<font class="required_notification">郵寄地址：</font><input type="text" name="user_cpost" placeholder="郵遞區號" title="請輸3碼數字" min="0" max="999" pattern="[0-9]{3}" maxlength ="3" style="width:6%" required /> <input type="text" name="user_caddr" style="width:40%"  required />&nbsp<button name="caddr" class="submit" onclick="return false;">同營業地址 </button> 
+	 			</div>
+	 			<div class="content">
+	 				<font class="required_notification">收件人或代辦：</font><input type="text" name="cnt1_name" style="width:15%"  required />        			
 	 				<font class="required_notification">&nbsp&nbsp聯絡電話：</font><input type="text" name="cnt1_sphone" placeholder="" pattern="\d*" maxlength ="10" size='10' required />
 	 				&nbsp&nbsp <font class="required_notification">E-MAIL：</font> <input type="text" name="cnt1_email" style="width:18%" required />  		              		            	 				
 	 			</div>
@@ -283,6 +250,10 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 	 				<table id="use_machine" >
 		 				<tr>
 		 					<td class="required_notification">廠牌名稱</td><td class="required_notification">機號</td>
+		 				</tr>
+		 				<tr>
+		 					<td><input type="text" name="factory" required></td><td><input type="text" name="machine" required></td>
+		 				</tr>
 	 				</table>
 	 			</div>	 		 
             </div>
@@ -312,7 +283,7 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
           	</div>
           	<div align="center">
           	<p><a class="fancybox" href="Kar2.html">公開演出概括授權契約書</a></p>
-          	<input type="checkbox" class="w3-check" name="iagree"><font color="red">本人已閱覽並同意接受本申請表及條款內容，且願履行及遵守該等約定條款。</font>         	
+          	<input type="checkbox" class="w3-check" name="iagree" disabled><font color="red">本人已閱覽並同意接受本申請表之條款內容，且願履行及遵守該等約定條款。(請先閱讀公開演出概括授權契約書)</font>         	
           	<br><br><br>
           	<button class="submit" type="submit" name="submit" disabled>確認送出</button></div> <br> <br>
 	</div>
@@ -326,7 +297,7 @@ String doc_no=(String)Check.checkNull(request.getParameter("doc_no"), "") ;
 	</div>
 </div>
 <input type="hidden" name="user_class" value="KAR">
-<input type="hidden" name="doc_no" value="<%=doc_no%>">
+<input type="hidden" name="cont_kind" value="L">
 </form>
 </body>
 
