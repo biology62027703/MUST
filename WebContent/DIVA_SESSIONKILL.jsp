@@ -51,22 +51,9 @@ if(!USER_NAME.equals("")) {
 %>
 <!DOCTYPE> 
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<!-- <link rel="shortcut icon" href="favicon.ico" />
-<link rel="stylesheet" href="css/CSS.css" type="text/css">
-<link rel="stylesheet" href="jquery/css/theme.ice.css" type="text/css">
-<link rel="stylesheet" href="jquery/css/theme.blue.css" type="text/css"> -->
-<link rel="stylesheet" href="assets/css/main.css" />
-<script src="sweetalert-master/dist/sweetalert.min.js"></script>
-<script src="<%=request.getContextPath()%>/assets/js/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/assets/js/skel.min.js"></script>
-<script src="<%=request.getContextPath()%>/assets/js/util.js"></script>
+<%@include file="HEAD.jsp"%>
+<script src="<%=request.getContextPath()%>/sweetalert-master/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="sweetalert-master/dist/sweetalert.css">
-</head>
 <body>
 <%@include file="/utility/JQUERY.jsp"%>
 <script language="javascript">
@@ -132,7 +119,7 @@ if(!USER_NAME.equals("")) {
 		</div>	
 	</div>
 	<div class="field">		
-		<input type="button" value="清除使用者SESSION" >
+		<input type="button" value="清除使用者SESSION" class="special">
 	</div>
 	<div class="field">		
 		<input type="button" id="unlockuser" value="解除使用者登入鎖定狀態">

@@ -2144,8 +2144,8 @@
 	input[type="password"],
 	input[type="email"],
 	input[type="tel"],
-	select,
-	textarea {
+	textarea
+	{
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
@@ -2154,7 +2154,23 @@
 		border: none;
 		border-radius: 0;
 		border-bottom: solid 1px #c9c9c9;
-		color: inherit;
+		color: white;
+		display: block;
+		outline: 0;
+		padding: 0;
+		text-decoration: none;
+		width: 100%;
+	}	 
+	select{
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		background-color: transparent;
+		border: none;
+		border-radius: 0;
+		border-bottom: solid 1px #c9c9c9;
+		color: black;
 		display: block;
 		outline: 0;
 		padding: 0;

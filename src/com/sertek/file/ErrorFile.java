@@ -6,7 +6,7 @@ import java.text.*;
 
 public class ErrorFile{
 	/**
-		*±N¦³Ãö°õ¦æ¹Lµ{¤¤ªº¿ù»~¡A¼g¨ìlogÀÉ®×¤¤¡A¤è«K¤é«áºûÅ@¤§»İ­n
+		*å°‡æœ‰é—œåŸ·è¡Œéç¨‹ä¸­çš„éŒ¯èª¤ï¼Œå¯«åˆ°logæª”æ¡ˆä¸­ï¼Œæ–¹ä¾¿æ—¥å¾Œç¶­è­·ä¹‹éœ€è¦
 		@authoer	Ellin Chen
 	*/
 	public ErrorFile() {
@@ -14,17 +14,17 @@ public class ErrorFile{
 	}
 	
 	/**
-		*	³]©w¿ù»~¼g¤JÀÉ®×ªº«Øºc¤l
-		@param		file	­n¼g¤J¿ù»~ªºÀÉ®×¦WºÙ
+		*	è¨­å®šéŒ¯èª¤å¯«å…¥æª”æ¡ˆçš„å»ºæ§‹å­
+		@param		file	è¦å¯«å…¥éŒ¯èª¤çš„æª”æ¡ˆåç¨±
 	*/
 	public ErrorFile(String file) {
 		this.setFile(file);
 	}
 	
 	/**
-		*	³]©w­n¼g¤J¿ù»~ªºÀÉ®×¦WºÙ
-		@param		file	­n¼g¤J¿ù»~ªºÀÉ®×¦WºÙ
-		@return		µL
+		*	è¨­å®šè¦å¯«å…¥éŒ¯èª¤çš„æª”æ¡ˆåç¨±
+		@param		file	è¦å¯«å…¥éŒ¯èª¤çš„æª”æ¡ˆåç¨±
+		@return		ç„¡
 	*/
 	public void setFile(String file) {
 		this.fname = file;
@@ -32,7 +32,7 @@ public class ErrorFile{
 	}
 	
 	/**
-		*¨ú±oÀÉ®×¦WºÙ»P¸ô®|
+		*å–å¾—æª”æ¡ˆåç¨±èˆ‡è·¯å¾‘
 		@return		(String)
 	*/
 	public String getFile() {
@@ -40,20 +40,20 @@ public class ErrorFile{
 	}
 	
 	/**
-		*±N¿ù»~ªºVector¼g¤JÀÉ®×¤¤
-		@param		ob	¥Ñ­ş­Óª«¥ó©Ò¶Ç°e¹L¨Óªº¿ù»~
-		@param		error	¿ù»~ªº°T®§Vector
-		@return		¶Ç°e¼g¤J¦¨¥\©Î¥¢±Ñ,µ²ªG<=0:¥¢±Ñ, µ²ªG>0:¦¨¥\
+		*å°‡éŒ¯èª¤çš„Vectorå¯«å…¥æª”æ¡ˆä¸­
+		@param		ob	ç”±å“ªå€‹ç‰©ä»¶æ‰€å‚³é€éä¾†çš„éŒ¯èª¤
+		@param		error	éŒ¯èª¤çš„è¨Šæ¯Vector
+		@return		å‚³é€å¯«å…¥æˆåŠŸæˆ–å¤±æ•—,çµæœ<=0:å¤±æ•—, çµæœ>0:æˆåŠŸ
 	*/
 	public int writeError(Object ob,Vector error) {
 		return write(ob,error,systemOut(ob));	
 	}
 	
 	/**
-		*±N¿ù»~ªºString¼g¤JÀÉ®×¤¤
-		@param		ob	¥Ñ­ş­Óª«¥ó©Ò¶Ç°e¹L¨Óªº¿ù»~
-		@param		error	¿ù»~ªº°T®§String
-		@return		¶Ç°e¼g¤J¦¨¥\©Î¥¢±Ñ¡Aµ²ªG<=0:¥¢±Ñ, µ²ªG>0:¦¨¥\
+		*å°‡éŒ¯èª¤çš„Stringå¯«å…¥æª”æ¡ˆä¸­
+		@param		ob	ç”±å“ªå€‹ç‰©ä»¶æ‰€å‚³é€éä¾†çš„éŒ¯èª¤
+		@param		error	éŒ¯èª¤çš„è¨Šæ¯String
+		@return		å‚³é€å¯«å…¥æˆåŠŸæˆ–å¤±æ•—ï¼Œçµæœ<=0:å¤±æ•—, çµæœ>0:æˆåŠŸ
 	*/
 	public int writeError(Object ob,String error) {
 		Vector vr = new Vector();
@@ -62,11 +62,11 @@ public class ErrorFile{
 	}
 	
 	/**
-		*±N¿ù»~ªº¸ê®Æ¼g¤JÀÉ®×¤¤
+		*å°‡éŒ¯èª¤çš„è³‡æ–™å¯«å…¥æª”æ¡ˆä¸­
 		@param		ob
 		@param		error
 		@param		sys
-		@return		¶Ç¦^¦¨¥\©Î¥¢±Ñ¡Aµ²ªG<=0:¥¢±Ñ, µ²ªG>0:¦¨¥\
+		@return		å‚³å›æˆåŠŸæˆ–å¤±æ•—ï¼Œçµæœ<=0:å¤±æ•—, çµæœ>0:æˆåŠŸ
 	*/
 	private int write(Object ob,Vector error,Vector sys) {
 		int result = 0;
@@ -83,36 +83,36 @@ public class ErrorFile{
 			BufferedWriter w = new BufferedWriter(new FileWriter(fname,true));
 			/*if(ranfile.length()==0) {
 				ranfile.seek(0);
-				//System.out.println("¼gÀÉ®×ªº¦ì¸m=" + 0);	
+				//System.out.println("å¯«æª”æ¡ˆçš„ä½ç½®=" + 0);	
 			} else {
 				ranfile.seek(ranfile.length()+1);
-				//System.out.println("¼gÀÉ®×ªº¦ì¸m=" + (ranfile.length()+1));
+				//System.out.println("å¯«æª”æ¡ˆçš„ä½ç½®=" + (ranfile.length()+1));
 			}
 			//System.out.println("ranfile length = " + ranfile.length());
 			*/
-			//¼g¤J©T©w¼ĞÃD¨ìÀÉ®×
+			//å¯«å…¥å›ºå®šæ¨™é¡Œåˆ°æª”æ¡ˆ
 			result = write(w,sys);
-			//¼g¤J¿ù»~°T®§¨ìÀÉ®×
+			//å¯«å…¥éŒ¯èª¤è¨Šæ¯åˆ°æª”æ¡ˆ
 			//if(error.size()>0) w.newLine();
 			error.add(getEnd());
 			result = write(w,error);
-			//Ãö³¬file
+			//é—œé–‰file
 			w.close();	
 			//f.close();
 			result = 1;
 		}catch(FileNotFoundException e) {
-			//System.out.println("§ä¤£¨ìÀÉ®×");	
+			//System.out.println("æ‰¾ä¸åˆ°æª”æ¡ˆ");	
 		} catch(IOException e) {
-			//System.out.println("¼g¤JÀÉ®×¥¢±Ñ");	
+			//System.out.println("å¯«å…¥æª”æ¡ˆå¤±æ•—");	
 		} 
 		return result;
 	}
 	
 	/**
-		*¼g¤JÀÉ®×
+		*å¯«å…¥æª”æ¡ˆ
 		@param		ranfile
 		@param		meg	Vector
-		@return		¶Ç¦^¦¨¥\©Î¥¢±Ñªºµ²ªG¡Aµ²ªG<=0:¥¢±Ñ¡Aµ²ªG>0:¦¨¥\¡C
+		@return		å‚³å›æˆåŠŸæˆ–å¤±æ•—çš„çµæœï¼Œçµæœ<=0:å¤±æ•—ï¼Œçµæœ>0:æˆåŠŸã€‚
 	*/
 	private int write(BufferedWriter ranfile,Vector meg) {
 		int result = 0;
@@ -139,9 +139,9 @@ public class ErrorFile{
 	}
 	
 	/**
-		*Åª¥X©Ò¦³ªº¿ù»~¤º®e
-		@param		µL
-		@return		Vectorªº¿ù»~¤º®e
+		*è®€å‡ºæ‰€æœ‰çš„éŒ¯èª¤å…§å®¹
+		@param		ç„¡
+		@return		Vectorçš„éŒ¯èª¤å…§å®¹
 	*/
 	private Vector readError() {
 		Vector result = new Vector();
@@ -150,7 +150,7 @@ public class ErrorFile{
 			File f = new File(fname);	
 			BufferedReader r = new BufferedReader(new FileReader(f));
 			while((temp = r.readLine())!=null) {
-				//System.out.println("Åª¥Xªºµ²ªG=" + temp);
+				//System.out.println("è®€å‡ºçš„çµæœ=" + temp);
 				result.add(temp);
 				//result.add(r.readLine());
 				//result = ranfile.readUTF();
@@ -159,16 +159,16 @@ public class ErrorFile{
 			r.close();
 			//f.close();
 		} catch(FileNotFoundException e) {
-			//System.out.println("Åª¤£¨ìÀÉ®×");
+			//System.out.println("è®€ä¸åˆ°æª”æ¡ˆ");
 		} catch(IOException e) {
 			//System.out.println(e);	
 		}
 		return result;	
 	}
 	/**
-		*¿ù»~ªº©T©w¶Ç¥X¨t²Î¸ê®Æ
-		@param		µL
-		@return		¨t²Îªº¸ê®ÆVector
+		*éŒ¯èª¤çš„å›ºå®šå‚³å‡ºç³»çµ±è³‡æ–™
+		@param		ç„¡
+		@return		ç³»çµ±çš„è³‡æ–™Vector
 	*/
 	public Vector systemOut(Object ob) {	
 		Vector result = new Vector();
@@ -178,9 +178,9 @@ public class ErrorFile{
 	}
 	
 	/**
-		*¨ú±oª«¥óªº¦WºÙ
-		@param		ob	ª«¥ó
-		@return		ª«¥óªº¦WºÙ
+		*å–å¾—ç‰©ä»¶çš„åç¨±
+		@param		ob	ç‰©ä»¶
+		@return		ç‰©ä»¶çš„åç¨±
 	*/
 	private String getClassName(Object ob) {
 		return ob.getClass().getName();

@@ -5,7 +5,6 @@ import java.util.Hashtable;
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
-import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 import javax.naming.ldap.InitialLdapContext;
@@ -13,13 +12,16 @@ import javax.naming.ldap.LdapContext;
 
 import com.sertek.util.CheckObject;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ADCHECK {
 	private String ldap_url = "ldap://192.168.1.60:3268";
+	
 	Hashtable MUST_GROUP = new Hashtable();
 	private String username = "";
 	private String password = "";
 	private String[] GROUP= {"管理部 ADM","資料暨分配部 DD","法務暨授權部 LL","MGT","資訊部 IT"};
 	Hashtable<String, String> env = new Hashtable<String,String>();
+	
 	public ADCHECK(String username, String password) {
 		this.username = username;
 		this.password = password;
@@ -29,6 +31,7 @@ public class ADCHECK {
 		MUST_GROUP.put("MGT", "4");
 		MUST_GROUP.put("資訊部 IT", "5");
 	}
+	
     public String LDAP_AUTH_AD() throws Exception {     
         
         String retval="";
@@ -54,7 +57,7 @@ public class ADCHECK {
                 			retval = "該帳號權限無法進入此系統!";
                 		}
                 	}
-                }                
+                }               
             }
             namingEnum.close();
     		return retval;
@@ -81,7 +84,8 @@ public class ADCHECK {
         
     }
     
-    public String getgroup() throws NamingException {
+	@SuppressWarnings("null")
+	public String getgroup() throws NamingException {
     	env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         env.put(Context.PROVIDER_URL, ldap_url);
         env.put(Context.SECURITY_AUTHENTICATION, "simple");
@@ -118,11 +122,8 @@ public class ADCHECK {
         searchControls.setReturningAttributes(attrIDs);
         return searchControls;
     }
-	
     
-    
-    
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 		String ldapURL = "ldap://192.168.1.60:3268";
 		String account = "james.Huang";
 		String password = "f62027704F";
@@ -141,7 +142,6 @@ public class ADCHECK {
             NamingEnumeration<?> namingEnum = ctx.search("dc=must,dc=org,dc=tw", filter, getSimpleSearchControls());
             while (namingEnum.hasMore ()) {
                 SearchResult result = (SearchResult) namingEnum.next ();    
-                Attributes attrs = result.getAttributes ();
                 System.out.println(result.getName());
             }
             namingEnum.close();
@@ -155,5 +155,5 @@ public class ADCHECK {
         	retval = "登入失敗- 發生未知的錯誤，請洽系統管理員 !"+e;
             //logger.error(username + ":登入失敗- 發生未知的錯誤，請洽系統管理員 ! => " + e.getMessage());
         }
-	}
+	}*/
 }

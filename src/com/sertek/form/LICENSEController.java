@@ -256,7 +256,7 @@ public class LICENSEController extends BaseAbstractCommandController {
 					}
 
 					List lsthisyear = this.SqlDBUtility_51.queryForList("LAL.CHECK_CONT_NO", form);//再檢查一次有沒有今年的合約
-					if(lsthisyear.size()>0&&form.get("nature").toString().equals("2")) {
+					if(lsthisyear.size()>0&&nature[i].equals("2")) {
 						HashMap hm = (HashMap)lsthisyear.get(0);
 						form.put("case_no",hm.get("CASE_NO"));
 						form.put("cont_no",hm.get("CONT_NO"));

@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.text.*;
 
-//³B²zÀÉ®×¬ÛÃö¤½¥Îµ{¦¡
+//è™•ç†æª”æ¡ˆç›¸é—œå…¬ç”¨ç¨‹å¼
 
 public class fileUtil {
 	//private util_date ud = new util_date();
@@ -14,27 +14,27 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path
-	»¡©ú:±N¸ô®|¤¤ªº'\'(§Y"\\")Âà¬°'/'
+	åƒæ•¸:String path
+	èªªæ˜:å°‡è·¯å¾‘ä¸­çš„'\'(å³"\\")è½‰ç‚º'/'
 	*/
 	public String changeSlopeToRL(String path) {
 		return path.replace('\\', '/');
 	}
 
 	/**
-	°Ñ¼Æ:String path
-	»¡©ú:±N¸ô®|ªº'/'»P'\\'Âà¬°'\'
+	åƒæ•¸:String path
+	èªªæ˜:å°‡è·¯å¾‘çš„'/'èˆ‡'\\'è½‰ç‚º'\'
 	*/
 	public String changeSlopeToLR(String path) {
 		return path.replace('/', '\\');
 	}
 
 	/**
-	°Ñ¼Æ:String path, String cpath, String spath
-	»¡©ú:±N[for¤åªö]ªº¸ô®|Âà¬°[for AP Server]ªº¸ô®|(°Ñ¦Òcpath»Pspath§ó§ï¨Ó·½,¨Ã²Î¤@'/'»P'\')
-	spath => exp:/nw/k/type, ¥i¥ÑUser.readString(...)¨ú±o
-	cpath => exp:N:\type, ¥i¥ÑUser.readString(...)¨ú±o
-	¦p¶Ç¤J¸ô®|¤w¬°client path, «h¤£§ïÅÜ
+	åƒæ•¸:String path, String cpath, String spath
+	èªªæ˜:å°‡[foræ–‡é‡‡]çš„è·¯å¾‘è½‰ç‚º[for AP Server]çš„è·¯å¾‘(åƒè€ƒcpathèˆ‡spathæ›´æ”¹ä¾†æº,ä¸¦çµ±ä¸€'/'èˆ‡'\')
+	spath => exp:/nw/k/type, å¯ç”±User.readString(...)å–å¾—
+	cpath => exp:N:\type, å¯ç”±User.readString(...)å–å¾—
+	å¦‚å‚³å…¥è·¯å¾‘å·²ç‚ºclient path, å‰‡ä¸æ”¹è®Š
 	*/
 	public String changeToServerPath(String path, String cpath, String spath) {
 		spath = changeSlopeToRL(spath);
@@ -51,11 +51,11 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path, String cpath, String spath
-	»¡©ú:±N[for AP Server]ªº¸ô®|Âà¬°[for¤åªö]ªº¸ô®|(°Ñ¦Òcpath»Pspath§ó§ï¨Ó·½,¨Ã²Î¤@'/'»P'\')
-	spath => exp:/nw/k/type, ¥i¥ÑUser.readString(...)¨ú±o
-	cpath => exp:N:\type, ¥i¥ÑUser.readString(...)¨ú±o
-	¦p¶Ç¤J¸ô®|¤w¬°client path, «h¤£§ïÅÜ
+	åƒæ•¸:String path, String cpath, String spath
+	èªªæ˜:å°‡[for AP Server]çš„è·¯å¾‘è½‰ç‚º[foræ–‡é‡‡]çš„è·¯å¾‘(åƒè€ƒcpathèˆ‡spathæ›´æ”¹ä¾†æº,ä¸¦çµ±ä¸€'/'èˆ‡'\')
+	spath => exp:/nw/k/type, å¯ç”±User.readString(...)å–å¾—
+	cpath => exp:N:\type, å¯ç”±User.readString(...)å–å¾—
+	å¦‚å‚³å…¥è·¯å¾‘å·²ç‚ºclient path, å‰‡ä¸æ”¹è®Š
 	*/
 	public String changeToClientPath(String path, String cpath, String spath) {
 		spath = changeSlopeToRL(spath);
@@ -72,8 +72,8 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:µL
-	»¡©ú:¬d¬İ°õ¦æÀô¹Ò¤§os¬°linux©Îwin
+	åƒæ•¸:ç„¡
+	èªªæ˜:æŸ¥çœ‹åŸ·è¡Œç’°å¢ƒä¹‹osç‚ºlinuxæˆ–win
 	*/
 	public String checkOS() {
 		String s = "linux";
@@ -84,10 +84,10 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path, String cpath, String spath
-	»¡©ú:±N[for AP Server]ªº¸ô®|Âà¬°[for¤åªö]ªº¸ô®|
-	spath => exp:/nw/k/type, ¥i¥ÑUser.readString(...)¨ú±o
-	cpath => exp:N:\type, ¥i¥ÑUser.readString(...)¨ú±o
+	åƒæ•¸:String path, String cpath, String spath
+	èªªæ˜:å°‡[for AP Server]çš„è·¯å¾‘è½‰ç‚º[foræ–‡é‡‡]çš„è·¯å¾‘
+	spath => exp:/nw/k/type, å¯ç”±User.readString(...)å–å¾—
+	cpath => exp:N:\type, å¯ç”±User.readString(...)å–å¾—
 	*/
 	public String modifyPath(String path, String cpath, String spath) {
 		if ("win".equals(checkOS()))
@@ -97,8 +97,8 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path
-	»¡©ú:®Ú¾Ú¶Ç¤J¤§ÀÉ®×¦ì¸m¡A§PÂ_¦¹¥Ø¿ı¤U¤§¯S©wÀÉ®×¬O§_¦s¦b
+	åƒæ•¸:String path
+	èªªæ˜:æ ¹æ“šå‚³å…¥ä¹‹æª”æ¡ˆä½ç½®ï¼Œåˆ¤æ–·æ­¤ç›®éŒ„ä¸‹ä¹‹ç‰¹å®šæª”æ¡ˆæ˜¯å¦å­˜åœ¨
 	*/
 	public boolean checkFile(String path) {
 		path = changeSlopeToRL(path);
@@ -110,9 +110,9 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path
-	»¡©ú:®Ú¾Ú¶Ç¤J¤§ÀÉ®×¦ì¸m¡A§PÂ_¦¹¥Ø¿ı¤U¤§¯S©wÀÉ®×¬O§_¦s¦b
-	­Y¤£¦s¦b, «h«Ø¥ß¦¹¤@¥Ø¿ı»PÀÉ®×, ·íÀÉ®×«Ø¥ß¥¢±Ñ®É, ¶Ç¦^false
+	åƒæ•¸:String path
+	èªªæ˜:æ ¹æ“šå‚³å…¥ä¹‹æª”æ¡ˆä½ç½®ï¼Œåˆ¤æ–·æ­¤ç›®éŒ„ä¸‹ä¹‹ç‰¹å®šæª”æ¡ˆæ˜¯å¦å­˜åœ¨
+	è‹¥ä¸å­˜åœ¨, å‰‡å»ºç«‹æ­¤ä¸€ç›®éŒ„èˆ‡æª”æ¡ˆ, ç•¶æª”æ¡ˆå»ºç«‹å¤±æ•—æ™‚, å‚³å›false
 	*/
 	public boolean setFile(String path) {
 		path = changeSlopeToRL(path);
@@ -138,10 +138,10 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path, String type
-	»¡©ú:®Ú¾Ú¶Ç¤J¤§ÀÉ®×¦ì¸m¡A§PÂ_¦¹¥Ø¿ı¤U¤§¯S©wÀÉ®×ªø«×¬°¦h¤Ö
-	·ítype="byte", «h¶Ç¦^ÀÉ®×©Ò¦û¤§byteªø«×, ·ítype="char", «h¶Ç¦^ÀÉ®×©Ò¦û¤§¦r¤¸¼Æ(§t´«¦æµ¥¦r¤¸,¤@­Ó¤¤¤å¦rºâ¤@­Ó¦r¤¸)
-	­YÀÉ®×¤£¦s¦b,«h¥H-1¬°¶Ç¦^­È
+	åƒæ•¸:String path, String type
+	èªªæ˜:æ ¹æ“šå‚³å…¥ä¹‹æª”æ¡ˆä½ç½®ï¼Œåˆ¤æ–·æ­¤ç›®éŒ„ä¸‹ä¹‹ç‰¹å®šæª”æ¡ˆé•·åº¦ç‚ºå¤šå°‘
+	ç•¶type="byte", å‰‡å‚³å›æª”æ¡ˆæ‰€ä½”ä¹‹byteé•·åº¦, ç•¶type="char", å‰‡å‚³å›æª”æ¡ˆæ‰€ä½”ä¹‹å­—å…ƒæ•¸(å«æ›è¡Œç­‰å­—å…ƒ,ä¸€å€‹ä¸­æ–‡å­—ç®—ä¸€å€‹å­—å…ƒ)
+	è‹¥æª”æ¡ˆä¸å­˜åœ¨,å‰‡ä»¥-1ç‚ºå‚³å›å€¼
 	*/
 	public long checkFileSize(String path, String type) {
 		path = changeSlopeToRL(path);
@@ -181,10 +181,10 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path, String type
-	»¡©ú:®Ú¾Ú¶Ç¤J¤§ÀÉ®×¦ì¸m¡A§PÂ_¦¹¥Ø¿ı¤U¤§¯S©wÀÉ®×­×§ï¤é´Á¡A¨Ã¨Ì°Ñ¼Æ³]©w¶Ç¦^
-	°Ñ¼Ætype="0":¶Ç¦^¤C½X¥Á°ê¦~¤ë¤é, type="1":¶Ç¦^¤»½X®É¶¡®É¤À¬í(24®É¨î), type="3":¨âªÌ¬Ò¶Ç¦^, ¤¤¶¡¥H³r¸¹(,)¤À¹j
-	­YÀÉ®×¤£¦s¦b,«h¥H"0000000","000000","000000,000000"¬°¶Ç¦^­È
+	åƒæ•¸:String path, String type
+	èªªæ˜:æ ¹æ“šå‚³å…¥ä¹‹æª”æ¡ˆä½ç½®ï¼Œåˆ¤æ–·æ­¤ç›®éŒ„ä¸‹ä¹‹ç‰¹å®šæª”æ¡ˆä¿®æ”¹æ—¥æœŸï¼Œä¸¦ä¾åƒæ•¸è¨­å®šå‚³å›
+	åƒæ•¸type="0":å‚³å›ä¸ƒç¢¼æ°‘åœ‹å¹´æœˆæ—¥, type="1":å‚³å›å…­ç¢¼æ™‚é–“æ™‚åˆ†ç§’(24æ™‚åˆ¶), type="3":å…©è€…çš†å‚³å›, ä¸­é–“ä»¥é€—è™Ÿ(,)åˆ†éš”
+	è‹¥æª”æ¡ˆä¸å­˜åœ¨,å‰‡ä»¥"0000000","000000","000000,000000"ç‚ºå‚³å›å€¼
 	*/
 	public String checkFileDate(String path, String type) {
 		path = changeSlopeToRL(path);
@@ -195,7 +195,7 @@ public class fileUtil {
 		if (myFile.exists()) {
 			java.util.Date fileDate = new java.util.Date(myFile.lastModified());
 			SimpleDateFormat tf = new SimpleDateFormat("yyyyMMdd,HHmmss");
-			//¤j¤p¼gªí¥Ü·N¸q¤£¦P
+			//å¤§å°å¯«è¡¨ç¤ºæ„ç¾©ä¸åŒ
 			String year =
 				""
 					+ (Integer.parseInt(tf.format(fileDate).substring(0, 4))
@@ -222,9 +222,9 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String oldPath, String newPath
-	»¡©ú:§ïÅÜÀÉ®×¦WºÙ»P©Ò¦b¦ì¸m
-	­Y°õ¦æ¥¢±Ñ(¨Ò:¥Ø¿ıµLªk¦s¨ú,­ìÀÉ®×¤£¦s¦bµ¥),«h¥Hfalse¬°¶Ç¦^­È
+	åƒæ•¸:String oldPath, String newPath
+	èªªæ˜:æ”¹è®Šæª”æ¡ˆåç¨±èˆ‡æ‰€åœ¨ä½ç½®
+	è‹¥åŸ·è¡Œå¤±æ•—(ä¾‹:ç›®éŒ„ç„¡æ³•å­˜å–,åŸæª”æ¡ˆä¸å­˜åœ¨ç­‰),å‰‡ä»¥falseç‚ºå‚³å›å€¼
 	*/
 	public boolean changeNewPath(String oldPath, String newPath) {
 		if (oldPath != null)
@@ -260,9 +260,9 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path
-	»¡©ú:®Ú¾Ú¶Ç¤J¤§ÀÉ®×¦ì¸m¡A±N¦¹¥Ø¿ı¤U¤§¯S©wÀÉ®×§R°£(¨Ã¤£§R°£¥Ø¿ı)
-	·íÀÉ®×§R°£¥¢±Ñ®É, ¶Ç¦^false
+	åƒæ•¸:String path
+	èªªæ˜:æ ¹æ“šå‚³å…¥ä¹‹æª”æ¡ˆä½ç½®ï¼Œå°‡æ­¤ç›®éŒ„ä¸‹ä¹‹ç‰¹å®šæª”æ¡ˆåˆªé™¤(ä¸¦ä¸åˆªé™¤ç›®éŒ„)
+	ç•¶æª”æ¡ˆåˆªé™¤å¤±æ•—æ™‚, å‚³å›false
 	*/
 	public boolean delFile(String path) {
 		path = changeSlopeToRL(path);
@@ -284,9 +284,9 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path
-	»¡©ú:®Ú¾Ú¶Ç¤J¤§¥Ø¿ı¦ì¸m¡A±N¦¹¥Ø¿ı§R°£(­Y¥Ø¿ı¤º¦³ÀÉ®×«h¤£§R°£¥Ø¿ı)
-	·í¥Ø¿ı§R°£¥¢±Ñ®É, ¶Ç¦^false
+	åƒæ•¸:String path
+	èªªæ˜:æ ¹æ“šå‚³å…¥ä¹‹ç›®éŒ„ä½ç½®ï¼Œå°‡æ­¤ç›®éŒ„åˆªé™¤(è‹¥ç›®éŒ„å…§æœ‰æª”æ¡ˆå‰‡ä¸åˆªé™¤ç›®éŒ„)
+	ç•¶ç›®éŒ„åˆªé™¤å¤±æ•—æ™‚, å‚³å›false
 	*/
 	public boolean delDir(String path) {
 		path = changeSlopeToRL(path);
@@ -305,9 +305,9 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path
-	»¡©ú:®Ú¾Ú¶Ç¤J¤§¥Ø¿ı¦ì¸m¡A«Ø¥ß¦¹¥Ø¿ı
-	·í¥Ø¿ı«Ø¥ß¥¢±Ñ®É, ¶Ç¦^false
+	åƒæ•¸:String path
+	èªªæ˜:æ ¹æ“šå‚³å…¥ä¹‹ç›®éŒ„ä½ç½®ï¼Œå»ºç«‹æ­¤ç›®éŒ„
+	ç•¶ç›®éŒ„å»ºç«‹å¤±æ•—æ™‚, å‚³å›false
 	*/
 	public boolean mkDir(String path) {
 		path = changeSlopeToRL(path);
@@ -326,9 +326,9 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String sourcePath, String targetPath
-	»¡©ú:ÀÉ®×¥ÑsourcePath½Æ»s¨ìtargetPath,¤é´Á¤£§ï
-	­Y°õ¦æ¥¢±Ñ(¨Ò:¥Ø¿ıµLªk¦s¨ú,­ìÀÉ®×¤£¦s¦bµ¥,¥Øªº¦aÀÉ®×¤w¦s¦bµ¥),«h¥Hfalse¬°¶Ç¦^­È
+	åƒæ•¸:String sourcePath, String targetPath
+	èªªæ˜:æª”æ¡ˆç”±sourcePathè¤‡è£½åˆ°targetPath,æ—¥æœŸä¸æ”¹
+	è‹¥åŸ·è¡Œå¤±æ•—(ä¾‹:ç›®éŒ„ç„¡æ³•å­˜å–,åŸæª”æ¡ˆä¸å­˜åœ¨ç­‰,ç›®çš„åœ°æª”æ¡ˆå·²å­˜åœ¨ç­‰),å‰‡ä»¥falseç‚ºå‚³å›å€¼
 	*/
 	public boolean copyFile(String sourcePath, String targetPath) {
 		if (sourcePath != null)
@@ -385,10 +385,10 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path, String chkString
-	»¡©ú:ÀË¬dpath©Ò«ü¤§ÀÉ®×ªº²Ä¤@¦æ¦³µL«ü©wªº¦r¦ê(chkString)
-	­Y°õ¦æ¥¢±Ñ(¨Ò:¥Ø¿ıµLªk¦s¨ú,­ìÀÉ®×¤£¦s¦bµ¥,¥Øªº¦aÀÉ®×¤w¦s¦bµ¥),«h¥Hfalse¬°¶Ç¦^­È
-	chkString¥i±µ¥Ñ³r¸¹(,)¤À¹j¦U¤¸¯À¤§¦r¦ê
+	åƒæ•¸:String path, String chkString
+	èªªæ˜:æª¢æŸ¥pathæ‰€æŒ‡ä¹‹æª”æ¡ˆçš„ç¬¬ä¸€è¡Œæœ‰ç„¡æŒ‡å®šçš„å­—ä¸²(chkString)
+	è‹¥åŸ·è¡Œå¤±æ•—(ä¾‹:ç›®éŒ„ç„¡æ³•å­˜å–,åŸæª”æ¡ˆä¸å­˜åœ¨ç­‰,ç›®çš„åœ°æª”æ¡ˆå·²å­˜åœ¨ç­‰),å‰‡ä»¥falseç‚ºå‚³å›å€¼
+	chkStringå¯æ¥ç”±é€—è™Ÿ(,)åˆ†éš”å„å…ƒç´ ä¹‹å­—ä¸²
 	*/
 	public boolean checkStringInFirstLine(String path, String chkString) {
 		if (chkString == null || "".equals(chkString))
@@ -407,10 +407,10 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:File myFile, String chkString
-	»¡©ú:ÀË¬dmyFile©Ò¥Nªí¤§ÀÉ®×ªº²Ä¤@¦æ¦³µL«ü©wªº¦r¦ê(chkString)
-	­Y°õ¦æ¥¢±Ñ(¨Ò:¥Ø¿ıµLªk¦s¨ú,­ìÀÉ®×¤£¦s¦bµ¥,¥Øªº¦aÀÉ®×¤w¦s¦bµ¥),«h¥Hfalse¬°¶Ç¦^­È
-	chkString¥i±µ¥Ñ³r¸¹(,)¤À¹j¦U¤¸¯À¤§¦r¦ê
+	åƒæ•¸:File myFile, String chkString
+	èªªæ˜:æª¢æŸ¥myFileæ‰€ä»£è¡¨ä¹‹æª”æ¡ˆçš„ç¬¬ä¸€è¡Œæœ‰ç„¡æŒ‡å®šçš„å­—ä¸²(chkString)
+	è‹¥åŸ·è¡Œå¤±æ•—(ä¾‹:ç›®éŒ„ç„¡æ³•å­˜å–,åŸæª”æ¡ˆä¸å­˜åœ¨ç­‰,ç›®çš„åœ°æª”æ¡ˆå·²å­˜åœ¨ç­‰),å‰‡ä»¥falseç‚ºå‚³å›å€¼
+	chkStringå¯æ¥ç”±é€—è™Ÿ(,)åˆ†éš”å„å…ƒç´ ä¹‹å­—ä¸²
 	*/
 	public boolean checkStringInFirstLine(File myFile, String chkString) {
 		if (!myFile.exists())
@@ -455,9 +455,9 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path, String times
-	»¡©ú:ÀË¬dpath©Ò«ü¤§ÀÉ®×¤¤,§¹¾ã¤§¤¤µØ¥Á°ê¤é´Á¬O§_¥X²{¯S©w¦¸¼Æ(times) 
-	­Y°õ¦æ¥¢±Ñ(¨Ò:­ìÀÉ®×¤£¦s¦bµ¥),«h¥Hfalse¬°¶Ç¦^­È
+	åƒæ•¸:String path, String times
+	èªªæ˜:æª¢æŸ¥pathæ‰€æŒ‡ä¹‹æª”æ¡ˆä¸­,å®Œæ•´ä¹‹ä¸­è¯æ°‘åœ‹æ—¥æœŸæ˜¯å¦å‡ºç¾ç‰¹å®šæ¬¡æ•¸(times) 
+	è‹¥åŸ·è¡Œå¤±æ•—(ä¾‹:åŸæª”æ¡ˆä¸å­˜åœ¨ç­‰),å‰‡ä»¥falseç‚ºå‚³å›å€¼
 	*/
 	public boolean checkChimeseDate(String path, int times) {
 		if (times == 0)
@@ -476,9 +476,9 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path, String times
-	»¡©ú:ÀË¬dpath©Ò«ü¤§ÀÉ®×¤¤,§¹¾ã¤§¤¤µØ¥Á°ê¤é´Á¬O§_¥X²{¯S©w¦¸¼Æ(times) 
-	­Y°õ¦æ¥¢±Ñ(¨Ò:­ìÀÉ®×¤£¦s¦bµ¥),«h¥Hfalse¬°¶Ç¦^­È
+	åƒæ•¸:String path, String times
+	èªªæ˜:æª¢æŸ¥pathæ‰€æŒ‡ä¹‹æª”æ¡ˆä¸­,å®Œæ•´ä¹‹ä¸­è¯æ°‘åœ‹æ—¥æœŸæ˜¯å¦å‡ºç¾ç‰¹å®šæ¬¡æ•¸(times) 
+	è‹¥åŸ·è¡Œå¤±æ•—(ä¾‹:åŸæª”æ¡ˆä¸å­˜åœ¨ç­‰),å‰‡ä»¥falseç‚ºå‚³å›å€¼
 	*/
 	public boolean checkChimeseDate(File myFile, int times) {
 		if (!myFile.exists())
@@ -512,9 +512,9 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path
-	»¡©ú:ÀË¬d¦r¦ê¬O§_¬°§¹¾ã¤§¤¤µØ¥Á°ê¤é´Á(¦³¨Ì§Ç¦³"¤¤µØ¥Á°ê","¦~","¤ë","¤é"µ¥¦r¦ê)
-	­Y°õ¦æ¥¢±Ñ(¨Ò:­ìÀÉ®×¤£¦s¦bµ¥),«h¥Hfalse¬°¶Ç¦^­È
+	åƒæ•¸:String path
+	èªªæ˜:æª¢æŸ¥å­—ä¸²æ˜¯å¦ç‚ºå®Œæ•´ä¹‹ä¸­è¯æ°‘åœ‹æ—¥æœŸ(æœ‰ä¾åºæœ‰"ä¸­è¯æ°‘åœ‹","å¹´","æœˆ","æ—¥"ç­‰å­—ä¸²)
+	è‹¥åŸ·è¡Œå¤±æ•—(ä¾‹:åŸæª”æ¡ˆä¸å­˜åœ¨ç­‰),å‰‡ä»¥falseç‚ºå‚³å›å€¼
 	*/
 	public boolean checkOneLineChimeseDate(String oneLine) {
 		try {
@@ -524,16 +524,16 @@ public class fileUtil {
 			int monthSet = 0;
 			int daySet = 0;
 
-			if ((titleSet = oneLine.indexOf("¤¤µØ¥Á°ê")) != 0)
+			if ((titleSet = oneLine.indexOf("ä¸­è¯æ°‘åœ‹")) != 0)
 				return false;
 
-			if ((yearSet = oneLine.indexOf("¦~")) == -1)
+			if ((yearSet = oneLine.indexOf("å¹´")) == -1)
 				return false;
 
-			if ((monthSet = oneLine.indexOf("¤ë")) == -1)
+			if ((monthSet = oneLine.indexOf("æœˆ")) == -1)
 				return false;
 
-			if ((daySet = oneLine.indexOf("¤é")) == -1)
+			if ((daySet = oneLine.indexOf("æ—¥")) == -1)
 				return false;
 
 			if (titleSet < yearSet && yearSet < monthSet && monthSet < daySet)
@@ -546,15 +546,15 @@ public class fileUtil {
 		}
 	}
 
-	//§â"¤¤µØ¥Á°ê£B£B£B¦~¢õ¢õ¤ë¢ì¢ì¤é"Âà¬°"yyymmdd"
+	//æŠŠ"ä¸­è¯æ°‘åœ‹ï½™ï½™ï½™å¹´ï½ï½æœˆï½„ï½„æ—¥"è½‰ç‚º"yyymmdd"
 	public String convertDate(String line) {
 		try {
 			String temps = ut.noAnyBlank(line);
 			String t =
 				getNumFromChinese(
 					temps.substring(
-						temps.indexOf("°ê") + 1,
-						temps.indexOf("¦~")));
+						temps.indexOf("åœ‹") + 1,
+						temps.indexOf("å¹´")));
 			if (t.length() == 2) {
 				t = "0" + t;
 			}
@@ -562,14 +562,14 @@ public class fileUtil {
 				t
 					+ getNumFromChinese(
 						temps.substring(
-							temps.indexOf("¦~") + 1,
-							temps.indexOf("¤ë")));
+							temps.indexOf("å¹´") + 1,
+							temps.indexOf("æœˆ")));
 			t =
 				t
 					+ getNumFromChinese(
 						temps.substring(
-							temps.indexOf("¤ë") + 1,
-							temps.indexOf("¤é")));
+							temps.indexOf("æœˆ") + 1,
+							temps.indexOf("æ—¥")));
 			return t;
 
 		} catch (Exception e) {
@@ -581,34 +581,34 @@ public class fileUtil {
 
 	private String getNumFromChinese(String d) {
 		Hashtable ht = new Hashtable();
-		ht.put("¤@", "1");
-		ht.put("¤G", "2");
-		ht.put("¤T", "3");
-		ht.put("¥|", "4");
-		ht.put("¤­", "5");
-		ht.put("¤»", "6");
-		ht.put("¤C", "7");
-		ht.put("¤K", "8");
-		ht.put("¤E", "9");
+		ht.put("ä¸€", "1");
+		ht.put("äºŒ", "2");
+		ht.put("ä¸‰", "3");
+		ht.put("å››", "4");
+		ht.put("äº”", "5");
+		ht.put("å…­", "6");
+		ht.put("ä¸ƒ", "7");
+		ht.put("å…«", "8");
+		ht.put("ä¹", "9");
 
 		int sum = 0;
 		String temps = "";
-		if (d.indexOf("¤d") != -1) {
-			temps = d.substring(d.indexOf("¤d") - 1, d.indexOf("¤d"));
+		if (d.indexOf("åƒ") != -1) {
+			temps = d.substring(d.indexOf("åƒ") - 1, d.indexOf("åƒ"));
 			int ti = Integer.parseInt((String) ht.get(temps)) * 1000;
 			sum = sum + ti;
 		}
 
-		if (d.indexOf("¦Ê") != -1) {
-			temps = d.substring(d.indexOf("¦Ê") - 1, d.indexOf("¦Ê"));
+		if (d.indexOf("ç™¾") != -1) {
+			temps = d.substring(d.indexOf("ç™¾") - 1, d.indexOf("ç™¾"));
 			int ti = Integer.parseInt((String) ht.get(temps)) * 100;
 			sum = sum + ti;
 		}
-		if (d.indexOf("¤Q") != -1) {
-			if (d.indexOf("¤Q") == 0) {
+		if (d.indexOf("å") != -1) {
+			if (d.indexOf("å") == 0) {
 				sum = sum + 10;
 			} else {
-				temps = d.substring(d.indexOf("¤Q") - 1, d.indexOf("¤Q"));
+				temps = d.substring(d.indexOf("å") - 1, d.indexOf("å"));
 				int ti = Integer.parseInt((String) ht.get(temps)) * 10;
 				sum = sum + ti;
 			}
@@ -627,9 +627,9 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String srcString, String chkString
-	»¡©ú:ÀË¬dsrcString©Ò¥Nªí¤§¦r¦ê¦³µL«ü©wªº¦r¦ê(chkString),­Y¦³,«h¶Ç¦^«ü©w¦r¶Ç¤§«eªº³¡¤À,
-	§_«h¶Ç¦^­ì¦r¦ê,chkString¥i±µ¥Ñ³r¸¹(,)¤À¹j¦U¤¸¯À¤§¦r¦ê
+	åƒæ•¸:String srcString, String chkString
+	èªªæ˜:æª¢æŸ¥srcStringæ‰€ä»£è¡¨ä¹‹å­—ä¸²æœ‰ç„¡æŒ‡å®šçš„å­—ä¸²(chkString),è‹¥æœ‰,å‰‡å‚³å›æŒ‡å®šå­—å‚³ä¹‹å‰çš„éƒ¨åˆ†,
+	å¦å‰‡å‚³å›åŸå­—ä¸²,chkStringå¯æ¥ç”±é€—è™Ÿ(,)åˆ†éš”å„å…ƒç´ ä¹‹å­—ä¸²
 	*/
 	public String cutSpecialString(String srcString, String chkString) {
 		if (chkString.indexOf(',') == -1) {
@@ -640,13 +640,13 @@ public class fileUtil {
 			return cutSpecialString(srcString, chkStrings);
 		}
 
-		return srcString; //³o¦æÀ³¸Ó¤£·|°õ¦æ¨ì
+		return srcString; //é€™è¡Œæ‡‰è©²ä¸æœƒåŸ·è¡Œåˆ°
 	}
 
 	/**
-	°Ñ¼Æ:String srcString, String chkStrings[]
-	»¡©ú:ÀË¬dsrcString©Ò¥Nªí¤§¦r¦ê¦³µL«ü©wªº¦r¦ê(chkString),­Y¦³,«h¶Ç¦^«ü©w¦r¶Ç¤§«eªº³¡¤À,
-	§_«h¶Ç¦^­ì¦r¦ê,chkString¥i±µ¥Ñ³r¸¹(,)¤À¹j¦U¤¸¯À¤§¦r¦ê
+	åƒæ•¸:String srcString, String chkStrings[]
+	èªªæ˜:æª¢æŸ¥srcStringæ‰€ä»£è¡¨ä¹‹å­—ä¸²æœ‰ç„¡æŒ‡å®šçš„å­—ä¸²(chkString),è‹¥æœ‰,å‰‡å‚³å›æŒ‡å®šå­—å‚³ä¹‹å‰çš„éƒ¨åˆ†,
+	å¦å‰‡å‚³å›åŸå­—ä¸²,chkStringå¯æ¥ç”±é€—è™Ÿ(,)åˆ†éš”å„å…ƒç´ ä¹‹å­—ä¸²
 	*/
 	public String cutSpecialString(String srcString, String[] chkStrings) {
 		for (int i = 0; i < chkStrings.length; i++)
@@ -656,10 +656,10 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:BufferedReader in, BufferedWriter out, String chkString
-	»¡©ú:ÀË¬d¿é¤JÀÉ®×(in)¦b¥D¤å«e©Ò¦³«ü©wªº¦r¦ê(chkString)¤Î¨ä¤§«á¦Ü¦æ§À¤Á±¼,¨Ã¿é¥X¦Ü«ü©w³B(out)
-	­YµL"¥D¤å"¨â¦r,«h¦ÜÀÉ®×µ²§ô¬°¤î,chkString¥i±µ¥Ñ³r¸¹(,)¤À¹j¦U¤¸¯À¤§¦r¦ê
-	ps:"¥D¤å"¨â¦r·|¿é¥X,¥»¨ç¦¡¿é¤J»P¿é¥X¨Ó·½§¡¥Ñ¨Ï¥ÎªÌ¦Û¦æ¦b¥~³¡½T©w,¨ç¦¡¥»¨­¤£¥]§t¶}ÃöÀÉ°Ê§@
+	åƒæ•¸:BufferedReader in, BufferedWriter out, String chkString
+	èªªæ˜:æª¢æŸ¥è¼¸å…¥æª”æ¡ˆ(in)åœ¨ä¸»æ–‡å‰æ‰€æœ‰æŒ‡å®šçš„å­—ä¸²(chkString)åŠå…¶ä¹‹å¾Œè‡³è¡Œå°¾åˆ‡æ‰,ä¸¦è¼¸å‡ºè‡³æŒ‡å®šè™•(out)
+	è‹¥ç„¡"ä¸»æ–‡"å…©å­—,å‰‡è‡³æª”æ¡ˆçµæŸç‚ºæ­¢,chkStringå¯æ¥ç”±é€—è™Ÿ(,)åˆ†éš”å„å…ƒç´ ä¹‹å­—ä¸²
+	ps:"ä¸»æ–‡"å…©å­—æœƒè¼¸å‡º,æœ¬å‡½å¼è¼¸å…¥èˆ‡è¼¸å‡ºä¾†æºå‡ç”±ä½¿ç”¨è€…è‡ªè¡Œåœ¨å¤–éƒ¨ç¢ºå®š,å‡½å¼æœ¬èº«ä¸åŒ…å«é–‹é—œæª”å‹•ä½œ
 	*/
 	public boolean cutSpecialString(
 		BufferedReader in,
@@ -668,7 +668,7 @@ public class fileUtil {
 		String oneLine = "";
 		try {
 			while ((oneLine = in.readLine()) != null
-				|| ut.noAnyBlank(oneLine).indexOf("¥D¤å") == -1) {
+				|| ut.noAnyBlank(oneLine).indexOf("ä¸»æ–‡") == -1) {
 				oneLine = cutSpecialString(oneLine, chkString);
 				out.write(oneLine, 0, oneLine.length());
 				out.newLine();
@@ -689,10 +689,10 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:BufferedReader in, BufferedWriter out, String[] chkStrings
-	»¡©ú:ÀË¬d¿é¤JÀÉ®×(in)¦b¥D¤å«e©Ò¦³«ü©wªº¦r¦ê(chkString)¤Î¨ä¤§«á¦Ü¦æ§À¤Á±¼,¨Ã¿é¥X¦Ü«ü©w³B(out)
-	­YµL"¥D¤å"¨â¦r,«h¦ÜÀÉ®×µ²§ô¬°¤î,chkString¥i±µ¥Ñ³r¸¹(,)¤À¹j¦U¤¸¯À¤§¦r¦ê
-	ps:"¥D¤å"¨â¦r·|¿é¥X,¥»¨ç¦¡¿é¤J»P¿é¥X¨Ó·½§¡¥Ñ¨Ï¥ÎªÌ¦Û¦æ¦b¥~³¡½T©w,¨ç¦¡¥»¨­¤£¥]§t¶}ÃöÀÉ°Ê§@
+	åƒæ•¸:BufferedReader in, BufferedWriter out, String[] chkStrings
+	èªªæ˜:æª¢æŸ¥è¼¸å…¥æª”æ¡ˆ(in)åœ¨ä¸»æ–‡å‰æ‰€æœ‰æŒ‡å®šçš„å­—ä¸²(chkString)åŠå…¶ä¹‹å¾Œè‡³è¡Œå°¾åˆ‡æ‰,ä¸¦è¼¸å‡ºè‡³æŒ‡å®šè™•(out)
+	è‹¥ç„¡"ä¸»æ–‡"å…©å­—,å‰‡è‡³æª”æ¡ˆçµæŸç‚ºæ­¢,chkStringå¯æ¥ç”±é€—è™Ÿ(,)åˆ†éš”å„å…ƒç´ ä¹‹å­—ä¸²
+	ps:"ä¸»æ–‡"å…©å­—æœƒè¼¸å‡º,æœ¬å‡½å¼è¼¸å…¥èˆ‡è¼¸å‡ºä¾†æºå‡ç”±ä½¿ç”¨è€…è‡ªè¡Œåœ¨å¤–éƒ¨ç¢ºå®š,å‡½å¼æœ¬èº«ä¸åŒ…å«é–‹é—œæª”å‹•ä½œ
 	*/
 	public boolean cutSpecialString(
 		BufferedReader in,
@@ -701,7 +701,7 @@ public class fileUtil {
 		String oneLine = "";
 		try {
 			while ((oneLine = in.readLine()) != null
-				|| ut.noAnyBlank(oneLine).indexOf("¥D¤å") == -1) {
+				|| ut.noAnyBlank(oneLine).indexOf("ä¸»æ–‡") == -1) {
 				oneLine = cutSpecialString(oneLine, chkStrings);
 				out.write(oneLine, 0, oneLine.length());
 				out.newLine();
@@ -722,10 +722,10 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:BufferedReader in, BufferedWriter out, Vector vr
-	»¡©ú:ÀË¬d¿é¤JÀÉ®×(in)¦b¥D¤å«e©Ò¦³«ü©wªº¦r¦ê(chkString)¤Î¨ä¤§«á¦Ü¦æ§À¤Á±¼,¨Ã¿é¥X¦Ü«ü©w³B(out)
-	­YµL"¥D¤å"¨â¦r,«h¦ÜÀÉ®×µ²§ô¬°¤î,chkString¥i±µ¥Ñ³r¸¹(,)¤À¹j¦U¤¸¯À¤§¦r¦ê
-	ps:"¥D¤å"¨â¦r·|¿é¥X,¥»¨ç¦¡¿é¤J»P¿é¥X¨Ó·½§¡¥Ñ¨Ï¥ÎªÌ¦Û¦æ¦b¥~³¡½T©w,¨ç¦¡¥»¨­¤£¥]§t¶}ÃöÀÉ°Ê§@
+	åƒæ•¸:BufferedReader in, BufferedWriter out, Vector vr
+	èªªæ˜:æª¢æŸ¥è¼¸å…¥æª”æ¡ˆ(in)åœ¨ä¸»æ–‡å‰æ‰€æœ‰æŒ‡å®šçš„å­—ä¸²(chkString)åŠå…¶ä¹‹å¾Œè‡³è¡Œå°¾åˆ‡æ‰,ä¸¦è¼¸å‡ºè‡³æŒ‡å®šè™•(out)
+	è‹¥ç„¡"ä¸»æ–‡"å…©å­—,å‰‡è‡³æª”æ¡ˆçµæŸç‚ºæ­¢,chkStringå¯æ¥ç”±é€—è™Ÿ(,)åˆ†éš”å„å…ƒç´ ä¹‹å­—ä¸²
+	ps:"ä¸»æ–‡"å…©å­—æœƒè¼¸å‡º,æœ¬å‡½å¼è¼¸å…¥èˆ‡è¼¸å‡ºä¾†æºå‡ç”±ä½¿ç”¨è€…è‡ªè¡Œåœ¨å¤–éƒ¨ç¢ºå®š,å‡½å¼æœ¬èº«ä¸åŒ…å«é–‹é—œæª”å‹•ä½œ
 	*/
 	public boolean cutSpecialString(
 		BufferedReader in,
@@ -747,7 +747,7 @@ public class fileUtil {
 			FileReader fin= new FileReader(filenm);
 			LineNumberReader lnr = new LineNumberReader(fin);
 			String str=lnr.readLine();
-			do{		//Åª¨úÀÉ®×¤º®e
+			do{		//è®€å–æª”æ¡ˆå…§å®¹
 				filecontent=filecontent+str+"\r\n";
 				str=lnr.readLine();
 			} while (str!= null);
@@ -758,9 +758,9 @@ public class fileUtil {
 	}
 
 	/**
-	°Ñ¼Æ:String path
-	»¡©ú:®Ú¾Ú¶Ç¤J¤§ÀÉ®×¦ì¸m¡A±N¦¹¥Ø¿ı¤U¤§¯S©wÀÉ®×§R°£(¨Ã¤£§R°£¥Ø¿ı)
-	·íÀÉ®×§R°£¥¢±Ñ®É, ¶Ç¦^false
+	åƒæ•¸:String path
+	èªªæ˜:æ ¹æ“šå‚³å…¥ä¹‹æª”æ¡ˆä½ç½®ï¼Œå°‡æ­¤ç›®éŒ„ä¸‹ä¹‹ç‰¹å®šæª”æ¡ˆåˆªé™¤(ä¸¦ä¸åˆªé™¤ç›®éŒ„)
+	ç•¶æª”æ¡ˆåˆªé™¤å¤±æ•—æ™‚, å‚³å›false
 	*/
 	public boolean rename(String filenm1, String filenm2) {
 		File f1 = new File(filenm1);
