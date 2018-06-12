@@ -106,6 +106,17 @@
 									</div>
 								</a>
 							</article>
+							<article class="style9">
+								<span class="image">
+								<img src="images/pic09.jpg" alt="" />
+								</span>
+								<a href="SOCIETY/SOCIETY_FILES_MOVE.jsp">
+									<h2>海外協會檔案相關</h2>
+									<div class="content">
+										<p>IT專用</p>
+									</div>
+								</a>
+							</article>
 							<article class="style7">
 								<span class="image">
 									<img src="images/function.jpg" alt="" />

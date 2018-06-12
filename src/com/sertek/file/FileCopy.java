@@ -305,7 +305,7 @@ public class FileCopy {
 	}
 
 	/**
-	 * ²¾°ÊÀÉ®×
+	 * ç§»å‹•æª”æ¡ˆ
 	 * 
 	 * @param s
 	 * @param s1
@@ -332,7 +332,7 @@ public class FileCopy {
 	 * @param s
 	 * @param s1
 	 * @param overWrite
-	 *            ¥ØªºÀÉ¦s¦b®É¡A¬O§_­nÂĞ¼g
+	 *            ç›®çš„æª”å­˜åœ¨æ™‚ï¼Œæ˜¯å¦è¦è¦†å¯«
 	 * @return
 	 * @throws IOException
 	 */
@@ -341,7 +341,7 @@ public class FileCopy {
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;
 
-		long sDate; // ¨Ó·½ÀÉªº¤é´Á
+		long sDate; // ä¾†æºæª”çš„æ—¥æœŸ
 
 		File afile = new File(s);
 		if (afile.exists()) {
@@ -376,7 +376,7 @@ public class FileCopy {
 				bis.close();
 				bos.close();
 
-				// ­×§ï¤é´Á
+				// ä¿®æ”¹æ—¥æœŸ
 				File dFile = new File(s1);
 				dFile.setLastModified(sDate);
 				dFile = null;

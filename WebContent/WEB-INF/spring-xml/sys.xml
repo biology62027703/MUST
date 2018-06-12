@@ -22,7 +22,7 @@
 				<prop key="LAL/LAL_CONTRACT_EXTENSIONController.do">LAL_CONTRACT_EXTENSIONController</prop>				
 				<prop key="/LICENSE/LICENSE.do">LICENSEController</prop>	
 				<prop key="SEND_STATEMENT_EMAIL.do">SEND_STATEMENT_EMAILController</prop>
-				<!-- <prop key="DIVA/DIVA.do">DIVAController</prop> -->									
+				<prop key="SOCIETY/SOCIETY_UNMATCH_FILE.do">SOCIETY_UNMATCH_FILEController</prop>	
 			</props>
 		</property>
 	</bean>
@@ -78,6 +78,9 @@
 	
 	<bean id="CALENDARController" class="com.sertek.form.CALENDARController" >
 		<property name="sqlDBUtility_ERP" ref="sqlDBUtility_ERP" />
+	</bean>
+	
+	<bean id="SOCIETY_UNMATCH_FILEController" class="com.sertek.society.SOCIETY_UNMATCH_FILEController" >
 	</bean>
 	
 	

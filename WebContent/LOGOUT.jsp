@@ -15,5 +15,5 @@ if (cookies!=null){
 	 }
  }
 
-response.sendRedirect("LOGIN.jsp");
+response.sendRedirect(request.getContextPath()+"/LOGIN.jsp");
 %>
